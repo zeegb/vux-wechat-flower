@@ -9,7 +9,7 @@
         <img slot="icon" src="https://o84lhz5xo.qnssl.com/master/src/assets/demo/icon_nav_button.png">
         <span slot="label">贺卡</span>
       </tabbar-item>
-      <tabbar-item show-dot>
+      <tabbar-item show-dot :selected="tab == 'cart'" v-link="{name:'Cart'}">
         <img slot="icon" src="https://o84lhz5xo.qnssl.com/master/src/assets/demo/icon_nav_button.png">
         <span slot="label">购物车</span>
       </tabbar-item>

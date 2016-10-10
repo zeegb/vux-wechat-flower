@@ -5,6 +5,8 @@ import Person from './views/Person.vue'
 import Setting from './views/P-setting.vue'
 import Card from './views/Card.vue'
 import Cart from './views/Cart.vue'
+import Product from './views/Product.vue'
+import productDetail from './views/Product-detail.vue'
 import VueRouter from 'vue-router'
 
 const FastClick = require('fastclick')
@@ -34,6 +36,14 @@ router.map({
   '/cart': {
     component: Cart,
     name: 'Cart'
+  },
+  '/product': {
+    component: Product,
+    name: 'Product'
+  },
+  '/product-detail': {
+    component: productDetail,
+    name: 'productDetail'
   }
 })
 

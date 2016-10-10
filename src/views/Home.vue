@@ -87,7 +87,7 @@
         panel_list: panelList,
         panel_footer: {
           title: '查看更多',
-          url: 'http://vux.li'
+          url: '/product'
         }
       }
     },

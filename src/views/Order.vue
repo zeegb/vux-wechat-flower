@@ -81,63 +81,9 @@
     </div>
 
     <!-- 收货地址页面 -->
-    <div class="v-alist" v-show="status === '1'">
-      <!-- 头部 -->
-      <x-header :left-options="{showBack: false}" class="v-hd">
-        收货地址
-        <i class="iconfont v-back" slot="left" @click="goback">&#xe602;</i>
-        <span class="f-c1" slot="right">新建</span>
-      </x-header>
 
-      <div class="v-bd-1">
-        <div class="v-addrList">
-          <div class="v-addrbd">
-            <div class="stat"><i class="iconfont">&#xe60b;</i></div>
-            <div class="cont">
-              <div class="hd">
-                <div class="name">张三</div>
-                <div class="tel">12312312313</div>
-              </div>
-              <div class="bd"><span class="defa">默认</span>厦门市湖里区的开发大道的肯定健身房34号楼493</div>
-            </div>
-            <div class="edit">
-              <i class="iconfont">&#xe60a;</i>
-            </div>
-          </div>
-
-
-          <div class="v-addrbd">
-            <!-- <div class="stat"><i class="iconfont">&#xe60b;</i></div> -->
-            <div class="cont">
-              <div class="hd">
-                <div class="name">张三</div>
-                <div class="tel">12312312313</div>
-              </div>
-              <div class="bd">厦门市湖里区的开发大道的肯定健身房34号楼493</div>
-            </div>
-            <div class="edit">
-              <i class="iconfont">&#xe60a;</i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- 编辑收货地址页面 -->
-    <div class="v-aedit" v-show="status === '2'">
-      <!-- 头部 -->
-      <x-header :left-options="{showBack: false}" class="v-hd">
-        收货地址
-        <i class="iconfont v-back" slot="left" @click="goback">&#xe602;</i>
-        <span class="f-c1" slot="right">保存</span>
-      </x-header>
 
-      <div class="v-bd weui_cells">
-        <x-input title="姓名" :value.sync="aeditName" name="username" placeholder="请输入姓名" is-type="china-name" :show-clear="false"></x-input>
-        <x-input title="手机号码" :value.sync="aeditTel" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
-        <address title="省市区" :value.sync="aeditVal" raw-value :list="addressData"></address>
-        <x-input title="详细地址" :value.sync="aeditTxt" placeholder="无需再写省市区" :show-clear="false"></x-input>
-      </div>
-    </div>
 
   </div>
 </template>
@@ -185,18 +131,6 @@
         linkTel: '12334234234',
         linkAddress: '北京市丰台区蒲黄榆四里14号楼305室',
         linkDate: '2016-10-10',
-
-        // 列表
-        addrList: [],
-
-        // 编辑收货地址
-        addressData: AddressChinaData,
-        aeditName: '',
-        aeditTel: '',
-        aeditVal: ['福建省', '厦门市', '思明区'],
-        aeditTxt: '',
-        aeditCon: '',
-
         // 订单中的所含产品临时变量
         proscellList: [{
           img: 'http://temp.im/80x80',

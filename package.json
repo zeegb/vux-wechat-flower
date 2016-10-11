@@ -59,6 +59,7 @@
     "less-loader": "^2.2.2",
     "lolex": "^1.4.0",
     "mocha": "^2.4.5",
+    "moment": "^2.15.1",
     "nightwatch": "^0.8.18",
     "node-sass": "^3.10.1",
     "ora": "^0.2.0",

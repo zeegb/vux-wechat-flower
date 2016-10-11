@@ -27,7 +27,8 @@
       </div>
     </card>
 
-    <group title="账号管理">
+    <group>
+      <cell title="我的订单" is-link v-link="{path:'order-list'}"></cell>
       <cell title="地址管理" is-link></cell>
       <cell title="实名认证" is-link></cell>
       <cell title="账号安全" is-link></cell>
@@ -72,20 +73,25 @@
 
 <style scoped lang="less">
   @import '../styles/1px.less';
+
   .card-demo-flex {
     display: flex;
   }
+
   .card-demo-content01 {
     padding: 10px 0;
   }
+
   .card-padding {
     padding: 15px;
   }
+
   .card-demo-flex > div {
     flex: 1;
     text-align: center;
     font-size: 12px;
   }
+
   .card-demo-flex span {
     color: #f74c31;
   }

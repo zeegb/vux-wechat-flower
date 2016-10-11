@@ -1,0 +1,539 @@
+<template>
+  <div class="v-orders">
+    <!-- 订单页面 -->
+    <div class="v-order" v-show="status === '0'">
+      <!-- 头部 -->
+      <x-header :left-options="{showBack: true}" class="v-hd">
+        确认订单
+      </x-header>
+
+
+      <div class="v-bd-0">
+        <!-- 配送 -->
+        <div class="v-send">
+          <!-- select vux -->
+          <div class="v-way">
+            <selector :value.sync="sendVal" title="配送方式" :options="sendOptions"></selector>
+          </div>
+          <!-- 1送货上门 -->
+          <div class="v-way" v-show="sendVal === '送货上门'">
+            <cell title="送货形式：">快递</cell>
+            <div class="v-address">
+              <div class="hd">
+                <div class="name">收货人：{{linkName}}</div>
+                <div class="tel">{{linkTel}}</div>
+                <div class="arrow"></div>
+              </div>
+              <div class="bd">
+                收货地址：{{linkAddress}}
+              </div>
+            </div>
+          </div>
+
+          <!-- 2到店自提 -->
+          <div class="v-way" v-show="sendVal === '到店自提'">
+            <cell title="自提门店：">蒲黄榆门店</cell>
+            <cell title="预计自提日期" link="javascript;" @click="calendarShow = !calendarShow">{{linkDate}}</cell>
+            <cell title="">使用期限：购买成功后10天内有效</cell>
+          </div>
+        </div>
+
+        <!-- 产品信息 -->
+        <div class="v-pros">
+          <div class="v-pro">
+            <div class="v-cellhd">
+              <div class="hd">哔哔哔的花店</div>
+            </div>
+            <productcell :proslist="proscellList"></productcell>
+            <div class="v-cellbd">
+              <div class="bd">运费</div>
+              <div class="ft f-c2">+ 0.00</div>
+            </div>
+            <div class="v-cellbd">
+              <div class="bd">店铺活动：满2件减50</div>
+              <div class="ft f-c2">- 50.00</div>
+            </div>
+            <div class="v-cellbd">
+              <div class="hd">卖家留言：</div>
+              <div class="bd">
+                <input type="text" class="ipt" placeholder="选填">
+              </div>
+            </div>
+            <div class="v-cellbd">
+              <div class="bd"></div>
+              <div class="ft">
+                共2件商品 合计：<span class="f-c2">￥4939.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部菜单 -->
+      <div class="v-ft">
+        <div class="total">合计：￥<span class="pri">0.00</span></div>
+        <div class="buy">立即购买</div>
+      </div>
+
+      <!-- 日期选择 -->
+      <inline-calendar class="v-calendar" :class="calendarShow ? 'z-crt' : ''" :value.sync="linkDate" :start-date="startDate" :end-date="endDate" :highlight-weekend="highlightWeekend" :weeks-list="weeksList">
+      </inline-calendar>
+    </div>
+
+    <!-- 收货地址页面 -->
+    <div class="v-alist" v-show="status === '1'">
+      <!-- 头部 -->
+      <x-header :left-options="{showBack: false}" class="v-hd">
+        收货地址
+        <i class="iconfont v-back" slot="left" @click="goback">&#xe602;</i>
+        <span class="f-c1" slot="right">新建</span>
+      </x-header>
+
+      <div class="v-bd-1">
+        <div class="v-addrList">
+          <div class="v-addrbd">
+            <div class="stat"><i class="iconfont">&#xe60b;</i></div>
+            <div class="cont">
+              <div class="hd">
+                <div class="name">张三</div>
+                <div class="tel">12312312313</div>
+              </div>
+              <div class="bd"><span class="defa">默认</span>厦门市湖里区的开发大道的肯定健身房34号楼493</div>
+            </div>
+            <div class="edit">
+              <i class="iconfont">&#xe60a;</i>
+            </div>
+          </div>
+
+
+          <div class="v-addrbd">
+            <!-- <div class="stat"><i class="iconfont">&#xe60b;</i></div> -->
+            <div class="cont">
+              <div class="hd">
+                <div class="name">张三</div>
+                <div class="tel">12312312313</div>
+              </div>
+              <div class="bd">厦门市湖里区的开发大道的肯定健身房34号楼493</div>
+            </div>
+            <div class="edit">
+              <i class="iconfont">&#xe60a;</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 编辑收货地址页面 -->
+    <div class="v-aedit" v-show="status === '2'">
+      <!-- 头部 -->
+      <x-header :left-options="{showBack: false}" class="v-hd">
+        收货地址
+        <i class="iconfont v-back" slot="left" @click="goback">&#xe602;</i>
+        <span class="f-c1" slot="right">保存</span>
+      </x-header>
+
+      <div class="v-bd weui_cells">
+        <x-input title="姓名" :value.sync="aeditName" name="username" placeholder="请输入姓名" is-type="china-name" :show-clear="false"></x-input>
+        <x-input title="手机号码" :value.sync="aeditTel" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile" :show-clear="false"></x-input>
+        <address title="省市区" :value.sync="aeditVal" raw-value :list="addressData"></address>
+        <x-input title="详细地址" :value.sync="aeditTxt" placeholder="无需再写省市区" :show-clear="false"></x-input>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+  import XHeader from 'vux/dist/components/x-header'
+  import Selector from 'vux/dist/components/selector'
+  import Cell from 'vux/dist/components/cell'
+  import XInput from 'vux/dist/components/x-input'
+  import InlineCalendar from 'vux/dist/components/inline-calendar'
+  import Address from 'vux/dist/components/address'
+  import AddressChinaData from 'vux/src/components/address/list.json'
+  import value2name from 'vux/src/filters/value2name'
+  import productcell from '../components/Prodect-cell.vue'
+  import moment from 'moment'
+
+  export default {
+    components: {
+      XHeader,
+      Selector,
+      Cell,
+      XInput,
+      InlineCalendar,
+      Address,
+      AddressChinaData,
+      value2name,
+      productcell
+    },
+    data () {
+      return {
+        // 内页切换
+        status: '0',
+        // 数据
+        sendOptions: ['送货上门', '到店自提'],
+        sendVal: '送货上门',
+        // 日期选择
+        calendarShow: false,
+        startDate: moment(new Date()).format('YYYY-MM-DD'),
+        endDate: moment().add('days', 7).format('YYYY-MM-DD'),
+        highlightWeekend: true,
+        weeksList: ['日', '一', '二', '三', '四', '五', '六 '],
+
+        // 收货人信息
+        linkName: '张三',
+        linkTel: '12334234234',
+        linkAddress: '北京市丰台区蒲黄榆四里14号楼305室',
+        linkDate: '2016-10-10',
+
+        // 列表
+        addrList: [],
+
+        // 编辑收货地址
+        addressData: AddressChinaData,
+        aeditName: '',
+        aeditTel: '',
+        aeditVal: ['福建省', '厦门市', '思明区'],
+        aeditTxt: '',
+        aeditCon: '',
+
+        // 订单中的所含产品临时变量
+        proscellList: [{
+          img: 'http://temp.im/80x80',
+          name: '产品名称11123123',
+          sku: '123',
+          pri: '99992.00',
+          num: 2
+        }, {
+          img: 'http://temp.im/80x80',
+          name: '产品名称11123123',
+          sku: '123',
+          pri: '99992.00',
+          num: 2
+        }]
+      }
+    },
+    created () {
+      // 获取店铺id
+      this.shop = this.$route.query.shop || 0
+    },
+    ready () {
+//        const url = `/api/shopping/shop-index.htm?shop=${this.shop}`
+//        this.$http.get(url).then(res => {
+//            if (res.ok) {
+//                this.indexData = Object.assign({}, JSON.parse(res.data).rows)
+//            }
+//        })
+    },
+    watch: {
+      calendarVal (val) {
+        this.calendarShow = false
+      }
+    },
+    methods: {
+      todayDay () {
+
+      }
+    }
+  }
+</script>
+<style lang="scss" scoped>
+  @import '../assets/styles/iconfont.scss';
+  // 箭头
+  @mixin arrow {
+    content: " ";
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 6px;
+    width: 6px;
+    border-width: 2px 2px 0 0;
+    border-color: #c8c8cd;
+    border-style: solid;
+    @content;
+  }
+
+  @mixin borderTop {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #cecece;
+    transform: scaleY(.5);
+  }
+
+  @mixin borderBottom {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid #cecece;
+    transform: scaleY(.5);
+  }
+
+  @mixin borderLeft {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-left: 1px solid #cecece;
+    transform: scaleX(.5);
+  }
+
+  .v-order {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    background: #efefef;
+    padding: 44px 0;
+  }
+
+  .v-alist {
+    padding-top: 44px;
+  }
+
+  .v-aedit {
+    padding-top: 44px;
+  }
+
+  .v-hd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 44px;
+  }
+
+  .v-back {
+    font-size: 22px;
+    color: #fff;
+  }
+
+  .v-bd {
+    // flex: 1;
+  }
+
+  .v-bd-1 {}
+
+  // 底部菜单
+  .v-ft {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    display: flex;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    background: #fff;
+    color: #666;
+    &:before {
+      @include borderTop;
+    }
+    .total {
+      flex: 2;
+      font-size: 14px;
+      text-align: right;
+      padding-right: 10px;
+      .pri {
+        font-size: 16px;
+        color: #f00;
+      }
+    }
+    .buy {
+      flex: 1;
+      padding: 0 15px;
+      background: #3cc51f;
+      color: #fff;
+    }
+  }
+
+  // 配送
+  .v-send {
+    // margin-bottom: 10px;
+  }
+
+  .v-way {
+    margin-bottom: 10px;
+    background: #fff;
+  }
+
+  // 地址
+  .v-address {
+    position: relative;
+    margin-bottom: 10px;
+    padding: 0 15px;
+    background: #fff;
+    &:before {
+      content: ' ';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      margin-left: 15px;
+      border-top: 1px solid #cecece;
+      transform: scaleY(.5);
+    }
+    .hd {
+      display: flex;
+      padding: 10px 0;
+      line-height: 24px;
+      .name {
+        flex: 1;
+      }
+      .tel {
+        text-align: right;
+      }
+      .arrow {
+        @include arrow;
+        position: relative;
+        top: 20px;
+        margin-left: .3em;
+      }
+    }
+    .bd {
+      position: relative;
+      top: -5px;
+      padding-right: 10px;
+      line-height: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  // 日期选择
+  .v-calendar {
+    position: fixed;
+    z-index: 6;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+    &.z-crt {
+      transform: translateY(0);
+    }
+  }
+
+  // 产品
+  .v-pro {
+    margin-bottom: 10px;
+    background: #fff;
+  }
+
+  .v-cellhd {
+    position: relative;
+    background: #fff;
+    &:after {
+      @include borderBottom;
+    }
+    .hd {
+      padding: 10px 15px;
+    }
+  }
+
+  .v-cellbd {
+    position: relative;
+    display: flex;
+    margin-left: 15px;
+    padding-right: 15px;
+    background: #fff;
+    &:after {
+      @include borderBottom;
+    }
+    &:last-child::after {
+      border-width: 0;
+    }
+    .hd {
+      padding: 10px 0;
+      white-space: nowrap;
+    }
+    .bd {
+      flex: 1;
+      padding: 10px 0;
+      .ipt {
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        border: 0 none;
+        font-size: 14px;
+      }
+    }
+    .ft {
+      padding: 10px 0;
+      white-space: nowrap;
+      text-align: right;
+    }
+  }
+
+  // 1-收货地址
+  .v-addrbd {
+    position: relative;
+    display: flex;
+    padding: 0 0 5px 15px;
+    background: #fff;
+    &:before {
+      @include borderBottom;
+    }
+    .stat {
+      padding: 15px 10px 0 0;
+      font-size: 20px;
+      color: #f00;
+    }
+    .cont {
+      // flex: 1;
+      .hd {
+        display: flex;
+        line-height: 20px;
+        padding: 5px 0;
+        .name {
+          flex: 1;
+        }
+        .tel {
+          text-align: right;
+        }
+      }
+      .bd {
+        line-height: 18px;
+        font-size: 14px;
+        color: #666;
+        .defa {
+          display: inline-block;
+          line-height: 14px;
+          margin-right: 5px;
+          padding: 1px 5px;
+          background: #f00;
+          color: #fff;
+        }
+      }
+    }
+    .edit {
+      flex: 1;
+      position: relative;
+      margin-top: 15px;
+      margin-left: 15px;
+      padding: 0 15px;
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      background: #fff;
+      color: #666;
+      &:before {
+        @include borderLeft;
+      }
+      i {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .f-c1 {
+    color: #fff;
+  }
+
+  .f-c2 {
+    color: #f00;
+  }
+</style>

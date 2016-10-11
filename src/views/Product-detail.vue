@@ -64,7 +64,7 @@
           <tab-item :selected="tabSel === 2" @click="tabAssess">评价</tab-item>
         </tab>
         <div class="v-tabcon">
-          <div class="v-content" v-show="tabSel === 0">1</div>
+          <div class="v-content" v-show="tabSel === 0">{{{productData.detail}}}</div>
           <div class="v-content" v-show="tabSel === 1">{{tabArgsCon}}
             <div class="f-tac">
               <spinner :type="ios" slot="value" v-show="disTab1"></spinner>
@@ -89,7 +89,7 @@
         <i class="iconfont z-act" @click="markpro(1)" v-show="!productData.pros_collect">&#xe609;</i>
       </div>
       <div class="cart">加入购物车</div>
-      <div class="buy">立即购买</div>
+      <div class="buy" v-link="{path:'order',query:{pid:productData.id}}">立即购买</div>
     </div>
   </div>
 </template>
@@ -101,6 +101,27 @@
   import Tab from 'vux/dist/components/tab'
   import TabItem from 'vux/dist/components/tab-item'
   import Spinner from 'vux/dist/components/spinner'
+
+  const baseList =
+    [{
+      url: 'javascript:',
+      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/1.jpg',
+      title: '如何挑选盆栽？'
+    }, {
+      url: 'javascript:',
+      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/2.jpg',
+      title: '如何挑选盆栽？'
+    }, {
+      url: 'javascript:',
+      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/3.jpg',
+      title: '如何挑选盆栽？'
+    }]
+
+  const urlList = baseList.map((item, index) => ({
+    url: 'http://m.baidu.com',
+    img: item.img,
+    title: `[精选]${item.title}`
+  }))
 
   export default {
     components: {
@@ -123,15 +144,17 @@
           shop: '',
           id: '',
           goods: {
-            current_price: '0',
-            price_new: '0'
+            goods_name: '我也不知道卖啥',
+            supplier: '哔哔哔的花店',
+            current_price: '110.00',
+            price_new: '10.00'
           },
-          hz_goods_picture: [],
+          hz_goods_picture: urlList,
           price: '',
           price_origin: '',
           total_sales: '',
           freightage: '',
-          detail: '',
+          detail: '<h1>这里是商品详情</h1><img src="http://temp.im/320x100">',
           // 收藏后获得的id
           collect_id: '',
           shop_collect: false,
@@ -442,7 +465,7 @@
     }
     .buy {
       flex: 1;
-      background: #c50a1d;
+      background: #3cc51f;
     }
   }
 </style>

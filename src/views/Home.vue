@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="v-home">
     <x-header :left-options="{showBack: false}" :right-options="{showMore: true}"
-              @on-click-more="showMenus = true">首页
+              @on-click-more="showMenus = true" class="v-hd">首页
     </x-header>
     <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
             top="46px"></search>
@@ -117,6 +117,19 @@
 </script>
 
 <style type="text/css">
+  .v-home {
+    padding-top: 44px;
+  }
+
+  .v-hd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 44px;
+  }
+
   .text-scroll {
     border: 1px solid #ddd;
     border-left: none;

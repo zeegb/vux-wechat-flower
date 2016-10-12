@@ -1,22 +1,25 @@
 <template>
-  <x-header :left-options="{showBack: false}" :right-options="{showMore: true}"
-            @on-click-more="showMenus = true">购物车
-  </x-header>
-  <div style="margin-top: 20px;">
-    <cartpanel :type="'1'" :list.sync="list"></cartpanel>
-    <group>
-      <cell title="总计">
-        <div slot="value">
-          <span class="rmb">￥</span>
-          <span style="color: red">{{total}}</span>
-        </div>
-      </cell>
-    </group>
-    <group style="padding:0 10px;">
-      <x-button :text="submit001" :disabled="disable001" @click="processButton001" type="primary" v-link="'/order'"></x-button>
-    </group>
+  <div class="v-cart">
+    <x-header :left-options="{showBack: false}" :right-options="{showMore: true}"
+              @on-click-more="showMenus = true" class="v-hd">购物车
+    </x-header>
+    <div style="margin-top: 20px;">
+      <cartpanel :type="'1'" :list.sync="list"></cartpanel>
+      <group>
+        <cell title="总计">
+          <div slot="value">
+            <span class="rmb">￥</span>
+            <span style="color: red">{{total}}</span>
+          </div>
+        </cell>
+      </group>
+      <group style="padding:0 10px;">
+        <x-button :text="submit001" :disabled="disable001" @click="processButton001" type="primary"
+                  v-link="'/order'"></x-button>
+      </group>
+    </div>
+    <tabbar tab="cart"></tabbar>
   </div>
-  <tabbar tab="cart"></tabbar>
 </template>
 
 <script>
@@ -82,10 +85,24 @@
   }
 </script>
 <style scoped>
-  .rmb{
+  .v-cart {
+    padding-top: 44px;
+  }
+
+  .v-hd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 44px;
+  }
+
+  .rmb {
     color: #6D4100;
   }
-  .buy-btn{
+
+  .buy-btn {
     background-color: #2FCA60;
     color: #3a33d1;
   }

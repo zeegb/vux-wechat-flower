@@ -1,20 +1,22 @@
 <template>
-  <x-header :left-options="{showBack: false}" :right-options="{showMore: false}">贺卡</x-header>
-  <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
-          top="46px"></search>
-  <div>
-    <div style="margin: 10px;overflow: hidden;" v-for="item in list">
-      <masker style="border-radius: 2px;">
-        <div class="m-img" :style="{backgroundImage: 'url(' + item.img + ')'}"></div>
-        <div slot="content" class="m-title">
-          {{item.title}}
-          <br/>
-          <span class="m-time">2016-03-18</span>
-        </div>
-      </masker>
+  <div class="v-card">
+    <x-header :left-options="{showBack: false}" :right-options="{showMore: false}" class="v-hd">贺卡</x-header>
+    <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
+            top="46px"></search>
+    <div>
+      <div style="margin: 10px;overflow: hidden;" v-for="item in list">
+        <masker style="border-radius: 2px;">
+          <div class="m-img" :style="{backgroundImage: 'url(' + item.img + ')'}"></div>
+          <div slot="content" class="m-title">
+            {{item.title}}
+            <br/>
+            <span class="m-time">2016-03-18</span>
+          </div>
+        </masker>
+      </div>
     </div>
+    <tabbar tab="card"></tabbar>
   </div>
-  <tabbar tab="card"></tabbar>
 </template>
 
 <script>
@@ -69,6 +71,19 @@
 </script>
 
 <style lang="less">
+  .v-card {
+    padding-top: 44px;
+  }
+
+  .v-hd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 44px;
+  }
+
   .m-img {
     padding-bottom: 33%;
     display: block;

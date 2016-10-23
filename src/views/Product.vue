@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="v-product">
     <x-header :left-options="{showBack: true}" :right-options="{showMore: false}"
-              @on-click-more="showMenus = true">全部商品
+              @on-click-more="showMenus = true" @on-click-title="scrollTop" class="v-hd">全部商品
     </x-header>
     <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
             top="46px"></search>
@@ -145,6 +145,9 @@
             this.prosList = JSON.parse(res.data).rows
           }
         })
+      },
+      scrollTop () {
+        window.scrollTo(0, 0)
       }
     }
   }
@@ -167,13 +170,18 @@
   }
 </style>
 <style lang="scss" scoped>
+
+  .v-product {
+    padding-top: 44px;
+  }
   // 自定义头部
   .v-hd {
-    position: relative;
-    display: flex;
-    align-items: center;
-    // padding: 0 10px;
-    background-color: #c50a1d;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 44px;
   }
 
   .v-search {

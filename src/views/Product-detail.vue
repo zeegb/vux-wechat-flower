@@ -32,10 +32,21 @@
 
       <div class="v-detailbd">
         <div class="v-standard">
-          <cell link="javascript;">
-            <span slot="after-title">选择:商品规格</span>
-          </cell>
+          <div v-for="(si, standardItem) in standardList">
+            <div class="hd">{{standardItem.standardName}}</div>
+            <div class="bd">
+              <div class="o-for" v-for="(oi, optionItem) in standardItem.optionList">
+                <div class="o-select" v-show="!optionItem.standard_collect" @click="selectStandard(1,si,oi)">
+                  {{optionItem.option}}
+                </div>
+                <div class="o-select o-act" v-show="optionItem.standard_collect" @click="selectStandard(0,si,oi)">
+                  {{optionItem.option}}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="v-favorable">
           <cell link="javascript;">
             <span slot="after-title">领取优惠券</span>
@@ -160,6 +171,45 @@
           shop_collect: false,
           pros_collect: false
         },
+        standardList: [
+          {
+            standardName: '商品规格',
+            optionList: [{
+              option: '单月(4束)',
+              standard_collect: false
+            }, {
+              option: '3个月(12束)',
+              standard_collect: false
+            }, {
+              option: '6个月(24束)',
+              standard_collect: false
+            }]
+          }, {
+            standardName: '收花时间',
+            optionList: [{
+              option: '单月(4束)',
+              standard_collect: false
+            }, {
+              option: '3个月(12束)',
+              standard_collect: false
+            }, {
+              option: '6个月(24束)',
+              standard_collect: false
+            }]
+          }, {
+            standardName: '套餐',
+            optionList: [{
+              option: '单月(4束)',
+              standard_collect: false
+            }, {
+              option: '3个月(12束)',
+              standard_collect: false
+            }, {
+              option: '6个月(24束)',
+              standard_collect: false
+            }]
+          }
+        ],
         tabSel: 0,
         tabArgsCon: '',
         tabAssessCon: '',
@@ -185,6 +235,14 @@
       })
     },
     methods: {
+      selectStandard (bool, si, oi) {
+        console.log(si, oi)
+        this.standardList[si].optionList = this.standardList[si].optionList.map(item => {
+          item.standard_collect = false
+          return item
+        })
+        this.standardList[si].optionList[oi].standard_collect = !!bool
+      },
 //      markShop (bool) {
 //        this.productData.shop_collect = !!bool
 //        // ajax传送给服务器
@@ -332,15 +390,42 @@
   .v-detailbd {
   }
 
-  .v-standard {
-    margin-bottom: 10px;
-    background: #fff;
-  }
-
   // 优惠相关
   .v-favorable {
     margin-bottom: 10px;
     background: #fff;
+  }
+
+  // 规格
+  .v-standard {
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    background: #fff;
+    .hd {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      color: #2e77e3;
+    }
+    .bd {
+      position: relative;
+      text-align: left;
+      .o-for {
+        display: inline-block;
+        .o-select {
+          margin: 5px 10px;
+          line-height: 24px;
+          padding: 0 20px;
+          border-radius: 5px;
+          font-size: 14px;
+          color: #333;
+          background: #f1f1f1;
+          &.o-act {
+            background: #FF5809;
+            color: #ffffff;
+          }
+        }
+      }
+    }
   }
 
   // 店铺
@@ -354,7 +439,7 @@
     }
     .bd {
       position: relative;
-      text-align: center;
+      text-align: left;
       &:after {
         content: " ";
         display: inline-block;

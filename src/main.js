@@ -1,70 +1,92 @@
 import Vue from 'vue'
 import App from './App'
-import Home from './views/Home.vue'
-import Person from './views/Person.vue'
-import Setting from './views/P-setting.vue'
-import Card from './views/Card.vue'
-import Cart from './views/Cart.vue'
-import Product from './views/Product.vue'
-import productDetail from './views/Product-detail.vue'
-import Order from './views/Order.vue'
-import OrderList from './views/Order-list.vue'
-import SelectAddress from './views/Select-address.vue'
-import EditAddress from './views/Edit-address.vue'
 import VueRouter from 'vue-router'
+import Resource from 'vue-resource'
 
 const FastClick = require('fastclick')
 FastClick.attach(document.body)
 
 Vue.use(VueRouter)
+Vue.use(Resource)
 
-const router = new VueRouter()
+const router = new VueRouter({
+  hashbang: true,
+  saveScrollPosition: true,
+  transitionOnLoad: true
+})
 
 router.map({
   '/': {
-    component: Home,
+    component: function (resolve) {
+      require(['./views/Home.vue'], resolve)
+    },
     name: 'Home'
   },
   '/person': {
-    component: Person,
+    component: function (resolve) {
+      require(['./views/Person.vue'], resolve)
+    },
     name: 'Person'
   },
   '/person-setting': {
-    component: Setting,
+    component: function (resolve) {
+      require(['./views/P-setting.vue'], resolve)
+    },
     name: 'Setting'
   },
   '/card': {
-    component: Card,
+    component: function (resolve) {
+      require(['./views/Card.vue'], resolve)
+    },
     name: 'Card'
   },
   '/cart': {
-    component: Cart,
+    component: function (resolve) {
+      require(['./views/Cart.vue'], resolve)
+    },
     name: 'Cart'
   },
   '/product': {
-    component: Product,
+    component: function (resolve) {
+      require(['./views/Product.vue'], resolve)
+    },
     name: 'Product'
   },
   '/product-detail': {
-    component: productDetail,
+    component: function (resolve) {
+      require(['./views/Product-detail.vue'], resolve)
+    },
     name: 'productDetail'
   },
   '/order': {
-    component: Order,
+    component: function (resolve) {
+      require(['./views/Order.vue'], resolve)
+    },
     name: 'order'
   },
   '/order-list': {
-    component: OrderList,
+    component: function (resolve) {
+      require(['./views/Order-list.vue'], resolve)
+    },
     name: 'orderList'
   },
   '/select-address': {
-    component: SelectAddress,
+    component: function (resolve) {
+      require(['./views/Select-address.vue'], resolve)
+    },
     name: 'selectAddress'
   },
   '/edit-address': {
-    component: EditAddress,
+    component: function (resolve) {
+      require(['./views/Edit-address.vue'], resolve)
+    },
     name: 'editAddress'
   }
+})
+
+router.afterEach(function (transition) {
+  console.log('afterEach')
+  window.scrollTo(0, 0)
 })
 
 router.start(App, '#app')

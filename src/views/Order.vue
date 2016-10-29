@@ -39,31 +39,46 @@
         </div>
 
         <!-- 产品信息 -->
-        <div class="v-pros">
-          <div class="v-pro">
-            <div class="v-cellhd">
-              <div class="hd">哔哔哔的花店</div>
+        <div class="v-pro">
+          <div class="v-cellhd">
+            <div class="hd">哔哔哔的花店</div>
+          </div>
+          <productcell :proslist="proscellList"></productcell>
+        </div>
+
+        <div class="v-reduce">
+          <div class="v-cellbd" v-link="'/coupon'">
+            <div class="bd">
+              优惠券
             </div>
-            <productcell :proslist="proscellList"></productcell>
-            <div class="v-cellbd">
-              <div class="bd">运费</div>
-              <div class="ft f-c2">+ 0.00</div>
+            <div class="ft f-c3" v-if="!isCoupon">未使用</div>
+            <div class="ft f-c2" v-if="isCoupon">- 50.00</div>
+            <div class="arrow"></div>
+          </div>
+          <div class="v-cellbd">
+            <div class="bd">店铺活动：满2件减50</div>
+            <div class="ft f-c2">- 50.00</div>
+          </div>
+        </div>
+
+        <div class="v-word">
+          <div class="v-cellbd">
+            <div class="hd">卖家留言：</div>
+            <div class="bd">
+              <input type="text" class="ipt" placeholder="选填">
             </div>
-            <div class="v-cellbd">
-              <div class="bd">店铺活动：满2件减50</div>
-              <div class="ft f-c2">- 50.00</div>
-            </div>
-            <div class="v-cellbd">
-              <div class="hd">卖家留言：</div>
-              <div class="bd">
-                <input type="text" class="ipt" placeholder="选填">
-              </div>
-            </div>
-            <div class="v-cellbd">
-              <div class="bd"></div>
-              <div class="ft">
-                共2件商品 合计：<span class="f-c2">￥4939.00</span>
-              </div>
+          </div>
+        </div>
+
+        <div class="v-cast">
+          <div class="v-cellbd">
+            <div class="bd">运费</div>
+            <div class="ft f-c2">+ 0.00</div>
+          </div>
+          <div class="v-cellbd">
+            <div class="bd"></div>
+            <div class="ft">
+              共2件商品 合计：<span class="f-c2">￥4939.00</span>
             </div>
           </div>
         </div>
@@ -76,7 +91,9 @@
       </div>
 
       <!-- 日期选择 -->
-      <inline-calendar class="v-calendar" :class="calendarShow ? 'z-crt' : ''" :value.sync="linkDate" :start-date="startDate" :end-date="endDate" :highlight-weekend="highlightWeekend" :weeks-list="weeksList">
+      <inline-calendar class="v-calendar" :class="calendarShow ? 'z-crt' : ''" :value.sync="linkDate"
+                       :start-date="startDate" :end-date="endDate" :highlight-weekend="highlightWeekend"
+                       :weeks-list="weeksList">
       </inline-calendar>
     </div>
 
@@ -132,6 +149,7 @@
         linkAddress: '北京市丰台区蒲黄榆四里14号楼305室',
         linkDate: '2016-10-10',
         // 订单中的所含产品临时变量
+        isCoupon: false,
         proscellList: [{
           img: 'http://temp.im/80x80',
           name: '产品名称11123123',
@@ -249,7 +267,8 @@
     // flex: 1;
   }
 
-  .v-bd-1 {}
+  .v-bd-1 {
+  }
 
   // 底部菜单
   .v-ft {
@@ -291,6 +310,16 @@
   }
 
   .v-way {
+    margin-bottom: 10px;
+    background: #fff;
+  }
+
+  .v-cast {
+    margin-bottom: 10px;
+    background: #fff;
+  }
+
+  .v-word {
     margin-bottom: 10px;
     background: #fff;
   }
@@ -355,6 +384,17 @@
   .v-pro {
     margin-bottom: 10px;
     background: #fff;
+  }
+
+  .v-reduce {
+    margin-bottom: 10px;
+    background: #fff;
+    .arrow {
+      @include arrow;
+      position: relative;
+      top: 20px;
+      margin-left: .3em;
+    }
   }
 
   .v-cellhd {
@@ -469,5 +509,9 @@
 
   .f-c2 {
     color: #f00;
+  }
+
+  .f-c3 {
+    color: #000000;
   }
 </style>

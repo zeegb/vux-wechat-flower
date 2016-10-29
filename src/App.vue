@@ -44,65 +44,19 @@
     background-color: #fbf9fe;
   }
 
-  /* v-r-transition, default is {forward: 'forward', back: 'back'}*/
-  .forward-enter, .forward-leave {
-    transform: translate3d(-100%, 0, 0);
+  /*transition*/
+  .cover-in-transition {
+    opacity: 1;
+    transition: .35s opacity ease;
   }
 
-  .back-enter, .back-leave {
+  .cover-in-enter {
+    transform: translate3d(80%, 0, 0);
+  }
+
+  .cover-in-leave {
+    transition: .25s all ease;
     transform: translate3d(100%, 0, 0);
-  }
-
-  .demo-icon-22 {
-    font-family: 'vux-demo';
-    font-size: 22px;
-    color: #888;
-  }
-
-  .weui_tabbar.vux-demo-tabbar {
-    backdrop-filter: blur(10px);
-    background-color: none;
-    background: rgba(247, 247, 250, 0.5);
-  }
-
-  .vux-demo-tabbar .weui_bar_item_on .demo-icon-22 {
-    color: #F70968;
-  }
-
-  .vux-demo-tabbar .weui_tabbar_item.weui_bar_item_on .weui_tabbar_label {
-    color: #35495e;
-  }
-
-  .vux-demo-tabbar .weui_tabbar_item.weui_bar_item_on .vux-demo-tabbar-icon-home {
-    color: rgb(53, 73, 94);
-  }
-
-  .demo-icon-22:before {
-    content: attr(icon);
-  }
-
-  .vux-demo-tabbar-component {
-    background-color: #F70968;
-    color: #fff;
-    border-radius: 7px;
-    padding: 0 4px;
-    line-height: 14px;
-  }
-
-  .weui_tabbar_icon + .weui_tabbar_label {
-    margin-top: 0 !important;
-  }
-
-  .vux-demo-header-box {
-    z-index: 100;
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 0;
-  }
-
-  .weui_tab_bd {
-    padding-top: 46px;
   }
 
   /**
@@ -121,7 +75,7 @@
   .vux-pop-in-enter,
   .vux-pop-in-leave {
     will-change: transform;
-    height: 100%;
+    height: 94%;
     position: absolute;
     left: 0;
   }

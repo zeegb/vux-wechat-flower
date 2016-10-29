@@ -27,9 +27,6 @@
 
   export default {
     ready () {
-      document.querySelector('body').style.height = '100%'
-      document.querySelector('html').style.height = '100%'
-      document.querySelector('#app').style.height = '100%'
     },
     components: {
       Tabbar,
@@ -41,8 +38,11 @@
 
 <style type="text/css">
   .weui_tab_tabbar {
-    position:fixed;
-    bottom:0;
-    width:100%;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 55px;
   }
+
 </style>

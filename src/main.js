@@ -81,11 +81,28 @@ router.map({
       require(['./views/Edit-address.vue'], resolve)
     },
     name: 'editAddress'
+  },
+  '/coupon': {
+    component: function (resolve) {
+      require(['./views/Coupon.vue'], resolve)
+    },
+    name: 'coupon'
+  },
+  '/waterfall': {
+    component: function (resolve) {
+      require(['./views/Waterfall.vue'], resolve)
+    },
+    name: 'waterfall'
+  },
+  '/waterfall4': {
+    component: function (resolve) {
+      require(['./views/Waterfall4.vue'], resolve)
+    },
+    name: 'waterfall4'
   }
 })
 
 router.afterEach(function (transition) {
-  console.log('afterEach')
   window.scrollTo(0, 0)
 })
 

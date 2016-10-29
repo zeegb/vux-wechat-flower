@@ -48,13 +48,15 @@
           title: '牡丹花',
           price: 25.2,
           soldOut: 2258,
-          count: 2
+          count: 2,
+          checked: false
         }, {
           src: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
           title: '茉莉花',
           price: 15.3,
           soldOut: 3389,
-          count: 3
+          count: 3,
+          checked: false
         }]
       }
     },
@@ -68,7 +70,7 @@
       total: function () {
         let sum = 0
         this.$get('list').forEach(function (item) {
-          sum += parseFloat(item.price * item.count)
+          if (item.checked) sum += parseFloat(item.price * item.count)
         })
         return sum.toFixed(2)
       }

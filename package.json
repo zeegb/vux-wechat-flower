@@ -75,6 +75,7 @@
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^8.3.0",
     "vue-style-loader": "^1.0.0",
+    "vue-waterfall": "^0.2.3",
     "vuex": "^1.0.0-rc.2",
     "vux-loader": "^0.0.3",
     "webpack": "^1.12.2",

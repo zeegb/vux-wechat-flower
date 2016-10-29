@@ -1,8 +1,13 @@
 <template>
   <div class="weui_panel weui_panel_access">
     <div class="weui_panel_bd">
-      <a href="javascript:;" v-for="(index,item) in list"
-         class="weui_media_box weui_media_appmsg">
+      <a href="javascript:;" v-for="(index,item) in list" v-if="item.count > 0"
+         class="weui_media_box weui_media_appmsg" >
+        <div class="sel">
+          <label>
+            <input type="checkbox" name="" id="" v-model="item.checked">
+          </label>
+        </div>
         <div class="weui_media_hd" v-if="item.count > 0 && item.src">
           <img class="weui_media_appmsg_thumb" :src="item.src" alt="">
         </div>
@@ -22,7 +27,7 @@
 </template>
 
 <!-- 清空购物车还是存在bug -->
-<style scoped>
+<style lang="less" scoped>
   .product-item-foot {
     margin-top: 5px;
   }
@@ -41,6 +46,10 @@
     font-size: 16px;
     color: #d30;
     margin-right: 10px;
+  }
+  .sel {
+    padding: 0 15px;
+    font-size: 14px;
   }
 
   .sold-out-text {
@@ -64,16 +73,16 @@
       }
     },
     methods: {
-      onItemClick (index, item) {
-        item.count = parseInt(this.$get('count'))
-        this.$set(index, index)
-        this.$dispatch('on-click-item', item)
-      },
-      change: function (val) {
-        console.log('change', val)
-        this.$set('count', val)
-        console.log('__change', this.$get('count'))
-      }
+//      onItemClick (index, item) {
+//        item.count = parseInt(this.$get('count'))
+//        this.$set(index, index)
+//        this.$dispatch('on-click-item', item)
+//      },
+//      change: function (val) {
+//        console.log('change', val)
+//        this.$set('count', val)
+//        console.log('__change', this.$get('count'))
+//      }
     },
     data () {
       return {

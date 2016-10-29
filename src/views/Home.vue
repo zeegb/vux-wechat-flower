@@ -97,7 +97,10 @@
       }
     },
     ready () {
-      this.setLoadingState(false)
+//      this.setLoadingState(false)
+      this.$http.get('/api/data/banner/list?uid=gopain').then((response) => {
+        console.log(response)
+      })
     },
     methods: {
       onIndexChange (index) {

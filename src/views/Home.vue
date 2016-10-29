@@ -31,7 +31,7 @@
   import SwiperItem from 'vux/dist/components/swiper-item'
   import Search from 'vux/dist/components/search'
   import Panel from 'vux/dist/components/panel'
-  import {set_loding_state} from '../vuex/actions'
+  import {setLoadingState} from '../vuex/actions'
 
   const baseList =
     [{
@@ -80,7 +80,7 @@
     },
     vuex: {
       getters: {},
-      actions: {set_loding_state}
+      actions: {setLoadingState}
     },
     data () {
       return {
@@ -96,8 +96,8 @@
         }
       }
     },
-    ready(){
-      this.set_loding_state(false)
+    ready () {
+      this.setLoadingState(false)
     },
     methods: {
       onIndexChange (index) {
@@ -112,7 +112,7 @@
     }
   }
 
-  function getResult(val) {
+  function getResult (val) {
     let rs = []
     for (let i = 0; i < 8; i++) {
       rs.push({

@@ -31,6 +31,7 @@
   import SwiperItem from 'vux/dist/components/swiper-item'
   import Search from 'vux/dist/components/search'
   import Panel from 'vux/dist/components/panel'
+  import {set_loding_state} from '../vuex/actions'
 
   const baseList =
     [{
@@ -77,6 +78,10 @@
       Search,
       Panel
     },
+    vuex: {
+      getters: {},
+      actions: {set_loding_state}
+    },
     data () {
       return {
         results: [],
@@ -91,6 +96,9 @@
         }
       }
     },
+    ready(){
+      this.set_loding_state(false)
+    },
     methods: {
       onIndexChange (index) {
         this.img_index = index
@@ -104,7 +112,7 @@
     }
   }
 
-  function getResult (val) {
+  function getResult(val) {
     let rs = []
     for (let i = 0; i < 8; i++) {
       rs.push({

@@ -97,6 +97,16 @@
       }
     },
     ready () {
+      // http://123.57.52.110:9202/wx/data/banner/list?uid=gopain
+      this.$http.get('/wx/data/banner/list?uid=gopain').then((res) => {
+        if (res.code === 200) {
+          console.log(res)
+        } else {
+          console.log(res)
+        }
+      }, (err) => {
+        console.log(err)
+      })
       this.setLoadingState(false)
     },
     methods: {

@@ -92,7 +92,7 @@
         panel_list: panelList,
         panel_footer: {
           title: '查看更多',
-          url: '/product'
+          url: '/product-list'
         }
       }
     },

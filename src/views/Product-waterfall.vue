@@ -13,7 +13,7 @@
         <tab-item :selected="this.tabProsNum === 2" @click="tabProsFn(2)">价格</tab-item>
       </tab>
       <div id="main">
-        <div class="pin" v-for="item in items" track-by="$index">
+        <div class="pin" v-for="item in items" track-by="$index" v-link="{path:'product-detail',query:{id:item.id}}">
           <div class="box">
             <img :src="item.image" class="img">
             <div class="bd">

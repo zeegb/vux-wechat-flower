@@ -98,7 +98,11 @@
     },
     ready () {
       // http://123.57.52.110:9202/wx/data/banner/list?uid=gopain
-      this.$http.get('/wx/data/banner/list?uid=gopain').then((res) => {
+      this.$http.post('/wx/data/banner/list', {
+        uid: 'system',
+        ops: '{}',
+        sort: '{}'
+      }).then((res) => {
         if (res.code === 200) {
           console.log(res)
         } else {

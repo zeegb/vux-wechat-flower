@@ -33,38 +33,38 @@
   import TabItem from 'vux/dist/components/tab-item'
   import Search from 'vux/dist/components/search'
 
-  var pinS
-  var $items = []
-  var itemWidth
-  var wf = {
-    arrange: function () {
-      var viewWidth = document.documentElement.clientWidth || document.body.clientWidth
-      var cols = Math.floor(viewWidth / itemWidth)
-
-      var colsHeight = []
-      for (var i = 0; i < cols; i++) {
-        colsHeight.push(0)
-      }
-      for (var j = 0; j < $items.length; j++) {
-        var ele = $items[j]
-        var curHeight = colsHeight[0]
-        var col = 0
-        for (var z = 0; z < colsHeight.length; z++) {
-          if (colsHeight[z] < curHeight) {
-            curHeight = colsHeight[z]
-            col = z
-          }
-        }
-        ele.style.left = col * itemWidth + 'px'
-        ele.style.top = curHeight + 'px'
-        ele.setAttribute('class', 'pin')
-        colsHeight[col] += ele.offsetHeight
-      }
-      var maxH = Math.max.apply(null, colsHeight)
-      var oParent = document.getElementById('main')
-      oParent.style.height = maxH + 'px'
-    }
-  }
+  //  var pinS
+  //  var $items = []
+  //  var itemWidth
+  //  var wf = {
+  //    arrange: function () {
+  //      var viewWidth = document.documentElement.clientWidth || document.body.clientWidth
+  //      var cols = Math.floor(viewWidth / itemWidth)
+  //
+  //      var colsHeight = []
+  //      for (var i = 0; i < cols; i++) {
+  //        colsHeight.push(0)
+  //      }
+  //      for (var j = 0; j < $items.length; j++) {
+  //        var ele = $items[j]
+  //        var curHeight = colsHeight[0]
+  //        var col = 0
+  //        for (var z = 0; z < colsHeight.length; z++) {
+  //          if (colsHeight[z] < curHeight) {
+  //            curHeight = colsHeight[z]
+  //            col = z
+  //          }
+  //        }
+  //        ele.style.left = col * itemWidth + 'px'
+  //        ele.style.top = curHeight + 'px'
+  //        ele.setAttribute('class', 'pin')
+  //        colsHeight[col] += ele.offsetHeight
+  //      }
+  //      var maxH = Math.max.apply(null, colsHeight)
+  //      var oParent = document.getElementById('main')
+  //      oParent.style.height = maxH + 'px'
+  //    }
+  //  }
   var likePro = [{
     'url': 'http://placekitten.com/' + Math.floor(Math.random() * 100) + 300 + '/' + Math.floor(Math.random() * 500) + 300,
     'id': 94,
@@ -125,7 +125,11 @@
         page: 1,
         more: true,
         load: false,
-        colsHeight: []
+        colsHeight: [0, 0],
+        pinS: [],
+        $items: [],
+        itemWidth: '',
+        index: 0
       }
     },
     route: {
@@ -142,16 +146,9 @@
     created () {
     },
     ready () {
-      setTimeout(function () {
-        pinS = document.getElementsByClassName('pin')
-        itemWidth = pinS[0].offsetWidth
-        for (var i = 0; i < pinS.length; i++) {
-          if (pinS[i].className.indexOf('wait')) {
-            $items.push(pinS[i])
-          }
-        }
-        wf.arrange()
-      }, 0)
+//      setTimeout(function () {
+      this.arrange()
+//      }, 0)
       // 根据url参数请求相应数据
 //      let getRes = (url, sort, type = 0) => {
 //        this.$http.get(`/api/shopping/${url}?shop=${this.shop}&word=${this.searchVal}&sort=${this.sort}`).then(res => {
@@ -175,10 +172,51 @@
 //      }
     },
     methods: {
+      arrange () {
+        this.pinS = document.getElementsByClassName('pin')
+        console.log('this.pinS', this.pinS)
+        this.itemWidth = this.pinS[0].offsetWidth
+        this.$items = []
+        for (var x = this.index; x < this.pinS.length; x++) {
+//          if (this.pinS[x].className.indexOf('pin wait')) {
+          this.$items.push(this.pinS[x])
+//          }
+        }
+        this.index = x
+        console.log(this.index)
+        console.log('this.$items', this.$items)
+//        var viewWidth = document.documentElement.clientWidth || document.body.clientWidth
+//        var cols = 2// Math.floor(viewWidth / this.itemWidth)
+
+//        var colsHeight = []
+//        for (var i = 0; i < cols; i++) {
+//          this.colsHeight.push(0)
+//        }
+        for (var j = 0; j < this.$items.length; j++) {
+          var ele = this.$items[j]
+          var curHeight = this.colsHeight[0]
+          var col = 0
+          for (var z = 0; z < this.colsHeight.length; z++) {
+            if (this.colsHeight[z] < curHeight) {
+              curHeight = this.colsHeight[z]
+              col = z
+            }
+          }
+          ele.style.left = col * this.itemWidth + 'px'
+          ele.style.top = curHeight + 'px'
+          ele.setAttribute('class', 'pin')
+          this.colsHeight[col] += ele.offsetHeight
+        }
+        var maxH = Math.max.apply(null, this.colsHeight)
+        var oParent = document.getElementById('main')
+        oParent.style.height = maxH + 'px'
+      },
+
       scroll (e) {
         if (document.body.scrollHeight - window.screen.height - document.body.scrollTop <= 0 && !this.load) {
           this.load = true
           this.pageData()
+          this.arrange()
         }
       },
       pageData () {
@@ -275,7 +313,6 @@
       font-size: 18px;
     }
   }
-
 
   // 修改组件样式
   .v-search {

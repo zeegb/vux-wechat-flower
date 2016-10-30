@@ -13,7 +13,7 @@
         <tab-item :selected="this.tabProsNum === 2" @click="tabProsFn(2)">价格</tab-item>
       </tab>
       <div id="main">
-        <div class="pin" v-for="item in items" track-by="$index">
+        <div class="pin wait" v-for="item in items" track-by="$index">
           <div class="box">
             <img :src="item.image" class="img">
             <div class="bd">
@@ -56,6 +56,7 @@
         }
         ele.style.left = col * itemWidth + 'px'
         ele.style.top = curHeight + 'px'
+        ele.setAttribute('class', 'pin')
         colsHeight[col] += ele.offsetHeight
       }
       var maxH = Math.max.apply(null, colsHeight)
@@ -122,7 +123,8 @@
         items: likePro,
         page: 1,
         more: true,
-        load: false
+        load: false,
+        colsHeight: []
       }
     },
     route: {
@@ -140,7 +142,7 @@
     },
     ready () {
       setTimeout(function () {
-        $items = document.getElementsByClassName('pin')
+        $items = document.getElementsByClassName('pin wait')
         console.log($items)
         itemWidth = $items[0].offsetWidth
 
@@ -172,7 +174,7 @@
       scroll (e) {
         if (document.body.scrollHeight - window.screen.height - document.body.scrollTop <= 0 && !this.load) {
           this.load = true
-//          this.pageData()
+          this.pageData()
         }
       },
       pageData () {
@@ -193,7 +195,7 @@
 //          this.load = false
 //        })
         this.page++
-        if (this.page > 10) {
+        if (this.page > 5) {
           this.more = false
           this.items = this.items
         } else {

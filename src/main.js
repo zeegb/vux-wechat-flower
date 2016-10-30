@@ -52,6 +52,12 @@ router.map({
     },
     name: 'Product'
   },
+  '/product-list': {
+    component: function (resolve) {
+      require(['./views/Product-waterfall.vue'], resolve)
+    },
+    name: 'product-list'
+  },
   '/product-detail': {
     component: function (resolve) {
       require(['./views/Product-detail.vue'], resolve)

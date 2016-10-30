@@ -13,7 +13,7 @@
         <tab-item :selected="this.tabProsNum === 2" @click="tabProsFn(2)">价格</tab-item>
       </tab>
       <div id="main">
-        <div class="pin wait" v-for="item in items" track-by="$index">
+        <div class="pin" v-for="item in items" track-by="$index">
           <div class="box">
             <img :src="item.image" class="img">
             <div class="bd">
@@ -121,7 +121,7 @@
         tabProsNum: 0,
         tabPrice: 0,
         // 数据结果
-        items: likePro,
+        items: [],
         page: 1,
         more: true,
         load: false,
@@ -134,7 +134,6 @@
     },
     route: {
       data (transition) {
-//        this.pageData()
         window.addEventListener('scroll', this.scroll)
       },
       deactivate (transition) {
@@ -144,6 +143,7 @@
       }
     },
     created () {
+      this.pageData()
     },
     ready () {
 //      setTimeout(function () {
@@ -204,7 +204,6 @@
           }
           ele.style.left = col * this.itemWidth + 'px'
           ele.style.top = curHeight + 'px'
-          ele.setAttribute('class', 'pin')
           this.colsHeight[col] += ele.offsetHeight
         }
         var maxH = Math.max.apply(null, this.colsHeight)
@@ -216,7 +215,9 @@
         if (document.body.scrollHeight - window.screen.height - document.body.scrollTop <= 0 && !this.load) {
           this.load = true
           this.pageData()
-          this.arrange()
+          setTimeout(function () {
+            this.arrange()
+          }.bind(this), 100)
         }
       },
       pageData () {

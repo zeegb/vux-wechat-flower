@@ -33,7 +33,8 @@
   import TabItem from 'vux/dist/components/tab-item'
   import Search from 'vux/dist/components/search'
 
-  var $items
+  var pinS
+  var $items = []
   var itemWidth
   var wf = {
     arrange: function () {
@@ -142,10 +143,13 @@
     },
     ready () {
       setTimeout(function () {
-        $items = document.getElementsByClassName('pin wait')
-        console.log($items)
-        itemWidth = $items[0].offsetWidth
-
+        pinS = document.getElementsByClassName('pin')
+        itemWidth = pinS[0].offsetWidth
+        for (var i = 0; i < pinS.length; i++) {
+          if (pinS[i].className.indexOf('wait')) {
+            $items.push(pinS[i])
+          }
+        }
         wf.arrange()
       }, 0)
       // 根据url参数请求相应数据

@@ -19,7 +19,6 @@
 
     <br/>
     <br/>
-    <tabbar tab="home"></tabbar>
   </div>
 
 </template>

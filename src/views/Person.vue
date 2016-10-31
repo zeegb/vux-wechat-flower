@@ -35,7 +35,6 @@
         <cell title="账号安全" is-link></cell>
       </group>
     </div>
-    <tabbar tab="person"></tabbar>
   </div>
 </template>
 

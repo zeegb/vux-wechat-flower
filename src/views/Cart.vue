@@ -18,7 +18,6 @@
                   v-link="'/order'"></x-button>
       </group>
     </div>
-    <tabbar tab="cart"></tabbar>
   </div>
 </template>
 

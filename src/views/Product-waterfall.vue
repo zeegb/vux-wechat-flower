@@ -1,6 +1,6 @@
 <template>
   <div class="v-product">
-    <x-header :left-options="{showBack: true}" :right-options="{showMore: false}"
+    <x-header :right-options="{showMore: false}"
               @on-click-more="showMenus = true" @on-click-title="scrollTop" class="v-hd">全部商品
     </x-header>
 

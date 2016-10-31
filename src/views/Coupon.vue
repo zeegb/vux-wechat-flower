@@ -1,7 +1,7 @@
 <template>
   <!-- 头部 -->
   <div class="v-cou">
-    <x-header :left-options="{showBack: true}" class="v-hd">
+    <x-header class="v-hd">
       我的优惠券
     </x-header>
     <tab>

@@ -1,7 +1,7 @@
 <template>
   <div class="v-alist">
     <!-- 头部 -->
-    <x-header :left-options="{showBack: true}" class="v-hd">
+    <x-header class="v-hd">
       收货地址
       <span class="f-c1" slot="right" v-link="{path:'edit-address'}">新建</span>
     </x-header>

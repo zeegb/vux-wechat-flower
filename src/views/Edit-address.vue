@@ -1,7 +1,7 @@
 <template>
   <div class="v-aedit">
     <!-- 头部 -->
-    <x-header :left-options="{showBack: true}" class="v-hd">
+    <x-header class="v-hd">
       收货地址
       <span class="f-c1" slot="right">保存</span>
     </x-header>

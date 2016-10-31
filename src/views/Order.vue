@@ -3,7 +3,7 @@
     <!-- 订单页面 -->
     <div class="v-order" v-show="status === '0'">
       <!-- 头部 -->
-      <x-header :left-options="{showBack: true}" class="v-hd">
+      <x-header class="v-hd">
         确认订单
       </x-header>
 

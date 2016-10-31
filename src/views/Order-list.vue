@@ -1,7 +1,7 @@
 <template>
   <div class="v-my">
     <!-- 头部 -->
-    <x-header :left-options="{showBack: true}" class="v-hd">
+    <x-header class="v-hd">
       我的订单
     </x-header>
 

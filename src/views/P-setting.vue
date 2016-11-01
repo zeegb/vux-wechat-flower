@@ -55,5 +55,7 @@
     z-index: 5;
     width: 100%;
     height: 44px;
+    background-color: #000011;
+    opacity: 0.7;
   }
 </style>

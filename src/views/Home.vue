@@ -13,12 +13,11 @@
       <swiper-item><p>【活动】盆栽买一送一!</p></swiper-item>
       <swiper-item><p>【活动】满50可获得20代金券!</p></swiper-item>
     </swiper>
-    <panel header="花" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>
-    <panel header="种子" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>
-    <panel header="多肉" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>
-
-    <br/>
-    <br/>
+    <div style="padding: 10px 0 65px 0">
+      <panel header="花" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>
+      <panel header="种子" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>
+      <panel header="多肉" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>
+    </div>
   </div>
 
 </template>

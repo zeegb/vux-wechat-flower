@@ -2,25 +2,43 @@
   <div id="app">
     <loading :show="isLoading" position="fixed"></loading>
     <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
+    <tabbar v-if="isTabbar" :tab="pathName"></tabbar>
   </div>
 </template>
 
 <script>
+  import Tabbar from './components/tabbar.vue'
   import store from './vuex/store'
   import {isLoading, direction} from './vuex/getters'
   import Loading from 'vux/dist/components/loading'
   export default {
     components: {
-      Loading
+      Loading,
+      Tabbar
     },
     data () {
       return {
         effect: 'fade'
       }
     },
+    computed: {
+      isTabbar () {
+        if (this.route.name === 'Home') return true
+        if (this.route.name === 'Card') return true
+        if (this.route.name === 'Cart') return true
+        if (this.route.name === 'Person') return true
+      },
+      pathName () {
+        if (this.route.name === 'Home') return 'Home'
+        if (this.route.name === 'Card') return 'Card'
+        if (this.route.name === 'Cart') return 'Cart'
+        if (this.route.name === 'Person') return 'Person'
+      }
+    },
     store: store,
     vuex: {
       getters: {
+        route: (state) => state.route,
         isLoading,
         direction
       }
@@ -75,7 +93,7 @@
   .vux-pop-in-enter,
   .vux-pop-in-leave {
     will-change: transform;
-    height: 94%;
+    height: 100%;
     position: absolute;
     left: 0;
   }

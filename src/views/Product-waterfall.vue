@@ -1,29 +1,42 @@
 <template>
   <div class="v-product">
-    <x-header :left-options="{showBack: true}" :right-options="{showMore: false}"
+    <x-header :right-options="{showMore: false}"
               @on-click-more="showMenus = true" @on-click-title="scrollTop" class="v-hd">全部商品
     </x-header>
-    <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
-            top="46px"></search>
-    <!-- 商品 -->
-    <div class="v-prolist">
-      <tab>
-        <tab-item :selected="this.tabProsNum === 0" @click="tabProsFn(0)">销售量</tab-item>
-        <tab-item :selected="this.tabProsNum === 1" @click="tabProsFn(1)">新品</tab-item>
-        <tab-item :selected="this.tabProsNum === 2" @click="tabProsFn(2)">价格</tab-item>
-      </tab>
-      <div id="main">
-        <div class="pin wait" v-for="item in items" track-by="$index">
-          <div class="box">
-            <img :src="item.image" class="img">
-            <div class="bd">
-              <div class="discribe">{{item.name}}</div>
-              <div class="pri">￥{{item.price}}</div>
+
+    <!--<scroller lock-x scrollbar-y use-pullup :pullup-status.sync="pullupStatus" @pullup:loading="load3">-->
+      <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
+              top="46px"></search>
+      <!-- 商品 -->
+      <div class="v-prolist">
+        <tab>
+          <tab-item :selected="this.tabProsNum === 0" @click="tabProsFn(0)">销售量</tab-item>
+          <tab-item :selected="this.tabProsNum === 1" @click="tabProsFn(1)">新品</tab-item>
+          <tab-item :selected="this.tabProsNum === 2" @click="tabProsFn(2)">价格</tab-item>
+        </tab>
+        <!--content slot-->
+        <div id="main">
+          <div class="pin" v-for="item in items" track-by="$index" v-link="{path:'product-detail',query:{id:item.id}}">
+            <div class="box">
+              <img :src="item.image" class="img">
+              <div class="bd">
+                <div class="discribe">{{item.name}}</div>
+                <div class="pri">￥{{item.price}}</div>
+              </div>
             </div>
           </div>
         </div>
+
+        <!--pullup slot-->
+        <div id="pullup" style="position: absolute; width: 100%; height: 40px; padding-top: 8px; text-align: center; color:#888888;">
+          <!--<span v-show="pullupStatus === 'default' && more">上拉加载更多</span>-->
+          <span v-show="!more">没有更多了～</span>
+          <!--<span class="pullup-arrow" v-show="more && (pullupStatus === 'down' || pullupStatus === 'up')"-->
+                <!--:class="{'rotate': pullupStatus === 'up'}">↑</span>-->
+          <span v-show="more"><spinner type="ios-small"></spinner>加载更多</span>
+        </div>
       </div>
-    </div>
+    <!--</scroller>-->
   </div>
 </template>
 
@@ -32,39 +45,9 @@
   import Tab from 'vux/dist/components/tab'
   import TabItem from 'vux/dist/components/tab-item'
   import Search from 'vux/dist/components/search'
+  import Scroller from 'vux/dist/components/scroller'
+  import Spinner from 'vux/dist/components/spinner'
 
-  var pinS
-  var $items = []
-  var itemWidth
-  var wf = {
-    arrange: function () {
-      var viewWidth = document.documentElement.clientWidth || document.body.clientWidth
-      var cols = Math.floor(viewWidth / itemWidth)
-
-      var colsHeight = []
-      for (var i = 0; i < cols; i++) {
-        colsHeight.push(0)
-      }
-      for (var j = 0; j < $items.length; j++) {
-        var ele = $items[j]
-        var curHeight = colsHeight[0]
-        var col = 0
-        for (var z = 0; z < colsHeight.length; z++) {
-          if (colsHeight[z] < curHeight) {
-            curHeight = colsHeight[z]
-            col = z
-          }
-        }
-        ele.style.left = col * itemWidth + 'px'
-        ele.style.top = curHeight + 'px'
-        ele.setAttribute('class', 'pin')
-        colsHeight[col] += ele.offsetHeight
-      }
-      var maxH = Math.max.apply(null, colsHeight)
-      var oParent = document.getElementById('main')
-      oParent.style.height = maxH + 'px'
-    }
-  }
   var likePro = [{
     'url': 'http://placekitten.com/' + Math.floor(Math.random() * 100) + 300 + '/' + Math.floor(Math.random() * 500) + 300,
     'id': 94,
@@ -108,7 +91,9 @@
       XHeader,
       Search,
       Tab,
-      TabItem
+      TabItem,
+      Scroller,
+      Spinner
     },
     data () {
       return {
@@ -121,16 +106,24 @@
         tabProsNum: 0,
         tabPrice: 0,
         // 数据结果
-        items: likePro,
+        items: [],
         page: 1,
         more: true,
         load: false,
-        colsHeight: []
+        colsHeight: [0, 0],
+        pinS: [],
+        $items: [],
+        itemWidth: '',
+        index: 0,
+        pullupStatus: 'default'
       }
     },
     route: {
       data (transition) {
-//        this.pageData()
+        this.pageData()
+        this.$nextTick(function () {
+          this.arrange()
+        })
         window.addEventListener('scroll', this.scroll)
       },
       deactivate (transition) {
@@ -142,16 +135,8 @@
     created () {
     },
     ready () {
-      setTimeout(function () {
-        pinS = document.getElementsByClassName('pin')
-        itemWidth = pinS[0].offsetWidth
-        for (var i = 0; i < pinS.length; i++) {
-          if (pinS[i].className.indexOf('wait')) {
-            $items.push(pinS[i])
-          }
-        }
-        wf.arrange()
-      }, 0)
+//      setTimeout(function () {
+//      }, 0)
       // 根据url参数请求相应数据
 //      let getRes = (url, sort, type = 0) => {
 //        this.$http.get(`/api/shopping/${url}?shop=${this.shop}&word=${this.searchVal}&sort=${this.sort}`).then(res => {
@@ -175,10 +160,67 @@
 //      }
     },
     methods: {
+      arrange () {
+        this.pinS = document.getElementsByClassName('pin')
+        console.log('this.pinS', this.pinS)
+        this.itemWidth = this.pinS[0].offsetWidth
+        this.$items = []
+        for (var x = this.index; x < this.pinS.length; x++) {
+//          if (this.pinS[x].className.indexOf('pin wait')) {
+          this.$items.push(this.pinS[x])
+//          }
+        }
+        this.index = x
+        console.log(this.index)
+        console.log('this.$items', this.$items)
+//        var viewWidth = document.documentElement.clientWidth || document.body.clientWidth
+//        var cols = 2// Math.floor(viewWidth / this.itemWidth)
+
+//        var colsHeight = []
+//        for (var i = 0; i < cols; i++) {
+//          this.colsHeight.push(0)
+//        }
+        for (var j = 0; j < this.$items.length; j++) {
+          var ele = this.$items[j]
+          var curHeight = this.colsHeight[0]
+          var col = 0
+          for (var z = 0; z < this.colsHeight.length; z++) {
+            if (this.colsHeight[z] < curHeight) {
+              curHeight = this.colsHeight[z]
+              col = z
+            }
+          }
+          ele.style.left = col * this.itemWidth + 'px'
+          ele.style.top = curHeight + 'px'
+          this.colsHeight[col] += ele.offsetHeight
+        }
+        var maxH = Math.max.apply(null, this.colsHeight)
+        var oParent = document.getElementById('main')
+        var oPullup = document.getElementById('pullup')
+        oParent.style.height = maxH + 'px'
+        oPullup.style.buttom = 0
+      },
+      load3 (uuid) {
+        setTimeout(() => {
+          this.pageData()
+          this.$nextTick(function () {
+            this.arrange()
+          })
+          setTimeout(() => {
+            this.$broadcast('pullup:reset', uuid)
+          }, 10)
+        }, 2000)
+      },
+
       scroll (e) {
         if (document.body.scrollHeight - window.screen.height - document.body.scrollTop <= 0 && !this.load) {
           this.load = true
-          this.pageData()
+          setTimeout(() => {
+            this.pageData()
+            this.$nextTick(function () {
+              this.arrange()
+            })
+          }, 2000)
         }
       },
       pageData () {
@@ -199,7 +241,7 @@
 //          this.load = false
 //        })
         this.page++
-        if (this.page > 5) {
+        if (this.page > 4) {
           this.more = false
           this.items = this.items
         } else {
@@ -256,7 +298,7 @@
 
   .box img {
     width: 100%;
-    height: 250px;
+    height: 200px;
   }
 
   .bd {
@@ -275,7 +317,6 @@
       font-size: 18px;
     }
   }
-
 
   // 修改组件样式
   .v-search {
@@ -306,6 +347,8 @@
     z-index: 5;
     width: 100%;
     height: 44px;
+    background-color: #000011;
+    opacity: 0.7;
   }
 
   .v-search {

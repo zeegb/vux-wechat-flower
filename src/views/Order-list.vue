@@ -1,7 +1,7 @@
 <template>
   <div class="v-my">
     <!-- 头部 -->
-    <x-header :left-options="{showBack: true}" class="v-hd">
+    <x-header class="v-hd">
       我的订单
     </x-header>
 
@@ -114,6 +114,8 @@
     z-index: 5;
     width: 100%;
     height: 44px;
+    background-color: #000011;
+    opacity: 0.7;
   }
 
   .v-order {

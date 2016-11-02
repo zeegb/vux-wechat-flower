@@ -3,7 +3,7 @@
     <!-- 订单页面 -->
     <div class="v-order" v-show="status === '0'">
       <!-- 头部 -->
-      <x-header :left-options="{showBack: true}" class="v-hd">
+      <x-header class="v-hd">
         确认订单
       </x-header>
 
@@ -24,7 +24,7 @@
                 <div class="tel">{{linkTel}}</div>
                 <div class="arrow"></div>
               </div>
-              <div class="bd">
+              <div class="cellbd">
                 收货地址：{{linkAddress}}
               </div>
             </div>
@@ -48,7 +48,7 @@
 
         <div class="v-reduce">
           <div class="v-cellbd" v-link="'/coupon'">
-            <div class="bd">
+            <div class="cellbd">
               优惠券
             </div>
             <div class="ft f-c3" v-if="!isCoupon">未使用</div>
@@ -56,7 +56,7 @@
             <div class="arrow"></div>
           </div>
           <div class="v-cellbd">
-            <div class="bd">店铺活动：满2件减50</div>
+            <div class="cellbd">店铺活动：满2件减50</div>
             <div class="ft f-c2">- 50.00</div>
           </div>
         </div>
@@ -64,7 +64,7 @@
         <div class="v-word">
           <div class="v-cellbd">
             <div class="hd">卖家留言：</div>
-            <div class="bd">
+            <div class="cellbd">
               <input type="text" class="ipt" placeholder="选填">
             </div>
           </div>
@@ -72,11 +72,11 @@
 
         <div class="v-cast">
           <div class="v-cellbd">
-            <div class="bd">运费</div>
+            <div class="cellbd">运费</div>
             <div class="ft f-c2">+ 0.00</div>
           </div>
           <div class="v-cellbd">
-            <div class="bd"></div>
+            <div class="cellbd"></div>
             <div class="ft">
               共2件商品 合计：<span class="f-c2">￥4939.00</span>
             </div>
@@ -256,6 +256,8 @@
     z-index: 5;
     width: 100%;
     height: 44px;
+    background-color: #000011;
+    opacity: 0.7;
   }
 
   .v-back {
@@ -357,7 +359,7 @@
         margin-left: .3em;
       }
     }
-    .bd {
+    .cellbd {
       position: relative;
       top: -5px;
       padding-right: 10px;
@@ -424,7 +426,7 @@
       padding: 10px 0;
       white-space: nowrap;
     }
-    .bd {
+    .cellbd {
       flex: 1;
       padding: 10px 0;
       .ipt {
@@ -469,7 +471,7 @@
           text-align: right;
         }
       }
-      .bd {
+      .cellbd {
         line-height: 18px;
         font-size: 14px;
         color: #666;

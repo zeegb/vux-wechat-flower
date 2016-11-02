@@ -26,7 +26,14 @@ module.exports = {
         pathRewrite: {
           '^/wx': ''
         }
-      }
+      },
+      '/url': {
+        target: 'http://',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/url': ''
+        }
+      },
     }
   }
 }

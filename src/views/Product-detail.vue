@@ -1,7 +1,7 @@
 <template>
   <div class="v-product">
     <!-- 头部 -->
-    <x-header :left-options="{showBack: true}">商品详情
+    <x-header class="v-hd">商品详情
       <i class="iconfont v-cart" slot="right" v-link="{path:'cart'}">&#xe601;</i>
     </x-header>
     <!-- 主内容 -->
@@ -286,6 +286,7 @@
   @import '../assets/styles/iconfont.scss';
 
   .v-product {
+    padding-top: 44px;
     background: #efefef;
   }
 
@@ -296,7 +297,8 @@
     z-index: 5;
     width: 100%;
     height: 44px;
-    background: #c50a1d;
+    background-color: #000011;
+    opacity: 0.7;
   }
 
   .v-back {

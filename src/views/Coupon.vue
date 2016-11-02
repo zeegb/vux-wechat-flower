@@ -1,7 +1,7 @@
 <template>
   <!-- 头部 -->
   <div class="v-cou">
-    <x-header :left-options="{showBack: true}" class="v-hd">
+    <x-header class="v-hd">
       我的优惠券
     </x-header>
     <tab>
@@ -125,6 +125,8 @@
     z-index: 5;
     width: 100%;
     height: 44px;
+    background-color: #000011;
+    opacity: 0.7;
   }
 
   .v-ghd {

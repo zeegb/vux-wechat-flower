@@ -1,6 +1,6 @@
 <template>
   <div class="v-product">
-    <x-header :left-options="{showBack: true}" :right-options="{showMore: false}"
+    <x-header :right-options="{showMore: false}"
               @on-click-more="showMenus = true" @on-click-title="scrollTop" class="v-hd">全部商品
     </x-header>
     <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
@@ -182,6 +182,8 @@
     z-index: 5;
     width: 100%;
     height: 44px;
+    background-color: #000011;
+    opacity: 0.7;
   }
 
   .v-search {

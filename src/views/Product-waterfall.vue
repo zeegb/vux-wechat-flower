@@ -275,7 +275,7 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import '../assets/styles/iconfont.scss';
   // 瀑布流
   #main {

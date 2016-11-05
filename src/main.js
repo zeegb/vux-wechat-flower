@@ -149,7 +149,7 @@ router.map({
   },
   '/feedback': {
     component: function (resolve) {
-      require(['./views/feedback.vue'], resolve)
+      require(['./views/Feedback.vue'], resolve)
     },
     name: 'feedback'
   }

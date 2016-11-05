@@ -20,7 +20,7 @@
         <div class="v-shop">
           <div class="hd">
             <div class="tt">蒲黄榆自营店</div>
-            <div class="tc">待付款</div>
+            <div class="tc">已完成</div>
           </div>
           <div class="bd">
             <productcell :proslist="proscellList"></productcell>
@@ -30,8 +30,8 @@
           </div>
         </div>
         <div class="v-btns">
-          <span class="btn"><button class="weui_btn weui_btn_mini weui_btn_primary"> 付款 </button></span>
-          <span class="btn"><button class="weui_btn weui_btn_mini weui_btn_warn"> 取消订单 </button></span>
+          <span class="btn"><button class="weui_btn weui_btn_mini weui_btn_primary" v-link="{path:'feedback'}"> 评价晒单 </button></span>
+          <span class="btn"><button class="weui_btn weui_btn_mini weui_btn_default"> 再次购买 </button></span>
         </div>
       </div>
     </div>

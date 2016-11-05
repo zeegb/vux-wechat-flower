@@ -7,8 +7,8 @@
         <h3>恭喜您，支付成功！</h3>
         <h3>请等待系统为您处理订单！</h3>
         <div class="btnBox">
-          <a href="javascript:" class="weui_btn"> 继续逛逛 </a>
-          <a href="javascript:" class="weui_btn weui_btn_default"> 查看订单记录 </a>
+          <a href="javascript:" class="weui_btn" v-link="{path:'product-list'}"> 继续逛逛 </a>
+          <a href="javascript:" class="weui_btn weui_btn_default" v-link="{path:'order-list'}"> 查看订单记录 </a>
         </div>
       </div>
       <div class="contentList">

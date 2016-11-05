@@ -132,7 +132,7 @@
   }
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
   .v-home {
     padding-top: 44px;
   }

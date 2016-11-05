@@ -3,7 +3,7 @@
     <x-header :left-options="{showBack: false}" :right-options="{showMore: true}"
               @on-click-more="showMenus = true" class="v-hd">购物车
     </x-header>
-    <div style="margin-top: 20px;">
+    <div style="margin-top: 10px;">
       <cartpanel :type="'1'" :list.sync="list"></cartpanel>
       <group>
         <cell title="总计">

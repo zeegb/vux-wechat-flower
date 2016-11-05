@@ -18,7 +18,7 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 9001,
+    port: 9203,
     proxyTable: {
       '/wx': {
         target: 'http://flower.wx.wurim.com/wx',

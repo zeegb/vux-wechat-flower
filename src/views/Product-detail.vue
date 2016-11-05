@@ -55,16 +55,16 @@
             <span slot="after-title">领取积分</span>
           </cell>
         </div>
-        <div class="v-myshop">
-          <div class="hd">{{productData.goods.supplier}}</div>
-          <div class="bd">
-            <div class="mark" v-show="productData.shop_collect" @click="markShop(0)"><i class="iconfont">&#xe608;</i>
-              关注店铺
-            </div>
-            <div class="mark z-act" @click="markShop(1)" v-else><i class="iconfont">&#xe607;</i> 关注店铺</div>
-            <div class="link" v-link="{path:'shop',query:{shop:productData.goods.supplier_id}}">进入店铺</div>
-          </div>
-        </div>
+        <!--<div class="v-myshop">-->
+          <!--<div class="hd">{{productData.goods.supplier}}</div>-->
+          <!--<div class="bd">-->
+            <!--<div class="mark" v-show="productData.shop_collect" @click="markShop(0)"><i class="iconfont">&#xe608;</i>-->
+              <!--关注店铺-->
+            <!--</div>-->
+            <!--<div class="mark z-act" @click="markShop(1)" v-else><i class="iconfont">&#xe607;</i> 关注店铺</div>-->
+            <!--<div class="link" v-link="{path:'shop',query:{shop:productData.goods.supplier_id}}">进入店铺</div>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
 
       <!-- tab -->
@@ -81,10 +81,9 @@
               <spinner :type="ios" slot="value" v-show="disTab1"></spinner>
             </div>
           </div>
-          <div class="v-content" v-show="tabSel === 2">{{tabAssessCon}}
-            <div class="f-tac">
+          <div class="v-content" v-show="tabSel === 2">
               <spinner :type="ios" slot="value" v-show="disTab2"></spinner>
-            </div>
+              <comment :list="tabAssessCon"></comment>
           </div>
         </div>
       </div>
@@ -112,6 +111,32 @@
   import Tab from 'vux/dist/components/tab'
   import TabItem from 'vux/dist/components/tab-item'
   import Spinner from 'vux/dist/components/spinner'
+  import Comment from '../components/Comment'
+
+  const list = [{
+    name: 'Airyland',
+    avatar: 'static/demo/comment/1.jpg',
+    time: '昨天',
+    like_num: 99,
+    content: '沙发',
+    has_praised: true,
+    reply_list: [{
+      content: '恭喜~',
+      time: '今天早上'
+    }]
+  }, {
+    name: 'Vux',
+    avatar: 'static/demo/comment/2.jpg',
+    time: '未来时间',
+    like_num: 0,
+    content: '板凳'
+  }, {
+    name: 'Secret',
+    avatar: 'static/demo/comment/3.jpg',
+    time: '未来时间',
+    like_num: 99,
+    content: '居然没抢到沙发'
+  }]
 
   const baseList =
     [{
@@ -141,7 +166,8 @@
       Cell,
       Tab,
       TabItem,
-      Spinner
+      Spinner,
+      Comment
     },
     data () {
       return {
@@ -152,6 +178,7 @@
         pro: '',
         goods_id: '',
         productData: {
+          address: '北京',
           shop: '',
           id: '',
           goods: {
@@ -175,10 +202,19 @@
           {
             standardName: '商品规格',
             optionList: [{
-              option: '单月(4束)',
+              option: '单月(4束)1111111111111111111111',
               standard_collect: false
             }, {
               option: '3个月(12束)',
+              standard_collect: false
+            }, {
+              option: '6个月(24束)',
+              standard_collect: false
+            }, {
+              option: '6个月(24束)',
+              standard_collect: false
+            }, {
+              option: '6个月(24束)',
               standard_collect: false
             }, {
               option: '6个月(24束)',
@@ -275,7 +311,7 @@
         this.tabSel = 2
         if (!this.tabAssessCon.length) {
           // ajax获取
-          this.tabAssessCon = '评价'
+          this.tabAssessCon = list
           this.disTab2 = 0
         }
       }
@@ -325,9 +361,8 @@
     position: relative;
     box-sizing: border-box;
     .name {
-      height: 44px;
+      height: 22px;
       line-height: 22px;
-      padding-right: 44px;
       overflow: hidden;
       font-size: 18px;
     }
@@ -386,12 +421,6 @@
     }
   }
 
-  .v-imgbd {
-  }
-
-  .v-detailbd {
-  }
-
   // 优惠相关
   .v-favorable {
     margin-bottom: 10px;
@@ -410,16 +439,18 @@
     }
     .bd {
       position: relative;
+      display: flex;
+      flex-flow: row wrap;
       text-align: left;
       .o-for {
-        display: inline-block;
+        flex: auto;
         .o-select {
           margin: 5px 10px;
-          line-height: 24px;
-          padding: 0 20px;
+          padding: 3px 5px;
           border-radius: 5px;
           font-size: 14px;
           color: #333;
+          text-align:center;
           background: #f1f1f1;
           &.o-act {
             background: #FF5809;

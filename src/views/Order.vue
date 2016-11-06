@@ -87,7 +87,7 @@
       <!-- 底部菜单 -->
       <div class="v-ft">
         <div class="total">合计：￥<span class="pri">0.00</span></div>
-        <div class="buy">立即购买</div>
+        <div class="buy" v-link="{path:'pay-result'}">立即购买</div>
       </div>
 
       <!-- 日期选择 -->

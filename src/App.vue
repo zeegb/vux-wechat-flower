@@ -48,9 +48,8 @@
 
 <style lang="less">
   @import 'styles/index.less';
-  @import './styles/weui/base/reset';
+  @import 'styles/weui/weui';
   @import '../node_modules/vux/dist/vux.css';
-  @import '../node_modules/vux/src/styles/reset';
 
   html, body {
     width: 100%;

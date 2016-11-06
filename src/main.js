@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import Resource from 'vue-resource'
-import { sync } from 'vuex-router-sync'
+import {sync} from 'vuex-router-sync'
 import store from './vuex/store'
 
 const FastClick = require('fastclick')
@@ -26,7 +26,7 @@ sync(store, router)
 
 const dispatch = store.dispatch
 
-router.beforeEach(({ to, from, next }) => {
+router.beforeEach(({to, from, next}) => {
   const toIndex = history.getItem(to.path)
   const fromIndex = history.getItem(from.path)
   if (toIndex) {
@@ -140,6 +140,18 @@ router.map({
       require(['./views/Waterfall4.vue'], resolve)
     },
     name: 'waterfall4'
+  },
+  '/pay-result': {
+    component: function (resolve) {
+      require(['./views/Pay-result.vue'], resolve)
+    },
+    name: 'payResult'
+  },
+  '/feedback': {
+    component: function (resolve) {
+      require(['./views/Feedback.vue'], resolve)
+    },
+    name: 'feedback'
   }
 })
 

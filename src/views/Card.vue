@@ -70,7 +70,7 @@
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .v-card {
     padding-top: 44px;
   }

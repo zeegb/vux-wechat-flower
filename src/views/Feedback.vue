@@ -22,7 +22,7 @@
         </div>
         <div class="cell-bd">
           <span>物流服务评价</span>
-          <span style="float:right;">满意请给5星</span>
+          <span style="float:right;">满意请给5星哦~</span>
         </div>
       </div>
       <div class="text-cells">
@@ -112,8 +112,8 @@
         padding: 5px 20px;
         flex: 1;
         line-height: 25px;
-        font-size: 16px;
-        color: #3e3e3e;
+        font-size: 20px;
+        color: #515151;
         p {
           padding: 0px 5px 10px 5px;
         }
@@ -155,12 +155,16 @@
         flex: 1;
         font-size: 12px;
         color: #3e3e3e;
+        span:nth-child(1) {
+          font-size: 18px;
+        }
+
       }
     }
     .text-cells {
       padding: 10px;
       .cell-text {
-        padding: 0px 5px 10px 5px;
+        padding: 0px 5px 10px 10px;
         font-size: 14px;
         color: #3e3e3e;
         .rater {

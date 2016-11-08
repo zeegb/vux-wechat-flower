@@ -21,7 +21,7 @@ module.exports = {
     port: 9203,
     proxyTable: {
       '/wx': {
-        target: 'http://flower.wx.wurim.com/wx',
+        target: 'http://api.flower.wx.wurim.com/wx',
         changeOrigin: true,
         pathRewrite: {
           '^/wx': ''

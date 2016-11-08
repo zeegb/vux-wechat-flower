@@ -13,10 +13,14 @@
       <swiper-item><p>【活动】盆栽买一送一!</p></swiper-item>
       <swiper-item><p>【活动】满50可获得20代金券!</p></swiper-item>
     </swiper>
-    <div style="padding: 10px 0 65px 0">
+    <div style="margin:10px 0px 0px 0px;">
       <panel header="花" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>
       <panel header="种子" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>
       <panel header="多肉" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>
+    </div>
+
+    <div class="button-box">
+      <x-button mini plain type="primary" v-link="{path:'product-list'}">&nbsp;&nbsp;查看全部商品&nbsp;&nbsp;</x-button>
     </div>
   </div>
 
@@ -29,6 +33,7 @@
   import SwiperItem from 'vux/dist/components/swiper-item'
   import Search from 'vux/dist/components/search'
   import Panel from 'vux/dist/components/panel'
+  import XButton from 'vux/dist/components/x-button'
   import {setLoadingState} from '../vuex/actions'
 
   const baseList =
@@ -71,7 +76,8 @@
       Swiper,
       SwiperItem,
       Search,
-      Panel
+      Panel,
+      XButton
     },
     vuex: {
       getters: {},
@@ -163,5 +169,10 @@
 
   .vux-header-right a {
     color: white !important;
+  }
+
+  .button-box {
+    margin: 10px 0px 50px 0px;
+    text-align: center;
   }
 </style>

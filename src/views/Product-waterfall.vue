@@ -1,42 +1,44 @@
 <template>
   <div class="v-product">
-    <x-header :right-options="{showMore: false}"
-              @on-click-more="showMenus = true" @on-click-title="scrollTop" class="v-hd">全部商品
+    <x-header :right-options="{showMore: false}" @on-click-title="scrollTop" class="v-hd">全部商品
+      <i class="" slot="right" @click="showMenus = !showMenus">分类</i>
     </x-header>
 
     <!--<scroller lock-x scrollbar-y use-pullup :pullup-status.sync="pullupStatus" @pullup:loading="load3">-->
-      <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
-              top="46px"></search>
-      <!-- 商品 -->
-      <div class="v-prolist">
-        <tab>
-          <tab-item :selected="this.tabProsNum === 0" @click="tabProsFn(0)">销售量</tab-item>
-          <tab-item :selected="this.tabProsNum === 1" @click="tabProsFn(1)">新品</tab-item>
-          <tab-item :selected="this.tabProsNum === 2" @click="tabProsFn(2)">价格</tab-item>
-        </tab>
-        <!--content slot-->
-        <div id="main">
-          <div class="pin" v-for="item in items" track-by="$index" v-link="{path:'product-detail',query:{id:item.id}}">
-            <div class="box">
-              <img :src="item.image" class="img">
-              <div class="bd">
-                <div class="discribe">{{item.name}}</div>
-                <div class="pri">￥{{item.price}}</div>
-              </div>
+    <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
+            top="46px"></search>
+    <!-- 商品 -->
+    <div class="v-prolist">
+      <tab>
+        <tab-item :selected="this.tabProsNum === 0" @click="tabProsFn(0)">销售量</tab-item>
+        <tab-item :selected="this.tabProsNum === 1" @click="tabProsFn(1)">新品</tab-item>
+        <tab-item :selected="this.tabProsNum === 2" @click="tabProsFn(2)">价格</tab-item>
+      </tab>
+      <!--content slot-->
+      <div id="main">
+        <div class="pin" v-for="item in items" track-by="$index" v-link="{path:'product-detail',query:{id:item.id}}">
+          <div class="box">
+            <img :src="item.image" class="img">
+            <div class="bd">
+              <div class="discribe">{{item.name}}</div>
+              <div class="pri">￥{{item.price}}</div>
             </div>
           </div>
         </div>
-
-        <!--pullup slot-->
-        <div id="pullup" style="position: absolute; width: 100%; height: 40px; padding-top: 8px; text-align: center; color:#888888;">
-          <!--<span v-show="pullupStatus === 'default' && more">上拉加载更多</span>-->
-          <span v-show="!more">没有更多了～</span>
-          <!--<span class="pullup-arrow" v-show="more && (pullupStatus === 'down' || pullupStatus === 'up')"-->
-                <!--:class="{'rotate': pullupStatus === 'up'}">↑</span>-->
-          <span v-show="more"><spinner type="ios-small"></spinner>加载更多</span>
-        </div>
       </div>
+
+      <!--pullup slot-->
+      <div id="pullup"
+           style="position: absolute; width: 100%; height: 40px; padding-top: 8px; text-align: center; color:#888888;">
+        <!--<span v-show="pullupStatus === 'default' && more">上拉加载更多</span>-->
+        <span v-show="!more">没有更多了～</span>
+        <!--<span class="pullup-arrow" v-show="more && (pullupStatus === 'down' || pullupStatus === 'up')"-->
+        <!--:class="{'rotate': pullupStatus === 'up'}">↑</span>-->
+        <span v-show="more"><spinner type="ios-small"></spinner>加载更多</span>
+      </div>
+    </div>
     <!--</scroller>-->
+    <actionsheet :show.sync="showMenus" :menus="typeList" @on-click-menu="selectType"></actionsheet>
   </div>
 </template>
 
@@ -47,6 +49,7 @@
   import Search from 'vux/dist/components/search'
   import Scroller from 'vux/dist/components/scroller'
   import Spinner from 'vux/dist/components/spinner'
+  import Actionsheet from 'vux/dist/components/actionsheet'
 
   var likePro = [{
     'url': 'http://placekitten.com/' + Math.floor(Math.random() * 100) + 300 + '/' + Math.floor(Math.random() * 500) + 300,
@@ -93,7 +96,8 @@
       Tab,
       TabItem,
       Scroller,
-      Spinner
+      Spinner,
+      Actionsheet
     },
     data () {
       return {
@@ -115,7 +119,13 @@
         $items: [],
         itemWidth: '',
         index: 0,
-        pullupStatus: 'default'
+        pullupStatus: 'default',
+        showMenus: false,
+        typeList: {
+          menu1: '多肉',
+          menu2: '种子',
+          menu3: '花'
+        }
       }
     },
     route: {
@@ -271,6 +281,9 @@
       },
       scrollTop () {
         window.scrollTo(0, 0)
+      },
+      selectType (key) {
+        console.log(key)
       }
     }
   }
@@ -284,8 +297,8 @@
   }
 
   .pin {
-    width: 47%;
-    padding: 10px 0 0 2%;
+    width: 48.5%;
+    padding: 1% 0 0 1%;
     position: absolute;
     top: 0;
     left: 0;

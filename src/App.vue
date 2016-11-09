@@ -54,6 +54,7 @@
   html, body {
     width: 100%;
     overflow-x: hidden;
+    font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
     height: auto !important;
   }
 

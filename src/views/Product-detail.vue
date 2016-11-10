@@ -98,9 +98,13 @@
         <i class="iconfont" v-show="pros_collect" @click="markpro(0)">&#xe606;</i>
         <i class="iconfont z-act" @click="markpro(1)" v-show="!pros_collect">&#xe609;</i>
       </div>
-      <div class="cart">加入购物车</div>
-      <div class="buy" v-link="{name:'order',query:{pid:productDetail._id},append: false}">立即购买</div>
+      <div class="cart" @click="pushCart">加入购物车</div>
+      <div class="buy" @click="cacheOrder">立即购买
+      </div>
     </div>
+
+    <toast :show.sync="showSuccess">已加入购物车</toast>
+    <toast :show.sync="showFail" type="cancel">购物车撑坏啦</toast>
   </div>
 </template>
 
@@ -111,8 +115,10 @@
   import Tab from 'vux/dist/components/tab'
   import TabItem from 'vux/dist/components/tab-item'
   import Spinner from 'vux/dist/components/spinner'
+  import Toast from 'vux/dist/components/toast'
   import Comment from '../components/Comment'
-
+  import {setCacheOrder} from '../vuex/actions'
+  import {go} from '../libs/router'
   const list = [{
     name: 'Airyland',
     avatar: 'static/demo/comment/1.jpg',
@@ -138,26 +144,26 @@
     content: '居然没抢到沙发'
   }]
 
-//  const baseList =
-//    [{
-//      url: 'javascript:',
-//      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/1.jpg',
-//      title: '如何挑选盆栽？'
-//    }, {
-//      url: 'javascript:',
-//      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/2.jpg',
-//      title: '如何挑选盆栽？'
-//    }, {
-//      url: 'javascript:',
-//      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/3.jpg',
-//      title: '如何挑选盆栽？'
-//    }]
-//
-//  const urlList = baseList.map((item, index) => ({
-//    url: 'http://m.baidu.com',
-//    img: item.img,
-//    title: `[精选]${item.title}`
-//  }))
+  //  const baseList =
+  //    [{
+  //      url: 'javascript:',
+  //      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/1.jpg',
+  //      title: '如何挑选盆栽？'
+  //    }, {
+  //      url: 'javascript:',
+  //      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/2.jpg',
+  //      title: '如何挑选盆栽？'
+  //    }, {
+  //      url: 'javascript:',
+  //      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/3.jpg',
+  //      title: '如何挑选盆栽？'
+  //    }]
+  //
+  //  const urlList = baseList.map((item, index) => ({
+  //    url: 'http://m.baidu.com',
+  //    img: item.img,
+  //    title: `[精选]${item.title}`
+  //  }))
 
   export default {
     components: {
@@ -167,7 +173,13 @@
       Tab,
       TabItem,
       Spinner,
-      Comment
+      Comment,
+      Toast
+    },
+    vuex: {
+      actions: {
+        setCacheOrder
+      }
     },
     data () {
       return {
@@ -237,6 +249,8 @@
 //            }]
 //          }
 //        ],
+        showSuccess: false,
+        showFail: false,
         tabSel: 0,
         tabArgsCon: '',
         tabAssessCon: '',
@@ -335,6 +349,43 @@
           this.tabAssessCon = list
           this.disTab2 = 0
         }
+      },
+      pushCart () {
+        var cartData = {
+          src: this.productPictures[0].img,
+          title: this.productDetail.name,
+          price: this.productDetail.price,
+          soldOut: this.productDetail.freightage,
+          count: this.productDetail.reserve,
+          checked: true
+        }
+        this.$http.post('/wx/data/cart/save', {
+          uid: 'system',
+          data: JSON.stringify(cartData)
+        }).then((res) => {
+          if (res.body && res.body.code === '200' && res.body.data) {
+            this.showSuccess = true
+          } else {
+            this.showFail = true
+          }
+        }, (err) => {
+          this.showFail = true
+          console.log('加入购物车失败:' + err)
+        })
+      },
+      cacheOrder () {
+        var cacheOrder = []
+        cacheOrder[0] = {
+          img: this.productPictures[0].img,
+          name: this.productDetail.name,
+          sku: this.productDetail.discount,
+          pri: this.productDetail.price,
+          num: 1
+        }
+        this.setCacheOrder(cacheOrder)
+        this.$nextTick(function () {
+          go('/order', this.$router)
+        })
       }
     }
   }

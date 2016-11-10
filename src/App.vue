@@ -47,14 +47,13 @@
 </script>
 
 <style lang="less">
-  @import 'styles/index.less';
-  @import 'styles/weui/weui';
-  @import '../node_modules/vux/dist/vux.css';
+  @import './styles/close';
+  @import '~vux/dist/vux.css';
 
   html, body {
     width: 100%;
     overflow-x: hidden;
-    font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+    font-family: "weui";
     height: auto !important;
   }
 

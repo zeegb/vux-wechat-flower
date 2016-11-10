@@ -21,7 +21,8 @@
       <x-button mini plain type="primary" v-link="{path:'product-list'}">&nbsp;&nbsp;查看全部商品&nbsp;&nbsp;</x-button>
     </div>
 
-    <dialog :show.sync="showNoScroll" class="dialog-demo" :scroll="false" style="color: #828282;max-height: 70%;overflow: auto;">
+    <dialog :show.sync="showNoScroll" class="dialog-demo" :scroll="false"
+            style="color: #828282;max-height: 70%;overflow: auto;">
       <p class="dialog-title">{{activity_list[clickIndex].name}}</p>
       <div class="img-box">
         <img :src="activity_list[clickIndex].image_url" style="max-width:100%">
@@ -216,7 +217,7 @@
   }
 </script>
 
-<style type="text/css" scoped>
+<style type="less" scoped>
   .v-home {
     padding-top: 44px;
   }
@@ -255,5 +256,29 @@
   .button-box {
     margin: 10px 0px 50px 0px;
     text-align: center;
+  }
+
+  .dialog-demo {
+
+    .weui_dialog {
+      border-radius: 8px;
+      padding-bottom: 8px;
+    }
+
+    .dialog-title {
+      line-height: 30px;
+      color: #666;
+    }
+
+    .img-box {
+      height: 350px;
+      overflow: hidden;
+    }
+
+    .vux-close {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
   }
 </style>

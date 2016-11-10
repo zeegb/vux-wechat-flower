@@ -6,7 +6,7 @@
 
     <!--<scroller lock-x scrollbar-y use-pullup :pullup-status.sync="pullupStatus" @pullup:loading="load3">-->
     <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
-            top="46px"></search>
+            top="44px"></search>
     <!-- 商品 -->
     <div class="v-prolist">
       <tab>
@@ -16,11 +16,11 @@
       </tab>
       <!--content slot-->
       <div id="main">
-        <div class="pin" v-for="item in items" track-by="$index" v-link="{path:'product-detail',query:{id:item.id}}">
+        <div class="pin" v-for="item in items" track-by="$index" v-link="{name:'productDetail',params:{id:item._id}}">
           <div class="box">
-            <img :src="item.image" class="img">
+            <img :src="item.pictures[0] || ''" class="img">
             <div class="bd">
-              <div class="discribe">{{item.name}}</div>
+              <div class="discribe">{{item.description}}</div>
               <div class="pri">￥{{item.price}}</div>
             </div>
           </div>
@@ -31,7 +31,7 @@
       <div id="pullup"
            style="position: absolute; width: 100%; height: 40px; padding-top: 8px; text-align: center; color:#888888;">
         <!--<span v-show="pullupStatus === 'default' && more">上拉加载更多</span>-->
-        <span v-show="!more">没有更多了～</span>
+        <span v-show="!more">没有更多了~</span>
         <!--<span class="pullup-arrow" v-show="more && (pullupStatus === 'down' || pullupStatus === 'up')"-->
         <!--:class="{'rotate': pullupStatus === 'up'}">↑</span>-->
         <span v-show="more"><spinner type="ios-small"></spinner>加载更多</span>
@@ -51,43 +51,43 @@
   import Spinner from 'vux/dist/components/spinner'
   import Actionsheet from 'vux/dist/components/actionsheet'
 
-  var likePro = [{
-    'url': 'http://placekitten.com/' + Math.floor(Math.random() * 100) + 300 + '/' + Math.floor(Math.random() * 500) + 300,
-    'id': 94,
-    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
-    'name': '产品名称产品名称产品',
-    'price': 982
-  }, {
-    'url': '/category/product/url',
-    'id': 94,
-    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
-    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
-    'price': 982
-  }, {
-    'url': '/category/product/url',
-    'id': 94,
-    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
-    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
-    'price': 982
-  }, {
-    'url': '/category/product/url',
-    'id': 94,
-    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
-    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
-    'price': 982
-  }, {
-    'url': '/category/product/url',
-    'id': 94,
-    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
-    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
-    'price': 982
-  }, {
-    'url': '/category/product/url',
-    'id': 94,
-    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
-    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
-    'price': 982
-  }]
+  //  var likePro = [{
+  //    'url': 'http://placekitten.com/' + Math.floor(Math.random() * 100) + 300 + '/' + Math.floor(Math.random() * 500) + 300,
+  //    'id': 94,
+  //    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
+  //    'name': '产品名称产品名称产品',
+  //    'price': 982
+  //  }, {
+  //    'url': '/category/product/url',
+  //    'id': 94,
+  //    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
+  //    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
+  //    'price': 982
+  //  }, {
+  //    'url': '/category/product/url',
+  //    'id': 94,
+  //    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
+  //    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
+  //    'price': 982
+  //  }, {
+  //    'url': '/category/product/url',
+  //    'id': 94,
+  //    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
+  //    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
+  //    'price': 982
+  //  }, {
+  //    'url': '/category/product/url',
+  //    'id': 94,
+  //    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
+  //    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
+  //    'price': 982
+  //  }, {
+  //    'url': '/category/product/url',
+  //    'id': 94,
+  //    'image': 'http://placekitten.com/' + (Math.floor(Math.random() * 100) + 300) + '/' + (Math.floor(Math.random() * 500) + 300),
+  //    'name': '产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称产品名称',
+  //    'price': 982
+  //  }]
 
   export default {
     components: {
@@ -125,15 +125,16 @@
           menu1: '多肉',
           menu2: '种子',
           menu3: '花'
-        }
+        },
+        selectedType: ''
       }
     },
     route: {
       data (transition) {
         this.pageData()
-        this.$nextTick(function () {
-          this.arrange()
-        })
+//        this.$nextTick(function () {
+//          this.arrange()
+//        })
         window.addEventListener('scroll', this.scroll)
       },
       deactivate (transition) {
@@ -210,30 +211,37 @@
         oParent.style.height = maxH + 'px'
         oPullup.style.buttom = 0
       },
-      load3 (uuid) {
-        setTimeout(() => {
-          this.pageData()
-          this.$nextTick(function () {
-            this.arrange()
-          })
-          setTimeout(() => {
-            this.$broadcast('pullup:reset', uuid)
-          }, 10)
-        }, 2000)
-      },
 
       scroll (e) {
         if (document.body.scrollHeight - window.screen.height - document.body.scrollTop <= 0 && !this.load) {
           this.load = true
-          setTimeout(() => {
-            this.pageData()
-            this.$nextTick(function () {
-              this.arrange()
-            })
-          }, 2000)
+          this.pageData()
         }
       },
       pageData () {
+        this.$http.post('/wx/data/product/list', {
+          page: this.page,
+          uid: 'system',
+          ops: this.selectedType ? `{"product_type_id":"${this.selectedType}"}` : ''
+        }).then((res) => {
+          if (res.body && res.body.code === '200' && res.body.data && res.body.data.items.length) {
+            this.page++
+            this.items = this.items.concat(res.body.data.items)
+            this.$nextTick(function () {
+              this.arrange()
+            })
+            this.load = false
+            if (res.body.data.items.length < 10) {
+              this.more = false
+              this.load = true
+            }
+          } else {
+            this.more = false
+            this.load = true
+          }
+        }, (err) => {
+          console.log('获取轮播图失败:' + err)
+        })
 //        this.$http.jsonp('http://api.douban.com/v2/movie/' + this.type, {
 //          count: this.count,
 //          start: (this.page - 1) * this.count
@@ -250,14 +258,15 @@
 //          }
 //          this.load = false
 //        })
-        this.page++
-        if (this.page > 4) {
-          this.more = false
-          this.items = this.items
-        } else {
-          this.items = this.items.concat(likePro)
-        }
-        this.load = false
+
+//        this.page++
+//        if (this.page > 4) {
+//          this.more = false
+//          this.items = this.items
+//        } else {
+//          this.items = this.items.concat(likePro)
+//        }
+//        this.load = false
       },
       // tab切换显示-商品
       tabProsFn (n) {

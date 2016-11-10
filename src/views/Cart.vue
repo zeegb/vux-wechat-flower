@@ -5,17 +5,17 @@
     </x-header>
     <div style="margin-top: 10px;">
       <cartpanel :type="'1'" :list.sync="list"></cartpanel>
-      <group>
-        <cell title="总计">
-          <div slot="value">
-            <span class="rmb">￥</span>
-            <span style="color: red">{{total}}</span>
-          </div>
-        </cell>
-      </group>
+      <!--<group>-->
+        <!--<cell title="总计">-->
+          <!--<div slot="value">-->
+            <!--<span class="rmb">￥</span>-->
+            <!--<span style="color: red">{{total}}</span>-->
+          <!--</div>-->
+        <!--</cell>-->
+      <!--</group>-->
       <group style="padding:0 10px;">
-        <x-button :text="submit001" :disabled="disable001" @click="processButton001" type="primary"
-                  v-link="'/order'"></x-button>
+        <x-button :disabled="disable001" @click="processButton001" type="primary"
+                  v-link="'/order'">提交订单&nbsp;￥{{total}}</x-button>
       </group>
     </div>
   </div>
@@ -57,6 +57,11 @@
           count: 3,
           checked: false
         }]
+      }
+    },
+    route: {
+      data (transition) {
+
       }
     },
     ready: function () {

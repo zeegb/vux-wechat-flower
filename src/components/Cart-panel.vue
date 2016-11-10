@@ -1,14 +1,14 @@
 <template>
-  <div class="weui_panel weui_panel_access">
+  <div class="weui_panel weui_panel_access cart-box">
     <div class="weui_panel_bd">
-      <a href="javascript:;" v-for="(index,item) in list" v-if="item.count > 0"
-         class="weui_media_box weui_media_appmsg" >
+      <div v-for="(index,item) in list" v-show="item.count > 0"
+         class="weui_media_box weui_media_appmsg " >
         <div class="sel">
           <label>
             <input type="checkbox" name="" id="" v-model="item.checked">
           </label>
         </div>
-        <div class="weui_media_hd" v-if="item.count > 0 && item.src">
+        <div class="weui_media_hd" v-if="item.count > 0">
           <img class="weui_media_appmsg_thumb" :src="item.src" alt="">
         </div>
         <div class="weui_media_bd" v-if="item.count > 0">
@@ -21,13 +21,18 @@
             </p>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </template>
 
-<!-- 清空购物车还是存在bug -->
 <style lang="less" scoped>
+  .cart-box {
+    margin: 0px 10px;
+    box-shadow: 0 0 3px #cacaca;
+    border-radius: 5px;
+  }
+
   .product-item-foot {
     margin-top: 5px;
   }
@@ -86,7 +91,6 @@
     },
     data () {
       return {
-        list: []
       }
     }
   }

@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Resource from 'vue-resource'
 import {sync} from 'vuex-router-sync'
 import store from './vuex/store'
+import routerMap from './router'
 
 const FastClick = require('fastclick')
 FastClick.attach(document.body)
@@ -14,7 +15,7 @@ Vue.use(Resource)
 const router = new VueRouter({
   hashbang: true,
   saveScrollPosition: true,
-  transitionOnLoad: true
+  transitionOnLoad: false
 })
 
 let history = window.sessionStorage
@@ -25,6 +26,10 @@ history.setItem('/', 0)
 sync(store, router)
 
 const dispatch = store.dispatch
+
+router.redirect({
+  '/': '/home'
+})
 
 router.beforeEach(({to, from, next}) => {
   const toIndex = history.getItem(to.path)
@@ -50,110 +55,7 @@ router.afterEach(function (transition) {
   window.scrollTo(0, 0)
 })
 
-router.map({
-  '/': {
-    component: function (resolve) {
-      require(['./views/Home.vue'], resolve)
-    },
-    name: 'Home'
-  },
-  '/person': {
-    component: function (resolve) {
-      require(['./views/Person.vue'], resolve)
-    },
-    name: 'Person'
-  },
-  '/person-setting': {
-    component: function (resolve) {
-      require(['./views/P-setting.vue'], resolve)
-    },
-    name: 'Setting'
-  },
-  '/card': {
-    component: function (resolve) {
-      require(['./views/Card.vue'], resolve)
-    },
-    name: 'Card'
-  },
-  '/cart': {
-    component: function (resolve) {
-      require(['./views/Cart.vue'], resolve)
-    },
-    name: 'Cart'
-  },
-  '/product': {
-    component: function (resolve) {
-      require(['./views/Product.vue'], resolve)
-    },
-    name: 'Product'
-  },
-  '/product-list': {
-    component: function (resolve) {
-      require(['./views/Product-waterfall.vue'], resolve)
-    },
-    name: 'product-list'
-  },
-  '/product-detail': {
-    component: function (resolve) {
-      require(['./views/Product-detail.vue'], resolve)
-    },
-    name: 'productDetail'
-  },
-  '/order': {
-    component: function (resolve) {
-      require(['./views/Order.vue'], resolve)
-    },
-    name: 'order'
-  },
-  '/order-list': {
-    component: function (resolve) {
-      require(['./views/Order-list.vue'], resolve)
-    },
-    name: 'orderList'
-  },
-  '/select-address': {
-    component: function (resolve) {
-      require(['./views/Select-address.vue'], resolve)
-    },
-    name: 'selectAddress'
-  },
-  '/edit-address': {
-    component: function (resolve) {
-      require(['./views/Edit-address.vue'], resolve)
-    },
-    name: 'editAddress'
-  },
-  '/coupon': {
-    component: function (resolve) {
-      require(['./views/Coupon.vue'], resolve)
-    },
-    name: 'coupon'
-  },
-  '/waterfall': {
-    component: function (resolve) {
-      require(['./views/Waterfall.vue'], resolve)
-    },
-    name: 'waterfall'
-  },
-  '/waterfall4': {
-    component: function (resolve) {
-      require(['./views/Waterfall4.vue'], resolve)
-    },
-    name: 'waterfall4'
-  },
-  '/pay-result': {
-    component: function (resolve) {
-      require(['./views/Pay-result.vue'], resolve)
-    },
-    name: 'payResult'
-  },
-  '/feedback': {
-    component: function (resolve) {
-      require(['./views/Feedback.vue'], resolve)
-    },
-    name: 'feedback'
-  }
-})
+routerMap(router)
 
 router.start(App, '#app')
 

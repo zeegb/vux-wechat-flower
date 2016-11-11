@@ -47,7 +47,7 @@ router.beforeEach(({to, from, next}) => {
     dispatch('UPDATE_DIRECTION', 'forward')
   }
   dispatch('UPDATE_LOADING', true)
-  setTimeout(next, 500)
+  setTimeout(next, 0)
 })
 
 router.afterEach(function (transition) {

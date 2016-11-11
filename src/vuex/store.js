@@ -14,5 +14,5 @@ export default new Vuex.Store({
     base,
     business
   },
-  strict: true
+  strict: false
 })

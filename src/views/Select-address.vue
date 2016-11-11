@@ -7,35 +7,24 @@
     </x-header>
 
     <div class="v-bd-1">
-      <div class="v-addrList">
-        <div class="v-addrbd">
+      <div class="v-addrList" v-if="!isEmpty">
+        <div class="v-addrbd" v-for="(index,addrItem) in addressList">
           <div class="stat"><i class="iconfont">&#xe60b;</i></div>
           <div class="cont">
             <div class="hd">
-              <div class="name">张三</div>
-              <div class="tel">12312312313</div>
+              <div class="name">{{addrItem.name}}</div>
+              <div class="tel">{{addrItem.phone}}</div>
             </div>
-            <div class="bd"><span class="defa">默认</span>北京市丰台区蒲黄榆四里14号楼305室</div>
+            <div class="bd"><span class="defa" v-if="addrItem.is_default">默认</span>{{addrItem.address}}</div>
           </div>
           <div class="edit">
             <i class="iconfont">&#xe60a;</i>
           </div>
         </div>
-
-
-        <div class="v-addrbd">
-          <!-- <div class="stat"><i class="iconfont">&#xe60b;</i></div> -->
-          <div class="cont">
-            <div class="hd">
-              <div class="name">张三</div>
-              <div class="tel">12312312313</div>
-            </div>
-            <div class="bd">北京市丰台区蒲黄榆四里14号楼305室</div>
-          </div>
-          <div class="edit">
-            <i class="iconfont">&#xe60a;</i>
-          </div>
-        </div>
+      </div>
+      <div class="no-address" v-if="isEmpty">
+        <image src="../../src/assets/addr.png"></image>
+        <p style="text-align:center;">暂未创建收货地址~</p>
       </div>
     </div>
   </div>
@@ -78,7 +67,8 @@
     opacity: 0.7;
   }
 
-  .v-bd-1 {}
+  .v-bd-1 {
+  }
 
   .v-addrbd {
     position: relative;
@@ -139,15 +129,45 @@
       }
     }
   }
+
+  .no-address {
+    color: #69717d;
+    width: 50%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 </style>
 <script>
   import XHeader from 'vux/dist/components/x-header'
   import AddressChinaData from 'vux/src/components/address/list.json'
+  import {addressList, isEmpty} from '../vuex/getters'
+  import {getAddress} from '../vuex/actions'
   export default{
+    vuex: {
+      getters: {
+        addressList,
+        isEmpty
+      },
+      actions: {
+        getAddress
+      }
+    },
+    route: {
+      data (transition) {
+        this.getAddress('system')
+        if (transition.from.name === 'Person') {
+          var classObj = document.getElementsByClassName('v-addrbd')
+          for (var i = 0; i < classObj.length; i++) {
+            classObj[i].addEventListener('click', this.setDefault)
+          }
+        }
+      }
+    },
     data () {
       return {
-        addrList: [],
-
         // 编辑收货地址
         addressData: AddressChinaData,
         aeditName: '',
@@ -159,6 +179,15 @@
     },
     components: {
       XHeader
+    },
+    methods: {
+      setDefault (index) {
+        this.addressList = this.addressList.map((item, index) => {
+          this.$set(`addressList[${index}].is_default`, false)
+          return item
+        })
+        this.addressList[index].is_default = true
+      }
     }
   }
 </script>

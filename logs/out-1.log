@@ -307,3 +307,111 @@ Child [1mhtml-webpack-plugin for "index.html"[22m:
          [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
     [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
 webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built 841992f87aad441c75de in 259ms
+Hash: [1m841992f87aad441c75de[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m259[22mms
+                               [1mAsset[22m       [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+                              [1m[32mapp.js[39m[22m     276 kB       [1m3[22m  [1m[32m[39m[22m     app
+[1m[32m3.a36f044228920fd89592.hot-update.js[39m[22m  223 bytes       [1m3[22m  [1m[32m[39m[22m     app
+[1m[32ma36f044228920fd89592.hot-update.json[39m[22m   36 bytes        [1m[22m  [1m[32m[39m[22m     
+
+[1m[31mERROR in ./src/main.js
+
+  ✘  http://eslint.org/docs/rules/  Parsing error: Unexpected token <<  
+  /root/vux-wechat-flower/src/main.js:63:2
+  <<<<<<< HEAD
+    ^
+
+
+✘ 1 problem (1 error, 0 warnings)
+
+
+Errors:
+  1  http://eslint.org/docs/rules/null[39m[22m
+
+[1m[31mERROR in ./src/main.js
+Module build failed: SyntaxError: Unexpected token (63:0)
+
+  61 |     setTimeout(next, 0)
+  62 |   }
+> 63 | <<<<<<< HEAD
+     | ^
+  64 |   dispatch('UPDATE_LOADING', true)
+  65 |   setTimeout(next, 0)
+  66 | =======
+
+ @ multi app[39m[22m
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built d3edcdc99617be650662 in 13482ms
+Hash: [1md3edcdc99617be650662[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m13482[22mms
+                                [1mAsset[22m      [1mSize[22m  [1mChunks[22m  [1m[22m           [1mChunk Names[22m
+                             [1m[32m12.12.js[39m[22m   1.17 MB      [1m12[22m  [1m[32m[emitted][39m[22m  
+        [1m[32mstatic/img/wechat.be7f59d.png[39m[22m    117 kB        [1m[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32m1.1.js[39m[22m    344 kB       [1m1[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32m2.2.js[39m[22m    399 kB       [1m2[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32mapp.js[39m[22m   1.88 MB       [1m3[22m  [1m[32m[emitted][39m[22m  app
+                               [1m[32m4.4.js[39m[22m     80 kB       [1m4[22m  [1m[32m[39m[22m           
+                               [1m[32m5.5.js[39m[22m    105 kB       [1m5[22m  [1m[32m[39m[22m           
+                               [1m[32m6.6.js[39m[22m   79.6 kB       [1m6[22m  [1m[32m[39m[22m           
+                               [1m[32m7.7.js[39m[22m    311 kB       [1m7[22m  [1m[32m[39m[22m           
+                               [1m[32m8.8.js[39m[22m   70.1 kB       [1m8[22m  [1m[32m[39m[22m           
+                               [1m[32m9.9.js[39m[22m    177 kB       [1m9[22m  [1m[32m[39m[22m           
+                             [1m[32m10.10.js[39m[22m   41.7 kB      [1m10[22m  [1m[32m[39m[22m           
+                             [1m[32m11.11.js[39m[22m   63.5 kB      [1m11[22m  [1m[32m[39m[22m           
+                               [1m[32m0.0.js[39m[22m   2.52 MB       [1m0[22m  [1m[32m[emitted][39m[22m  
+                             [1m[32m13.13.js[39m[22m   71.3 kB      [1m13[22m  [1m[32m[39m[22m           
+                             [1m[32m14.14.js[39m[22m   53.1 kB      [1m14[22m  [1m[32m[39m[22m           
+                             [1m[32m15.15.js[39m[22m    922 kB      [1m15[22m  [1m[32m[emitted][39m[22m  
+                             [1m[32m16.16.js[39m[22m   29.5 kB      [1m16[22m  [1m[32m[39m[22m           
+                             [1m[32m17.17.js[39m[22m   27.3 kB      [1m17[22m  [1m[32m[39m[22m           
+ [1m[32m0.a36f044228920fd89592.hot-update.js[39m[22m   19.4 kB       [1m0[22m  [1m[32m[emitted][39m[22m  
+ [1m[32m1.a36f044228920fd89592.hot-update.js[39m[22m   45.2 kB       [1m1[22m  [1m[32m[emitted][39m[22m  
+ [1m[32m2.a36f044228920fd89592.hot-update.js[39m[22m   11.1 kB       [1m2[22m  [1m[32m[emitted][39m[22m  
+ [1m[32m3.a36f044228920fd89592.hot-update.js[39m[22m   48.7 kB       [1m3[22m  [1m[32m[emitted][39m[22m  app
+[1m[32m12.a36f044228920fd89592.hot-update.js[39m[22m   22.8 kB      [1m12[22m  [1m[32m[emitted][39m[22m  
+[1m[32m15.a36f044228920fd89592.hot-update.js[39m[22m   48.8 kB      [1m15[22m  [1m[32m[emitted][39m[22m  
+ [1m[32ma36f044228920fd89592.hot-update.json[39m[22m  48 bytes        [1m[22m  [1m[32m[emitted][39m[22m  
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built d3edcdc99617be650662 in 411ms
+Hash: [1md3edcdc99617be650662[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m411[22mms
+                        [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+                       [1m[32m8.8.js[39m[22m  70.1 kB       [1m8[22m  [1m[32m[39m[22m     
+[1m[32mstatic/img/wechat.be7f59d.png[39m[22m   117 kB        [1m[22m  [1m[32m[39m[22m     
+                       [1m[32m1.1.js[39m[22m   344 kB       [1m1[22m  [1m[32m[39m[22m     
+                       [1m[32m2.2.js[39m[22m   399 kB       [1m2[22m  [1m[32m[39m[22m     
+                       [1m[32mapp.js[39m[22m  1.88 MB       [1m3[22m  [1m[32m[39m[22m     app
+                       [1m[32m4.4.js[39m[22m    80 kB       [1m4[22m  [1m[32m[39m[22m     
+                       [1m[32m5.5.js[39m[22m   105 kB       [1m5[22m  [1m[32m[39m[22m     
+                       [1m[32m6.6.js[39m[22m  79.6 kB       [1m6[22m  [1m[32m[39m[22m     
+                       [1m[32m7.7.js[39m[22m   311 kB       [1m7[22m  [1m[32m[39m[22m     
+                       [1m[32m0.0.js[39m[22m  2.52 MB       [1m0[22m  [1m[32m[39m[22m     
+                       [1m[32m9.9.js[39m[22m   177 kB       [1m9[22m  [1m[32m[39m[22m     
+                     [1m[32m10.10.js[39m[22m  41.7 kB      [1m10[22m  [1m[32m[39m[22m     
+                     [1m[32m11.11.js[39m[22m  63.5 kB      [1m11[22m  [1m[32m[39m[22m     
+                     [1m[32m12.12.js[39m[22m  1.17 MB      [1m12[22m  [1m[32m[39m[22m     
+                     [1m[32m13.13.js[39m[22m  71.3 kB      [1m13[22m  [1m[32m[39m[22m     
+                     [1m[32m14.14.js[39m[22m  53.1 kB      [1m14[22m  [1m[32m[39m[22m     
+                     [1m[32m15.15.js[39m[22m   922 kB      [1m15[22m  [1m[32m[39m[22m     
+                     [1m[32m16.16.js[39m[22m  29.5 kB      [1m16[22m  [1m[32m[39m[22m     
+                     [1m[32m17.17.js[39m[22m  27.3 kB      [1m17[22m  [1m[32m[39m[22m     
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.

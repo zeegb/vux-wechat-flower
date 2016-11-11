@@ -6,13 +6,15 @@ import Vuex from 'vuex'
 
 import base from './modules/base'
 import business from './modules/business'
+import user from './modules/user'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     base,
-    business
+    business,
+    user
   },
   strict: false
 })

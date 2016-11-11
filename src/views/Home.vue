@@ -32,6 +32,17 @@
       </div>
       <span class="vux-close" @click="showNoScroll=false"></span>
     </dialog>
+
+    <dialog :show="showAlert" class="dialog-demo" :scroll="false"
+            style="color: #828282;max-height: 70%;overflow: auto;">
+      <div class="img-box">
+        <img src="../../src/assets/wechat.png" style="max-width:100%">
+      </div>
+      <div>
+        <i>请扫码关注后使用更多功能~</i>
+      </div>
+      <span class="vux-close" @click="closeAlert"></span>
+    </dialog>
   </div>
 
 </template>
@@ -45,7 +56,8 @@
   import Panel from 'vux/dist/components/panel'
   import XButton from 'vux/dist/components/x-button'
   import Dialog from 'vux/dist/components/dialog'
-  import {setLoadingState} from '../vuex/actions'
+  import {setLoadingState, closeAlert} from '../vuex/actions'
+  import {showAlert} from '../vuex/getters'
 
   const baseList =
     [{
@@ -86,8 +98,8 @@
       Dialog
     },
     vuex: {
-      getters: {},
-      actions: {setLoadingState}
+      getters: {showAlert},
+      actions: {setLoadingState, closeAlert}
     },
     data () {
       return {
@@ -189,6 +201,9 @@
       // http://123.57.52.110:9202/wx/data/banner/list?uid=gopain
     },
     methods: {
+      closeAlert () {
+        this.closeAlert(false)
+      },
       onIndexChange (index) {
         this.img_index = index
       },

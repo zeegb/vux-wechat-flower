@@ -53,7 +53,6 @@
   html, body {
     width: 100%;
     overflow-x: hidden;
-    font-family: "weui";
     height: auto !important;
   }
 

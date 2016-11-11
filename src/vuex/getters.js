@@ -5,4 +5,10 @@ export const isLoading = ({base}) => base.isLoading
 export const direction = ({base}) => base.direction
 
 export const cacheOrder = ({business}) => business.cacheOrder
-export const address = ({business}) => business.address
+export const addressList = ({business}) => business.addressList
+export const addressError = ({business}) => business.addressError
+export const addressSuccess = ({business}) => business.addressSuccess
+export const isEmpty = ({business}) => business.isEmpty
+
+export const getUserId = ({user}) => user.openid
+export const showAlert = ({user}) => user.showAlert

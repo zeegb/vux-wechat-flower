@@ -27,27 +27,39 @@ sync(store, router)
 
 const dispatch = store.dispatch
 
-router.redirect({
-  '/': '/home'
-})
-
-router.beforeEach(({to, from, next}) => {
-  const toIndex = history.getItem(to.path)
-  const fromIndex = history.getItem(from.path)
-  if (toIndex) {
-    if (toIndex > fromIndex) {
-      dispatch('UPDATE_DIRECTION', 'forward')
+router.beforeEach(({to, from, next, redirect}) => {
+  if (to.name === 'Home' && to.query.openid) {
+    history.setItem('openid', to.query.openid)
+    dispatch('SET_OPENID', to.query.openid)
+  }
+  if (to.auth) {
+    if (history.getItem('openid')) {
+      toNext()
     } else {
-      dispatch('UPDATE_DIRECTION', 'reverse')
+      redirect('/')
+      dispatch('SHOW_ALERT', true)
     }
   } else {
-    ++historyCount
-    history.setItem('count', historyCount)
-    to.path !== '/' && history.setItem(to.path, historyCount)
-    dispatch('UPDATE_DIRECTION', 'forward')
+    toNext()
   }
-  dispatch('UPDATE_LOADING', true)
-  setTimeout(next, 500)
+  function toNext () {
+    const toIndex = history.getItem(to.path)
+    const fromIndex = history.getItem(from.path)
+    if (toIndex) {
+      if (toIndex > fromIndex) {
+        dispatch('UPDATE_DIRECTION', 'forward')
+      } else {
+        dispatch('UPDATE_DIRECTION', 'reverse')
+      }
+    } else {
+      ++historyCount
+      history.setItem('count', historyCount)
+      to.path !== '/' && history.setItem(to.path, historyCount)
+      dispatch('UPDATE_DIRECTION', 'forward')
+    }
+    dispatch('UPDATE_LOADING', true)
+    setTimeout(next, 0)
+  }
 })
 
 router.afterEach(function (transition) {

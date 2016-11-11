@@ -139,7 +139,7 @@
         // 日期选择
         calendarShow: false,
         startDate: moment(new Date()).format('YYYY-MM-DD'),
-        endDate: moment().add('days', 7).format('YYYY-MM-DD'),
+        endDate: moment().add(7, 'days').format('YYYY-MM-DD'),
         highlightWeekend: true,
         weeksList: ['日', '一', '二', '三', '四', '五', '六 '],
 

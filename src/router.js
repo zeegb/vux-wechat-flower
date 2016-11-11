@@ -4,10 +4,6 @@
 export default function (router) {
   router.map({
     '/': {
-      name: 'index',
-      component: require('./App.vue')
-    },
-    '/home': {
       component: function (resolve) {
         require(['./views/Home.vue'], resolve)
       },
@@ -17,24 +13,28 @@ export default function (router) {
       component: function (resolve) {
         require(['./views/Person.vue'], resolve)
       },
+      auth: true,
       name: 'Person'
     },
     '/person-setting': {
       component: function (resolve) {
         require(['./views/P-setting.vue'], resolve)
       },
+      auth: true,
       name: 'Setting'
     },
     '/card': {
       component: function (resolve) {
         require(['./views/Card.vue'], resolve)
       },
+      auth: true,
       name: 'Card'
     },
     '/cart': {
       component: function (resolve) {
         require(['./views/Cart.vue'], resolve)
       },
+      auth: true,
       name: 'Cart'
     },
     '/product': {
@@ -59,30 +59,35 @@ export default function (router) {
       component: function (resolve) {
         require(['./views/Order.vue'], resolve)
       },
+      auth: true,
       name: 'order'
     },
     '/order-list': {
       component: function (resolve) {
         require(['./views/Order-list.vue'], resolve)
       },
+      auth: true,
       name: 'orderList'
     },
     '/select-address': {
       component: function (resolve) {
         require(['./views/Select-address.vue'], resolve)
       },
+      auth: true,
       name: 'selectAddress'
     },
     '/edit-address': {
       component: function (resolve) {
         require(['./views/Edit-address.vue'], resolve)
       },
+      auth: true,
       name: 'editAddress'
     },
     '/coupon': {
       component: function (resolve) {
         require(['./views/Coupon.vue'], resolve)
       },
+      auth: true,
       name: 'coupon'
     },
     '/waterfall': {
@@ -101,12 +106,14 @@ export default function (router) {
       component: function (resolve) {
         require(['./views/Pay-result.vue'], resolve)
       },
+      auth: true,
       name: 'payResult'
     },
     '/feedback': {
       component: function (resolve) {
         require(['./views/Feedback.vue'], resolve)
       },
+      auth: true,
       name: 'feedback'
     }
   })

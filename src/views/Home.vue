@@ -183,7 +183,7 @@
               type.products = type.products.map((product, index) => ({
                 src: product.pictures[0],
                 title: product.name,
-                desc: product.description,
+                desc: product.summary,
                 url: `/product-detail/${product._id}`
               }))
               return type

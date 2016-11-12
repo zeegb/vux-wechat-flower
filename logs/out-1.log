@@ -1,0 +1,417 @@
+[HPM] Proxy created: /wx  ->  http://flower.wx.wurim.com/wx
+[HPM] Proxy rewrite rule created: "^/wx" ~> ""
+[HPM] Proxy created: /url  ->  http://
+[HPM] Proxy rewrite rule created: "^/url" ~> ""
+Listening at http://localhost:9203
+
+webpack: wait until bundle finished: /__webpack_hmr
+webpack built 3dd7aef74474686bf360 in 23812ms
+Hash: [1m3dd7aef74474686bf360[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m23812[22mms
+     [1mAsset[22m       [1mSize[22m  [1mChunks[22m  [1m[22m           [1mChunk Names[22m
+    [1m[32m9.9.js[39m[22m     177 kB       [1m9[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m0.0.js[39m[22m    2.52 MB       [1m0[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m2.2.js[39m[22m     298 kB       [1m2[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m3.3.js[39m[22m      80 kB       [1m3[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m4.4.js[39m[22m     105 kB       [1m4[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m5.5.js[39m[22m    79.6 kB       [1m5[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m6.6.js[39m[22m     304 kB       [1m6[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m7.7.js[39m[22m      70 kB       [1m7[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m8.8.js[39m[22m     175 kB       [1m8[22m  [1m[32m[emitted][39m[22m  
+    [1m[32mapp.js[39m[22m    2.02 MB       [1m1[22m  [1m[32m[emitted][39m[22m  app
+  [1m[32m10.10.js[39m[22m    41.7 kB      [1m10[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m11.11.js[39m[22m    63.1 kB      [1m11[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m12.12.js[39m[22m    1.04 MB      [1m12[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m13.13.js[39m[22m    71.3 kB      [1m13[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m14.14.js[39m[22m    53.1 kB      [1m14[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m15.15.js[39m[22m     894 kB      [1m15[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m16.16.js[39m[22m    29.5 kB      [1m16[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m17.17.js[39m[22m    27.3 kB      [1m17[22m  [1m[32m[emitted][39m[22m  
+[1m[32mindex.html[39m[22m  347 bytes        [1m[22m  [1m[32m[emitted][39m[22m  
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built 9b8058bcbfc7d7d76280 in 3932ms
+Hash: [1m9b8058bcbfc7d7d76280[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m3932[22mms
+                                [1mAsset[22m      [1mSize[22m  [1mChunks[22m  [1m[22m           [1mChunk Names[22m
+                             [1m[32m11.11.js[39m[22m   63.5 kB      [1m11[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32m0.0.js[39m[22m   2.52 MB       [1m0[22m  [1m[32m[39m[22m           
+                               [1m[32m2.2.js[39m[22m    298 kB       [1m2[22m  [1m[32m[39m[22m           
+                               [1m[32m3.3.js[39m[22m     80 kB       [1m3[22m  [1m[32m[39m[22m           
+                               [1m[32m4.4.js[39m[22m    105 kB       [1m4[22m  [1m[32m[39m[22m           
+                               [1m[32m5.5.js[39m[22m   79.6 kB       [1m5[22m  [1m[32m[39m[22m           
+                               [1m[32m6.6.js[39m[22m    312 kB       [1m6[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32m7.7.js[39m[22m     70 kB       [1m7[22m  [1m[32m[39m[22m           
+                               [1m[32m8.8.js[39m[22m    181 kB       [1m8[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32m9.9.js[39m[22m    177 kB       [1m9[22m  [1m[32m[39m[22m           
+                             [1m[32m10.10.js[39m[22m   41.7 kB      [1m10[22m  [1m[32m[39m[22m           
+                               [1m[32mapp.js[39m[22m   2.02 MB       [1m1[22m  [1m[32m[emitted][39m[22m  app
+                             [1m[32m12.12.js[39m[22m   1.04 MB      [1m12[22m  [1m[32m[39m[22m           
+                             [1m[32m13.13.js[39m[22m   71.3 kB      [1m13[22m  [1m[32m[39m[22m           
+                             [1m[32m14.14.js[39m[22m   53.1 kB      [1m14[22m  [1m[32m[39m[22m           
+                             [1m[32m15.15.js[39m[22m    894 kB      [1m15[22m  [1m[32m[39m[22m           
+                             [1m[32m16.16.js[39m[22m   29.5 kB      [1m16[22m  [1m[32m[39m[22m           
+                             [1m[32m17.17.js[39m[22m   27.3 kB      [1m17[22m  [1m[32m[39m[22m           
+ [1m[32m6.3dd7aef74474686bf360.hot-update.js[39m[22m   43.7 kB       [1m6[22m  [1m[32m[emitted][39m[22m  
+ [1m[32m8.3dd7aef74474686bf360.hot-update.js[39m[22m   21.1 kB       [1m8[22m  [1m[32m[emitted][39m[22m  
+[1m[32m11.3dd7aef74474686bf360.hot-update.js[39m[22m   18.1 kB      [1m11[22m  [1m[32m[emitted][39m[22m  
+ [1m[32m3dd7aef74474686bf360.hot-update.json[39m[22m  41 bytes        [1m[22m  [1m[32m[emitted][39m[22m  
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+[HPM] Proxy created: /wx  ->  http://api.flower.wx.wurim.com/wx
+[HPM] Proxy rewrite rule created: "^/wx" ~> ""
+[HPM] Proxy created: /url  ->  http://
+[HPM] Proxy rewrite rule created: "^/url" ~> ""
+Listening at http://localhost:9203
+
+webpack: wait until bundle finished: /index.html
+webpack: wait until bundle finished: /__webpack_hmr
+webpack: wait until bundle finished: /index.html
+webpack built 498107570c219b1f3ca0 in 54454ms
+Hash: [1m498107570c219b1f3ca0[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m54454[22mms
+     [1mAsset[22m       [1mSize[22m  [1mChunks[22m  [1m[22m           [1mChunk Names[22m
+    [1m[32m9.9.js[39m[22m     177 kB       [1m9[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m0.0.js[39m[22m    2.52 MB       [1m0[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m2.2.js[39m[22m     298 kB       [1m2[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m3.3.js[39m[22m      80 kB       [1m3[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m4.4.js[39m[22m     105 kB       [1m4[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m5.5.js[39m[22m    79.6 kB       [1m5[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m6.6.js[39m[22m     312 kB       [1m6[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m7.7.js[39m[22m     181 kB       [1m7[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m8.8.js[39m[22m      70 kB       [1m8[22m  [1m[32m[emitted][39m[22m  
+    [1m[32mapp.js[39m[22m    2.02 MB       [1m1[22m  [1m[32m[emitted][39m[22m  app
+  [1m[32m10.10.js[39m[22m    41.7 kB      [1m10[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m11.11.js[39m[22m    63.5 kB      [1m11[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m12.12.js[39m[22m    1.04 MB      [1m12[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m13.13.js[39m[22m    71.3 kB      [1m13[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m14.14.js[39m[22m    53.1 kB      [1m14[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m15.15.js[39m[22m     894 kB      [1m15[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m16.16.js[39m[22m    29.5 kB      [1m16[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m17.17.js[39m[22m    27.3 kB      [1m17[22m  [1m[32m[emitted][39m[22m  
+[1m[32mindex.html[39m[22m  347 bytes        [1m[22m  [1m[32m[emitted][39m[22m  
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built 957691b1b02df0d7d285 in 7462ms
+Hash: [1m957691b1b02df0d7d285[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m7462[22mms
+                               [1mAsset[22m      [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+                            [1m[32m27.27.js[39m[22m   41.7 kB      [1m27[22m  [1m[32m[39m[22m     
+                              [1m[32mapp.js[39m[22m   1.87 MB       [1m1[22m  [1m[32m[39m[22m     app
+                            [1m[32m19.19.js[39m[22m    316 kB      [1m19[22m  [1m[32m[39m[22m     
+                            [1m[32m20.20.js[39m[22m    392 kB      [1m20[22m  [1m[32m[39m[22m     
+                            [1m[32m21.21.js[39m[22m     80 kB      [1m21[22m  [1m[32m[39m[22m     
+                            [1m[32m22.22.js[39m[22m    105 kB      [1m22[22m  [1m[32m[39m[22m     
+                            [1m[32m23.23.js[39m[22m   79.7 kB      [1m23[22m  [1m[32m[39m[22m     
+                            [1m[32m24.24.js[39m[22m    311 kB      [1m24[22m  [1m[32m[39m[22m     
+                            [1m[32m25.25.js[39m[22m     70 kB      [1m25[22m  [1m[32m[39m[22m     
+                            [1m[32m26.26.js[39m[22m    177 kB      [1m26[22m  [1m[32m[39m[22m     
+                            [1m[32m18.18.js[39m[22m   2.52 MB      [1m18[22m  [1m[32m[39m[22m     
+                            [1m[32m28.28.js[39m[22m   63.5 kB      [1m28[22m  [1m[32m[39m[22m     
+                            [1m[32m29.29.js[39m[22m   1.04 MB      [1m29[22m  [1m[32m[39m[22m     
+                            [1m[32m30.30.js[39m[22m   71.3 kB      [1m30[22m  [1m[32m[39m[22m     
+                            [1m[32m31.31.js[39m[22m   53.1 kB      [1m31[22m  [1m[32m[39m[22m     
+                            [1m[32m32.32.js[39m[22m    894 kB      [1m32[22m  [1m[32m[39m[22m     
+                            [1m[32m33.33.js[39m[22m   29.5 kB      [1m33[22m  [1m[32m[39m[22m     
+                            [1m[32m34.34.js[39m[22m   27.3 kB      [1m34[22m  [1m[32m[39m[22m     
+[1m[32m1.498107570c219b1f3ca0.hot-update.js[39m[22m   40.9 kB       [1m1[22m  [1m[32m[39m[22m     app
+[1m[32m498107570c219b1f3ca0.hot-update.json[39m[22m  36 bytes        [1m[22m  [1m[32m[39m[22m     
+
+[1m[31mERROR in ./src/components/swiper/swiper.js
+Module not found: Error: Cannot resolve module 'array-from' in /root/vux-wechat-flower/src/components/swiper
+ @ ./src/components/swiper/swiper.js 19:17-38[39m[22m
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built 3512087a8d75047f8e4f in 547ms
+Hash: [1m3512087a8d75047f8e4f[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m547[22mms
+                               [1mAsset[22m      [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+                            [1m[32m27.27.js[39m[22m   41.7 kB      [1m27[22m  [1m[32m[39m[22m     
+                              [1m[32mapp.js[39m[22m   1.87 MB       [1m1[22m  [1m[32m[39m[22m     app
+                            [1m[32m19.19.js[39m[22m    316 kB      [1m19[22m  [1m[32m[39m[22m     
+                            [1m[32m20.20.js[39m[22m    392 kB      [1m20[22m  [1m[32m[39m[22m     
+                            [1m[32m21.21.js[39m[22m     80 kB      [1m21[22m  [1m[32m[39m[22m     
+                            [1m[32m22.22.js[39m[22m    105 kB      [1m22[22m  [1m[32m[39m[22m     
+                            [1m[32m23.23.js[39m[22m   79.7 kB      [1m23[22m  [1m[32m[39m[22m     
+                            [1m[32m24.24.js[39m[22m    311 kB      [1m24[22m  [1m[32m[39m[22m     
+                            [1m[32m25.25.js[39m[22m     70 kB      [1m25[22m  [1m[32m[39m[22m     
+                            [1m[32m26.26.js[39m[22m    177 kB      [1m26[22m  [1m[32m[39m[22m     
+                            [1m[32m18.18.js[39m[22m   2.52 MB      [1m18[22m  [1m[32m[39m[22m     
+                            [1m[32m28.28.js[39m[22m   63.5 kB      [1m28[22m  [1m[32m[39m[22m     
+                            [1m[32m29.29.js[39m[22m   1.04 MB      [1m29[22m  [1m[32m[39m[22m     
+                            [1m[32m30.30.js[39m[22m   71.3 kB      [1m30[22m  [1m[32m[39m[22m     
+                            [1m[32m31.31.js[39m[22m   53.1 kB      [1m31[22m  [1m[32m[39m[22m     
+                            [1m[32m32.32.js[39m[22m    894 kB      [1m32[22m  [1m[32m[39m[22m     
+                            [1m[32m33.33.js[39m[22m   29.5 kB      [1m33[22m  [1m[32m[39m[22m     
+                            [1m[32m34.34.js[39m[22m   27.3 kB      [1m34[22m  [1m[32m[39m[22m     
+[1m[32m1.498107570c219b1f3ca0.hot-update.js[39m[22m   40.9 kB       [1m1[22m  [1m[32m[39m[22m     app
+[1m[32m498107570c219b1f3ca0.hot-update.json[39m[22m  36 bytes        [1m[22m  [1m[32m[39m[22m     
+
+[1m[31mERROR in ./src/components/swiper/swiper.js
+Module not found: Error: Cannot resolve module 'array-from' in /root/vux-wechat-flower/src/components/swiper
+ @ ./src/components/swiper/swiper.js 19:17-38[39m[22m
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+[HPM] Proxy created: /wx  ->  http://api.flower.wx.wurim.com/wx
+[HPM] Proxy rewrite rule created: "^/wx" ~> ""
+[HPM] Proxy created: /url  ->  http://
+[HPM] Proxy rewrite rule created: "^/url" ~> ""
+Listening at http://localhost:9203
+
+webpack: wait until bundle finished: /index.html
+webpack: wait until bundle finished: /__webpack_hmr
+webpack built 8e7d084fc1a5b676cd96 in 58331ms
+Hash: [1m8e7d084fc1a5b676cd96[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m58331[22mms
+   [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+  [1m[32m9.9.js[39m[22m   177 kB       [1m9[22m  [1m[32m[39m[22m     
+  [1m[32m0.0.js[39m[22m  2.52 MB       [1m0[22m  [1m[32m[39m[22m     
+  [1m[32m2.2.js[39m[22m   392 kB       [1m2[22m  [1m[32m[39m[22m     
+  [1m[32mapp.js[39m[22m  1.87 MB       [1m3[22m  [1m[32m[39m[22m     app
+  [1m[32m4.4.js[39m[22m    80 kB       [1m4[22m  [1m[32m[39m[22m     
+  [1m[32m5.5.js[39m[22m   105 kB       [1m5[22m  [1m[32m[39m[22m     
+  [1m[32m6.6.js[39m[22m  79.6 kB       [1m6[22m  [1m[32m[39m[22m     
+  [1m[32m7.7.js[39m[22m   311 kB       [1m7[22m  [1m[32m[39m[22m     
+  [1m[32m8.8.js[39m[22m  70.1 kB       [1m8[22m  [1m[32m[39m[22m     
+  [1m[32m1.1.js[39m[22m   315 kB       [1m1[22m  [1m[32m[39m[22m     
+[1m[32m10.10.js[39m[22m  41.7 kB      [1m10[22m  [1m[32m[39m[22m     
+[1m[32m11.11.js[39m[22m  63.5 kB      [1m11[22m  [1m[32m[39m[22m     
+[1m[32m12.12.js[39m[22m  1.04 MB      [1m12[22m  [1m[32m[39m[22m     
+[1m[32m13.13.js[39m[22m  71.3 kB      [1m13[22m  [1m[32m[39m[22m     
+[1m[32m14.14.js[39m[22m  53.1 kB      [1m14[22m  [1m[32m[39m[22m     
+[1m[32m15.15.js[39m[22m   894 kB      [1m15[22m  [1m[32m[39m[22m     
+[1m[32m16.16.js[39m[22m  29.5 kB      [1m16[22m  [1m[32m[39m[22m     
+[1m[32m17.17.js[39m[22m  27.3 kB      [1m17[22m  [1m[32m[39m[22m     
+
+[1m[31mERROR in ./src/components/swiper/swiper.js
+Module not found: Error: Cannot resolve module 'array-from' in /root/vux-wechat-flower/src/components/swiper
+ @ ./src/components/swiper/swiper.js 19:17-38[39m[22m
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built ea29ab1fbf18fb048c65 in 5184ms
+Hash: [1mea29ab1fbf18fb048c65[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m5184[22mms
+     [1mAsset[22m       [1mSize[22m  [1mChunks[22m  [1m[22m           [1mChunk Names[22m
+    [1m[32m9.9.js[39m[22m     177 kB       [1m9[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m0.0.js[39m[22m    2.52 MB       [1m0[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m2.2.js[39m[22m     392 kB       [1m2[22m  [1m[32m[emitted][39m[22m  
+    [1m[32mapp.js[39m[22m    1.87 MB       [1m3[22m  [1m[32m[emitted][39m[22m  app
+    [1m[32m4.4.js[39m[22m      80 kB       [1m4[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m5.5.js[39m[22m     105 kB       [1m5[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m6.6.js[39m[22m    79.6 kB       [1m6[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m7.7.js[39m[22m     311 kB       [1m7[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m8.8.js[39m[22m    70.1 kB       [1m8[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m1.1.js[39m[22m     333 kB       [1m1[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m10.10.js[39m[22m    41.7 kB      [1m10[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m11.11.js[39m[22m    63.5 kB      [1m11[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m12.12.js[39m[22m    1.04 MB      [1m12[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m13.13.js[39m[22m    71.3 kB      [1m13[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m14.14.js[39m[22m    53.1 kB      [1m14[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m15.15.js[39m[22m     894 kB      [1m15[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m16.16.js[39m[22m    29.5 kB      [1m16[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m17.17.js[39m[22m    27.3 kB      [1m17[22m  [1m[32m[emitted][39m[22m  
+[1m[32mindex.html[39m[22m  347 bytes        [1m[22m  [1m[32m[emitted][39m[22m  
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+[HPM] Proxy created: /wx  ->  http://api.flower.wx.wurim.com/wx
+[HPM] Proxy rewrite rule created: "^/wx" ~> ""
+[HPM] Proxy created: /url  ->  http://
+[HPM] Proxy rewrite rule created: "^/url" ~> ""
+Listening at http://localhost:9203
+
+webpack built ea29ab1fbf18fb048c65 in 41601ms
+Hash: [1mea29ab1fbf18fb048c65[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m41601[22mms
+     [1mAsset[22m       [1mSize[22m  [1mChunks[22m  [1m[22m           [1mChunk Names[22m
+    [1m[32m9.9.js[39m[22m     177 kB       [1m9[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m0.0.js[39m[22m    2.52 MB       [1m0[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m2.2.js[39m[22m     392 kB       [1m2[22m  [1m[32m[emitted][39m[22m  
+    [1m[32mapp.js[39m[22m    1.87 MB       [1m3[22m  [1m[32m[emitted][39m[22m  app
+    [1m[32m4.4.js[39m[22m      80 kB       [1m4[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m5.5.js[39m[22m     105 kB       [1m5[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m6.6.js[39m[22m    79.6 kB       [1m6[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m7.7.js[39m[22m     311 kB       [1m7[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m8.8.js[39m[22m    70.1 kB       [1m8[22m  [1m[32m[emitted][39m[22m  
+    [1m[32m1.1.js[39m[22m     333 kB       [1m1[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m10.10.js[39m[22m    41.7 kB      [1m10[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m11.11.js[39m[22m    63.5 kB      [1m11[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m12.12.js[39m[22m    1.04 MB      [1m12[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m13.13.js[39m[22m    71.3 kB      [1m13[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m14.14.js[39m[22m    53.1 kB      [1m14[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m15.15.js[39m[22m     894 kB      [1m15[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m16.16.js[39m[22m    29.5 kB      [1m16[22m  [1m[32m[emitted][39m[22m  
+  [1m[32m17.17.js[39m[22m    27.3 kB      [1m17[22m  [1m[32m[emitted][39m[22m  
+[1m[32mindex.html[39m[22m  347 bytes        [1m[22m  [1m[32m[emitted][39m[22m  
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built a36f044228920fd89592 in 2135ms
+Hash: [1ma36f044228920fd89592[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m2135[22mms
+                               [1mAsset[22m      [1mSize[22m  [1mChunks[22m  [1m[22m           [1mChunk Names[22m
+                            [1m[32m10.10.js[39m[22m   41.7 kB      [1m10[22m  [1m[32m[39m[22m           
+                              [1m[32m0.0.js[39m[22m   2.52 MB       [1m0[22m  [1m[32m[39m[22m           
+                              [1m[32m2.2.js[39m[22m    392 kB       [1m2[22m  [1m[32m[39m[22m           
+                              [1m[32mapp.js[39m[22m   1.87 MB       [1m3[22m  [1m[32m[emitted][39m[22m  app
+                              [1m[32m4.4.js[39m[22m     80 kB       [1m4[22m  [1m[32m[39m[22m           
+                              [1m[32m5.5.js[39m[22m    105 kB       [1m5[22m  [1m[32m[39m[22m           
+                              [1m[32m6.6.js[39m[22m   79.6 kB       [1m6[22m  [1m[32m[39m[22m           
+                              [1m[32m7.7.js[39m[22m    311 kB       [1m7[22m  [1m[32m[39m[22m           
+                              [1m[32m8.8.js[39m[22m   70.1 kB       [1m8[22m  [1m[32m[39m[22m           
+                              [1m[32m9.9.js[39m[22m    177 kB       [1m9[22m  [1m[32m[39m[22m           
+                              [1m[32m1.1.js[39m[22m    333 kB       [1m1[22m  [1m[32m[39m[22m           
+                            [1m[32m11.11.js[39m[22m   63.5 kB      [1m11[22m  [1m[32m[39m[22m           
+                            [1m[32m12.12.js[39m[22m   1.04 MB      [1m12[22m  [1m[32m[39m[22m           
+                            [1m[32m13.13.js[39m[22m   71.3 kB      [1m13[22m  [1m[32m[39m[22m           
+                            [1m[32m14.14.js[39m[22m   53.1 kB      [1m14[22m  [1m[32m[39m[22m           
+                            [1m[32m15.15.js[39m[22m    894 kB      [1m15[22m  [1m[32m[39m[22m           
+                            [1m[32m16.16.js[39m[22m   29.5 kB      [1m16[22m  [1m[32m[39m[22m           
+                            [1m[32m17.17.js[39m[22m   27.3 kB      [1m17[22m  [1m[32m[39m[22m           
+[1m[32m3.ea29ab1fbf18fb048c65.hot-update.js[39m[22m   6.58 kB       [1m3[22m  [1m[32m[emitted][39m[22m  app
+[1m[32mea29ab1fbf18fb048c65.hot-update.json[39m[22m  36 bytes        [1m[22m  [1m[32m[emitted][39m[22m  
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built 841992f87aad441c75de in 259ms
+Hash: [1m841992f87aad441c75de[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m259[22mms
+                               [1mAsset[22m       [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+                              [1m[32mapp.js[39m[22m     276 kB       [1m3[22m  [1m[32m[39m[22m     app
+[1m[32m3.a36f044228920fd89592.hot-update.js[39m[22m  223 bytes       [1m3[22m  [1m[32m[39m[22m     app
+[1m[32ma36f044228920fd89592.hot-update.json[39m[22m   36 bytes        [1m[22m  [1m[32m[39m[22m     
+
+[1m[31mERROR in ./src/main.js
+
+  ✘  http://eslint.org/docs/rules/  Parsing error: Unexpected token <<  
+  /root/vux-wechat-flower/src/main.js:63:2
+  <<<<<<< HEAD
+    ^
+
+
+✘ 1 problem (1 error, 0 warnings)
+
+
+Errors:
+  1  http://eslint.org/docs/rules/null[39m[22m
+
+[1m[31mERROR in ./src/main.js
+Module build failed: SyntaxError: Unexpected token (63:0)
+
+  61 |     setTimeout(next, 0)
+  62 |   }
+> 63 | <<<<<<< HEAD
+     | ^
+  64 |   dispatch('UPDATE_LOADING', true)
+  65 |   setTimeout(next, 0)
+  66 | =======
+
+ @ multi app[39m[22m
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built d3edcdc99617be650662 in 13482ms
+Hash: [1md3edcdc99617be650662[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m13482[22mms
+                                [1mAsset[22m      [1mSize[22m  [1mChunks[22m  [1m[22m           [1mChunk Names[22m
+                             [1m[32m12.12.js[39m[22m   1.17 MB      [1m12[22m  [1m[32m[emitted][39m[22m  
+        [1m[32mstatic/img/wechat.be7f59d.png[39m[22m    117 kB        [1m[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32m1.1.js[39m[22m    344 kB       [1m1[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32m2.2.js[39m[22m    399 kB       [1m2[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32mapp.js[39m[22m   1.88 MB       [1m3[22m  [1m[32m[emitted][39m[22m  app
+                               [1m[32m4.4.js[39m[22m     80 kB       [1m4[22m  [1m[32m[39m[22m           
+                               [1m[32m5.5.js[39m[22m    105 kB       [1m5[22m  [1m[32m[39m[22m           
+                               [1m[32m6.6.js[39m[22m   79.6 kB       [1m6[22m  [1m[32m[39m[22m           
+                               [1m[32m7.7.js[39m[22m    311 kB       [1m7[22m  [1m[32m[39m[22m           
+                               [1m[32m8.8.js[39m[22m   70.1 kB       [1m8[22m  [1m[32m[39m[22m           
+                               [1m[32m9.9.js[39m[22m    177 kB       [1m9[22m  [1m[32m[39m[22m           
+                             [1m[32m10.10.js[39m[22m   41.7 kB      [1m10[22m  [1m[32m[39m[22m           
+                             [1m[32m11.11.js[39m[22m   63.5 kB      [1m11[22m  [1m[32m[39m[22m           
+                               [1m[32m0.0.js[39m[22m   2.52 MB       [1m0[22m  [1m[32m[emitted][39m[22m  
+                             [1m[32m13.13.js[39m[22m   71.3 kB      [1m13[22m  [1m[32m[39m[22m           
+                             [1m[32m14.14.js[39m[22m   53.1 kB      [1m14[22m  [1m[32m[39m[22m           
+                             [1m[32m15.15.js[39m[22m    922 kB      [1m15[22m  [1m[32m[emitted][39m[22m  
+                             [1m[32m16.16.js[39m[22m   29.5 kB      [1m16[22m  [1m[32m[39m[22m           
+                             [1m[32m17.17.js[39m[22m   27.3 kB      [1m17[22m  [1m[32m[39m[22m           
+ [1m[32m0.a36f044228920fd89592.hot-update.js[39m[22m   19.4 kB       [1m0[22m  [1m[32m[emitted][39m[22m  
+ [1m[32m1.a36f044228920fd89592.hot-update.js[39m[22m   45.2 kB       [1m1[22m  [1m[32m[emitted][39m[22m  
+ [1m[32m2.a36f044228920fd89592.hot-update.js[39m[22m   11.1 kB       [1m2[22m  [1m[32m[emitted][39m[22m  
+ [1m[32m3.a36f044228920fd89592.hot-update.js[39m[22m   48.7 kB       [1m3[22m  [1m[32m[emitted][39m[22m  app
+[1m[32m12.a36f044228920fd89592.hot-update.js[39m[22m   22.8 kB      [1m12[22m  [1m[32m[emitted][39m[22m  
+[1m[32m15.a36f044228920fd89592.hot-update.js[39m[22m   48.8 kB      [1m15[22m  [1m[32m[emitted][39m[22m  
+ [1m[32ma36f044228920fd89592.hot-update.json[39m[22m  48 bytes        [1m[22m  [1m[32m[emitted][39m[22m  
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.
+webpack: bundle is now INVALID.
+webpack building...
+webpack built d3edcdc99617be650662 in 411ms
+Hash: [1md3edcdc99617be650662[22m
+Version: webpack [1m1.13.2[22m
+Time: [1m411[22mms
+                        [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+                       [1m[32m8.8.js[39m[22m  70.1 kB       [1m8[22m  [1m[32m[39m[22m     
+[1m[32mstatic/img/wechat.be7f59d.png[39m[22m   117 kB        [1m[22m  [1m[32m[39m[22m     
+                       [1m[32m1.1.js[39m[22m   344 kB       [1m1[22m  [1m[32m[39m[22m     
+                       [1m[32m2.2.js[39m[22m   399 kB       [1m2[22m  [1m[32m[39m[22m     
+                       [1m[32mapp.js[39m[22m  1.88 MB       [1m3[22m  [1m[32m[39m[22m     app
+                       [1m[32m4.4.js[39m[22m    80 kB       [1m4[22m  [1m[32m[39m[22m     
+                       [1m[32m5.5.js[39m[22m   105 kB       [1m5[22m  [1m[32m[39m[22m     
+                       [1m[32m6.6.js[39m[22m  79.6 kB       [1m6[22m  [1m[32m[39m[22m     
+                       [1m[32m7.7.js[39m[22m   311 kB       [1m7[22m  [1m[32m[39m[22m     
+                       [1m[32m0.0.js[39m[22m  2.52 MB       [1m0[22m  [1m[32m[39m[22m     
+                       [1m[32m9.9.js[39m[22m   177 kB       [1m9[22m  [1m[32m[39m[22m     
+                     [1m[32m10.10.js[39m[22m  41.7 kB      [1m10[22m  [1m[32m[39m[22m     
+                     [1m[32m11.11.js[39m[22m  63.5 kB      [1m11[22m  [1m[32m[39m[22m     
+                     [1m[32m12.12.js[39m[22m  1.17 MB      [1m12[22m  [1m[32m[39m[22m     
+                     [1m[32m13.13.js[39m[22m  71.3 kB      [1m13[22m  [1m[32m[39m[22m     
+                     [1m[32m14.14.js[39m[22m  53.1 kB      [1m14[22m  [1m[32m[39m[22m     
+                     [1m[32m15.15.js[39m[22m   922 kB      [1m15[22m  [1m[32m[39m[22m     
+                     [1m[32m16.16.js[39m[22m  29.5 kB      [1m16[22m  [1m[32m[39m[22m     
+                     [1m[32m17.17.js[39m[22m  27.3 kB      [1m17[22m  [1m[32m[39m[22m     
+Child [1mhtml-webpack-plugin for "index.html"[22m:
+         [1mAsset[22m     [1mSize[22m  [1mChunks[22m  [1m[22m     [1mChunk Names[22m
+    [1m[32mindex.html[39m[22m  21.7 kB       [1m0[22m  [1m[32m[39m[22m     
+webpack: bundle is now VALID.

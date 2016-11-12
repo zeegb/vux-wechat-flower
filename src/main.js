@@ -51,7 +51,7 @@ router.beforeEach(({to, from, next, redirect}) => {
   } else {
     toNext()
   }
-  function toNext() {
+  function toNext () {
     const toIndex = history.getItem(to.path)
     const fromIndex = history.getItem(from.path)
     if (toIndex) {

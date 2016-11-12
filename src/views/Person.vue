@@ -15,24 +15,24 @@
             <br/>
             优惠券
           </div>
-          <div class="vux-1px-r">
-            <span>0</span>
-            <br/>
-            余额
-          </div>
-          <div>
-            <span>88</span>
-            <br/>
-            代金卡
-          </div>
+          <!--<div class="vux-1px-r">-->
+            <!--<span>0</span>-->
+            <!--<br/>-->
+            <!--余额-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<span>88</span>-->
+            <!--<br/>-->
+            <!--代金卡-->
+          <!--</div>-->
         </div>
       </card>
 
       <group>
         <cell title="我的订单" is-link v-link="{path:'order-list'}"></cell>
         <cell title="地址管理" is-link v-link="{path:'select-address'}"></cell>
-        <cell title="实名认证" is-link></cell>
-        <cell title="账号安全" is-link></cell>
+        <!--<cell title="实名认证" is-link></cell>-->
+        <!--<cell title="账号安全" is-link></cell>-->
       </group>
     </div>
   </div>

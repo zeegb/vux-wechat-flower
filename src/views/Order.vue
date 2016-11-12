@@ -18,17 +18,17 @@
           <!-- 1送货上门 -->
           <div class="v-way" v-if="sendVal === '送货上门'">
             <cell title="送货形式：">快递</cell>
-            <div class="v-address" v-if="isHaveselectAddress">
+            <div class="v-address" v-if="isHaveselectAddress" v-link="{path:'select-address',query:{type:order}}">
               <div class="hd">
-                <div class="name">收货人：{{linkName}}</div>
-                <div class="tel">{{linkTel}}</div>
+                <div class="name">收货人：{{selectAddress.name}}</div>
+                <div class="tel">{{selectAddress.phone}}</div>
                 <div class="arrow"></div>
               </div>
               <div class="cellbd">
-                收货地址：{{linkAddress}}
+                收货地址：{{selectAddress.address}}
               </div>
             </div>
-            <div class="v-address" v-show="!isHaveselectAddress">
+            <div class="v-address" v-show="!isHaveselectAddress" v-link="{path:'select-address',query:{type:order}}">
               <div class="hd">
                 <div class="name">请选择收货地址</div>
                 <div class="arrow"></div>
@@ -182,8 +182,9 @@
     },
     route: {
       data (transition) {
-        this.getSelectAddress(this.getUserId)
-        this.isHaveselectAddress = Object.keys(this.selectAddress).length !== 0
+        if (transition.from.name !== 'selectAddress') {
+          this.getSelectAddress(this.getUserId)
+        }
       }
     },
     created () {
@@ -193,6 +194,9 @@
     watch: {
       calendarVal (val) {
         this.calendarShow = false
+      },
+      selectAddress (val) {
+        this.isHaveselectAddress = Object.keys(this.selectAddress).length !== 0
       }
     },
     methods: {
@@ -366,9 +370,7 @@
       }
       .arrow {
         @include arrow;
-        position: relative;
-        top: 20px;
-        right: 0;
+        align-items: center;
         margin-left: .3em;
       }
     }

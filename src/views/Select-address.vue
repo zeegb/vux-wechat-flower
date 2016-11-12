@@ -143,7 +143,7 @@
   import XHeader from 'vux/dist/components/x-header'
   import AddressChinaData from '../libs/list.json'
   import {addressList, isEmpty, getUserId} from '../vuex/getters'
-  import {getAddress, setDefaultAddress} from '../vuex/actions'
+  import {getAddress, setDefaultAddress, setSelectAddress} from '../vuex/actions'
   export default{
     vuex: {
       getters: {
@@ -153,12 +153,14 @@
       },
       actions: {
         getAddress,
-        setDefaultAddress
+        setDefaultAddress,
+        setSelectAddress
       }
     },
     route: {
       data (transition) {
         this.getAddress(this.getUserId)
+        this.pathFrom = this.$route.query.type
       },
       canReuse (transition) {
         return false
@@ -175,7 +177,8 @@
         aeditTel: '',
         aeditVal: ['福建省', '厦门市', '思明区'],
         aeditTxt: '',
-        aeditCon: ''
+        aeditCon: '',
+        pathFrom: ''
       }
     },
     watch: {
@@ -191,7 +194,12 @@
     },
     methods: {
       setDefault (index) {
-        this.setDefaultAddress(this.addressList[index]._id, this.getUserId)
+        if (this.pathFrom === 'order') {
+          this.setDefaultAddress(this.addressList[index]._id, this.getUserId)
+        } else {
+          this.setSelectAddress(this.addressList[index])
+          window.history.back()
+        }
       }
     }
   }

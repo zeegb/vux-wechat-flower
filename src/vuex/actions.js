@@ -107,7 +107,7 @@ export const getSelectAddress = ({dispatch}, userId) => {
         return item.is_default
       })
       console.log(JSON.stringify(selectAddress[0]))
-      dispatch('UPDATE_SELECT_ADDRESS', {})
+      dispatch('UPDATE_SELECT_ADDRESS', selectAddress[0])
     } else {
       dispatch('GET_ADDRESS_ERROR', true)
     }

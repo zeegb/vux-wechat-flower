@@ -73,14 +73,14 @@ export default function (router) {
       component: function (resolve) {
         require(['./views/Select-address.vue'], resolve)
       },
-      auth: true,
+      auth: false,
       name: 'selectAddress'
     },
     '/edit-address': {
       component: function (resolve) {
         require(['./views/Edit-address.vue'], resolve)
       },
-      auth: true,
+      auth: false,
       name: 'editAddress'
     },
     '/coupon': {

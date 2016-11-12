@@ -29,16 +29,23 @@ sync(store, router)
 const dispatch = store.dispatch
 
 router.beforeEach(({to, from, next, redirect}) => {
-  if (to.name === 'Home' && to.query.openid) {
-    history.setItem('openid', to.query.openid)
-    dispatch('SET_OPENID', to.query.openid)
-  }
+  // if (to.name === 'Home' && to.query.openid) {
+  //   history.setItem('openid', to.query.openid)
+  //   dispatch('SET_OPENID', to.query.openid)
+  // }
   if (to.auth) {
     if (history.getItem('openid')) {
       toNext()
     } else {
-      redirect('/')
-      dispatch('SHOW_ALERT', true)
+      Vue.http.post('/wx/user/cookie').then((res) => {
+        if (res.body && res.body.code === '200' && res.body.data) {
+          history.setItem('openid', res.body.data.openid)
+          dispatch('SET_OPENID', res.body.data.openid)
+          toNext()
+        }
+      })
+      // redirect('/')
+      // dispatch('SHOW_ALERT', true)
     }
   } else {
     toNext()

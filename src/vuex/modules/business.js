@@ -6,7 +6,8 @@ import {
   UPDATE_ADDRESS_SUCCESS,
   UPDATE_ADDRESS_ERROR,
   UPDATE_ADDRESS_LIST,
-  GET_ADDRESS_ERROR
+  GET_ADDRESS_ERROR,
+  UPDATE_SELECT_ADDRESS
 } from '../mutation-types'
 
 let state = {
@@ -14,7 +15,8 @@ let state = {
   addressList: [],
   addressError: false,
   addressSuccess: false,
-  isEmpty: false
+  isEmpty: false,
+  selectAddress: {}
 }
 
 const mutations = {
@@ -32,6 +34,9 @@ const mutations = {
   },
   [GET_ADDRESS_ERROR] (state, isEmpty) {
     state.isEmpty = isEmpty
+  },
+  [UPDATE_SELECT_ADDRESS] (state, selectAddress) {
+    state.selectAddress = selectAddress
   }
 }
 

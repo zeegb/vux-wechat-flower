@@ -59,7 +59,7 @@ export default function (router) {
       component: function (resolve) {
         require(['./views/Order.vue'], resolve)
       },
-      auth: true,
+      auth: false,
       name: 'order'
     },
     '/order-list': {

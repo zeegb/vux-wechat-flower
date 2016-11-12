@@ -4,7 +4,7 @@
 import {SET_OPENID, SHOW_ALERT} from '../mutation-types'
 
 let state = {
-  openid: '',
+  openid: 'oDFcvv_Wms0vesZKqtiTKk5X3Zyc',
   showAlert: false
 }
 

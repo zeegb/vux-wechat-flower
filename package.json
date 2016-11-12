@@ -20,7 +20,9 @@
     "vue-resource": "^1.0.3"
   },
   "devDependencies": {
+    "array-find": "^1.0.0",
     "array-from": "^2.1.1",
+    "array-map": "0.0.0",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-runtime": "^6.0.0",

@@ -7,16 +7,13 @@
     </x-header>
 
     <div class="v-bd weui_cells">
-      <x-input title="姓&nbsp;&nbsp;名" :value.sync="addr.name" name="username" placeholder="请输入姓名" is-type="china-name"
-               :show-clear="false"></x-input>
+      <x-input title="姓&nbsp;&nbsp;名" :value.sync="addr.name" name="username" placeholder="请输入姓名"
+               is-type="china-name"></x-input>
       <x-input title="手机号码" :value.sync="addr.phone" name="mobile" placeholder="请输入手机号码" keyboard="number"
-               is-type="china-mobile" :show-clear="false"></x-input>
-      <address title="选择省市" :value.sync="addr.editVal" raw-value :list="addressData"></address>
-      <x-input title="详细地址" :value.sync="addr.addrText" placeholder="无需再写省市区" :show-clear="false"></x-input>
+               is-type="china-mobile"></x-input>
+      <address title="选择省市" :value.sync="addr.editVal" raw-value :list="addressData" placeholder="请选择地址"></address>
+      <x-input title="详细地址" :value.sync="addr.addrText" placeholder="无需再写省市区"></x-input>
     </div>
-
-    <toast :show="addressSuccess">保存成功</toast>
-    <toast :show="addressError" type="cancel">保存失败</toast>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -45,7 +42,8 @@
   import XInput from 'vux/dist/components/x-input'
   import Address from 'vux/dist/components/address'
   import Toast from 'vux/dist/components/toast'
-  import AddressChinaData from 'vux/src/components/address/list.json'
+  import AddressChinaData from '../libs/list.json'
+  import value2name from '../libs/filter'
   import {addressList, getUserId, addressError, addressSuccess} from '../vuex/getters'
   import {setAddress, editAddress, resetAddressError, resetAddressSuccess} from '../vuex/actions'
   import {go} from '../libs/router'
@@ -72,11 +70,14 @@
           this.isInsert = true
         }
       },
-      deactivate (transition) {
-        this.resetAddressError()
-        this.resetAddressSuccess()
-        transition.next()
+      canReuse (transition) {
+        return false
       }
+//      deactivate (transition) {
+//        this.resetAddressError()
+//        this.resetAddressSuccess()
+//        transition.next()
+//      }
     },
     data () {
       return {
@@ -98,17 +99,20 @@
       Toast
     },
     methods: {
+      getName (value) {
+        return value2name(value, AddressChinaData)
+      },
       saveAddr () {
         if (this.isInsert) {
-          this.setAddress(this.addr, this.getUserId)
-          this.$nextTick(() => {
-            go('/select-address', this.$router)
+          var addrInfo = this.addr
+//          addrInfo.editVal = this.getName(addrInfo.editVal).split(' ')
+//          console.log(addrInfo.editVal)
+          this.setAddress(addrInfo, this.getUserId, () => {
+            window.history.back()
           })
         } else {
           this.editAddress(this.addr, this.getUserId)
-          this.$nextTick(() => {
-            go('/select-address', this.$router)
-          })
+          go('/select-address', this.$router)
         }
       }
     }

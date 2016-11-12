@@ -9,6 +9,7 @@ export const addressList = ({business}) => business.addressList
 export const addressError = ({business}) => business.addressError
 export const addressSuccess = ({business}) => business.addressSuccess
 export const isEmpty = ({business}) => business.isEmpty
+export const selectAddress = ({business}) => business.selectAddress
 
 export const getUserId = ({user}) => user.openid
 export const showAlert = ({user}) => user.showAlert

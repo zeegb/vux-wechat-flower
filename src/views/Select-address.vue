@@ -84,7 +84,7 @@
       color: #f00;
     }
     .cont {
-      // flex: 1;
+      flex: 1;
       .hd {
         display: flex;
         line-height: 20px;
@@ -111,7 +111,6 @@
       }
     }
     .edit {
-      flex: 1;
       position: relative;
       margin-top: 15px;
       margin-left: 15px;
@@ -142,28 +141,30 @@
 </style>
 <script>
   import XHeader from 'vux/dist/components/x-header'
-  import AddressChinaData from 'vux/src/components/address/list.json'
-  import {addressList, isEmpty} from '../vuex/getters'
-  import {getAddress} from '../vuex/actions'
+  import AddressChinaData from '../libs/list.json'
+  import {addressList, isEmpty, getUserId} from '../vuex/getters'
+  import {getAddress, setDefaultAddress} from '../vuex/actions'
   export default{
     vuex: {
       getters: {
         addressList,
-        isEmpty
+        isEmpty,
+        getUserId
       },
       actions: {
-        getAddress
+        getAddress,
+        setDefaultAddress
       }
     },
     route: {
       data (transition) {
-        this.getAddress('system')
-        if (transition.from.name === 'Person') {
-          var classObj = document.getElementsByClassName('v-addrbd')
-          for (var i = 0; i < classObj.length; i++) {
-            classObj[i].addEventListener('click', this.setDefault)
-          }
-        }
+        this.getAddress(this.getUserId)
+      },
+      canReuse (transition) {
+        return false
+      },
+      deactivate (transition) {
+        transition.next()
       }
     },
     data () {
@@ -177,16 +178,20 @@
         aeditCon: ''
       }
     },
+    watch: {
+      addressList (curVal, oldVal) {
+        var classObj = document.getElementsByClassName('v-addrbd')
+        for (var i = 0; i < classObj.length; i++) {
+          classObj[i].addEventListener('click', this.setDefault.bind(classObj[i], i))
+        }
+      }
+    },
     components: {
       XHeader
     },
     methods: {
       setDefault (index) {
-        this.addressList = this.addressList.map((item, index) => {
-          this.$set(`addressList[${index}].is_default`, false)
-          return item
-        })
-        this.addressList[index].is_default = true
+        this.setDefaultAddress(this.addressList[index]._id, this.getUserId)
       }
     }
   }

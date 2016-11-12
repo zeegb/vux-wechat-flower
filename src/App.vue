@@ -4,17 +4,22 @@
     <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
     <tabbar v-if="isTabbar" :tab="pathName"></tabbar>
   </div>
+  <toast :show="addressSuccess">保存成功</toast>
+  <toast :show="addressError" type="cancel">保存失败</toast>
 </template>
 
 <script>
   import Tabbar from './components/tabbar.vue'
   import store from './vuex/store'
-  import {isLoading, direction} from './vuex/getters'
+  import {isLoading, direction, addressSuccess, addressError} from './vuex/getters'
+  import {resetAddressError, resetAddressSuccess} from './vuex/actions'
   import Loading from 'vux/dist/components/loading'
+  import Toast from 'vux/dist/components/toast'
   export default {
     components: {
       Loading,
-      Tabbar
+      Tabbar,
+      Toast
     },
     data () {
       return {
@@ -35,12 +40,30 @@
         if (this.route.name === 'Person') return 'Person'
       }
     },
+    watch: {
+      addressSuccess (curVal, oldVal) {
+        setTimeout(() => {
+          this.resetAddressSuccess()
+        }, 2000)
+      },
+      addressError (curVal, oldVal) {
+        setTimeout(() => {
+          this.resetAddressError()
+        }, 2000)
+      }
+    },
     store: store,
     vuex: {
       getters: {
         route: (state) => state.route,
         isLoading,
-        direction
+        direction,
+        addressSuccess,
+        addressError
+      },
+      actions: {
+        resetAddressError,
+        resetAddressSuccess
       }
     }
   }

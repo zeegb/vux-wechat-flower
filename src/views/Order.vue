@@ -16,9 +16,9 @@
             <selector :value.sync="sendVal" title="配送方式" :options="sendOptions"></selector>
           </div>
           <!-- 1送货上门 -->
-          <div class="v-way" v-show="sendVal === '送货上门'">
+          <div class="v-way" v-if="sendVal === '送货上门'">
             <cell title="送货形式：">快递</cell>
-            <div class="v-address">
+            <div class="v-address" v-if="isHaveselectAddress">
               <div class="hd">
                 <div class="name">收货人：{{linkName}}</div>
                 <div class="tel">{{linkTel}}</div>
@@ -26,6 +26,12 @@
               </div>
               <div class="cellbd">
                 收货地址：{{linkAddress}}
+              </div>
+            </div>
+            <div class="v-address" v-show="!isHaveselectAddress">
+              <div class="hd">
+                <div class="name">请选择收货地址</div>
+                <div class="arrow"></div>
               </div>
             </div>
           </div>
@@ -112,12 +118,21 @@
   import XInput from 'vux/dist/components/x-input'
   import InlineCalendar from 'vux/dist/components/inline-calendar'
   import Address from 'vux/dist/components/address'
-  import AddressChinaData from 'vux/src/components/address/list.json'
-  import value2name from 'vux/src/filters/value2name'
+  import AddressChinaData from '../libs/list.json'
   import productcell from '../components/Prodect-cell.vue'
   import moment from 'moment'
+  import {selectAddress, getUserId, cacheOrder} from '../vuex/getters'
+  import {getSelectAddress} from '../vuex/actions'
 
   export default {
+    vuex: {
+      getters: {
+        selectAddress, getUserId, cacheOrder
+      },
+      actions: {
+        getSelectAddress
+      }
+    },
     components: {
       XHeader,
       Selector,
@@ -126,7 +141,6 @@
       InlineCalendar,
       Address,
       AddressChinaData,
-      value2name,
       productcell
     },
     data () {
@@ -162,20 +176,19 @@
           sku: '123',
           pri: '99992.00',
           num: 2
-        }]
+        }],
+        isHaveselectAddress: true
+      }
+    },
+    route: {
+      data (transition) {
+        this.getSelectAddress(this.getUserId)
+        this.isHaveselectAddress = Object.keys(this.selectAddress).length !== 0
       }
     },
     created () {
-      // 获取店铺id
-      this.shop = this.$route.query.shop || 0
     },
     ready () {
-//        const url = `/api/shopping/shop-index.htm?shop=${this.shop}`
-//        this.$http.get(url).then(res => {
-//            if (res.ok) {
-//                this.indexData = Object.assign({}, JSON.parse(res.data).rows)
-//            }
-//        })
     },
     watch: {
       calendarVal (val) {
@@ -184,7 +197,6 @@
     },
     methods: {
       todayDay () {
-
       }
     }
   }
@@ -356,6 +368,7 @@
         @include arrow;
         position: relative;
         top: 20px;
+        right: 0;
         margin-left: .3em;
       }
     }

@@ -14,7 +14,8 @@ Vue.use(Resource)
 
 const router = new VueRouter({
   hashbang: true,
-  saveScrollPosition: true,
+  history: true,
+  saveScrollPosition: false,
   transitionOnLoad: false
 })
 

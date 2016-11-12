@@ -29,7 +29,7 @@ export const closeAlert = ({dispatch}, isShow) => {
 export const setCacheOrder = ({dispatch}, cacheOrder) => {
   dispatch('UPDATE_CACHE_ORDER', cacheOrder)
 }
-export const setAddress = ({dispatch}, address, userId) => {
+export const setAddress = ({dispatch}, address, userId, cb) => {
   return Vue.http.post('/wx/user-center/address-add', {
     userId: userId,
     address: address.editVal.join('') + address.addrText,
@@ -40,15 +40,18 @@ export const setAddress = ({dispatch}, address, userId) => {
     name: address.name
   }).then((res) => {
     if (res.body && res.body.code === '200' && res.body.data) {
-      console.log(11111)
+      console.log(1111)
       dispatch('UPDATE_ADDRESS_SUCCESS', true)
+      setTimeout(cb, 0)
     } else {
       console.log(2222)
       dispatch('UPDATE_ADDRESS_ERROR', true)
+      cb()
     }
   }, (err) => {
     console.log(err)
     dispatch('UPDATE_ADDRESS_ERROR', true)
+    cb()
   })
 }
 export const editAddress = ({dispatch}, address, userId) => {
@@ -73,7 +76,7 @@ export const editAddress = ({dispatch}, address, userId) => {
   })
 }
 export const getAddress = ({dispatch}, userId) => {
-  return Vue.http.post('/wx/data/product/find-one', {
+  return Vue.http.post('/wx/user-center/address', {
     userId: userId
   }).then((res) => {
     if (res.body && res.body.code === '200' && res.body.data) {
@@ -91,4 +94,44 @@ export const resetAddressError = ({dispatch}) => {
 }
 export const resetAddressSuccess = ({dispatch}) => {
   dispatch('UPDATE_ADDRESS_SUCCESS', false)
+}
+export const resetDataEmpty = ({dispatch}) => {
+  dispatch('GET_ADDRESS_ERROR', false)
+}
+export const getSelectAddress = ({dispatch}, userId) => {
+  return Vue.http.post('/wx/user-center/address', {
+    userId: userId
+  }).then((res) => {
+    if (res.body && res.body.code === '200' && res.body.data) {
+      var selectAddress = res.body.data.filter((item) => {
+        return item.is_default
+      })
+      console.log(JSON.stringify(selectAddress[0]))
+      dispatch('UPDATE_SELECT_ADDRESS', {})
+    } else {
+      dispatch('GET_ADDRESS_ERROR', true)
+    }
+  }, (err) => {
+    console.log(err)
+    dispatch('GET_ADDRESS_ERROR', true)
+  })
+}
+export const setSelectAddress = ({dispatch}, selectAddress) => {
+  dispatch('UPDATE_SELECT_ADDRESS', selectAddress)
+}
+export const setDefaultAddress = ({dispatch}, addressId, userId) => {
+  return Vue.http.post('/wx/user-center/address-set-default', {
+    userId: userId,
+    addressId: addressId
+  }).then((res) => {
+    console.log(res)
+    if (res.body && res.body.code === '200' && res.body.data) {
+      dispatch('UPDATE_ADDRESS_LIST', res.body.data)
+    } else {
+      // dispatch('GET_ADDRESS_ERROR', true)
+    }
+  }, (err) => {
+    console.log(err)
+    // dispatch('GET_ADDRESS_ERROR', true)
+  })
 }

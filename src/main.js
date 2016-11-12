@@ -14,7 +14,7 @@ Vue.use(Resource)
 
 const router = new VueRouter({
   hashbang: true,
-  history: true,
+  history: false,
   saveScrollPosition: false,
   transitionOnLoad: false
 })
@@ -41,6 +41,7 @@ router.beforeEach(({to, from, next, redirect}) => {
         if (res.body && res.body.code === '200' && res.body.data) {
           history.setItem('openid', res.body.data.openid)
           dispatch('SET_OPENID', res.body.data.openid)
+          dispatch('SET_USERINFO', res.body.data)
           toNext()
         }
       })
@@ -50,7 +51,7 @@ router.beforeEach(({to, from, next, redirect}) => {
   } else {
     toNext()
   }
-  function toNext () {
+  function toNext() {
     const toIndex = history.getItem(to.path)
     const fromIndex = history.getItem(from.path)
     if (toIndex) {

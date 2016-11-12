@@ -14,3 +14,4 @@ export const UPDATE_SELECT_ADDRESS = 'UPDATE_SELECT_ADDRESS'
 
 export const SET_OPENID = 'SET_OPENID'
 export const SHOW_ALERT = 'SHOW_ALERT'
+export const SET_USERINFO = 'SET_USERINFO'

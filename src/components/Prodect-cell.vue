@@ -2,12 +2,12 @@
   <div>
     <div class="v-proscell" v-for="items of proslist">
       <div class="hd">
-        <img :src="items.img" alt="" class="img">
+        <img :src="items.img" alt="" class="img" style="width: 60px;height: 60px;">
       </div>
       <div class="bd">
         <div class="v-txt">
           <div class="name">{{items.name}}</div>
-          <div class="sku">规格{{items.sku}}</div>
+          <div class="sku">折扣:{{items.sku}}</div>
           <div class="nums">
             <div class="pri f-c2">{{items.pri}}</div>
             <div class="num">x{{items.num}}</div>
@@ -49,6 +49,8 @@
       @include borderBottom;
     }
     .hd {
+      width: 60px;
+      height: 60px;
       padding: 10px 0;
       white-space: nowrap;
     }

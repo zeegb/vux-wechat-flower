@@ -49,7 +49,7 @@
           <div class="v-cellhd">
             <div class="hd">哔哔哔的花店</div>
           </div>
-          <productcell :proslist="proscellList"></productcell>
+          <productcell :proslist="cacheOrder"></productcell>
         </div>
 
         <div class="v-reduce">

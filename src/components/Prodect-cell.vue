@@ -6,7 +6,7 @@
       </div>
       <div class="bd">
         <div class="v-txt">
-          <div class="name">{{items.name}}</div>
+          <div class="name">{{items.name}}11</div>
           <div class="sku">折扣:{{items.sku}}</div>
           <div class="nums">
             <div class="pri f-c2">{{items.pri}}</div>
@@ -57,6 +57,35 @@
     .bd {
       flex: 1;
       padding: 10px 0;
+      .v-txt {
+        padding-left: 10px;
+        line-height: 20px;
+        .name {
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          font-size: 14px;
+        }
+        .sku {
+          font-size: 12px;
+          color: #666;
+        }
+        .nums {
+          position: relative;
+          .pri {
+            color: #f00;
+          }
+          .num {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            font-size: 12px;
+            color: #666;
+          }
+        }
+      }
       .ipt {
         width: 100%;
         box-sizing: border-box;
@@ -69,36 +98,6 @@
       padding: 10px 0;
       white-space: nowrap;
       text-align: right;
-    }
-  }
-
-  .v-txt {
-    padding-left: 10px;
-    line-height: 20px;
-    .name {
-      display: -webkit-box;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      font-size: 14px;
-    }
-    .sku {
-      font-size: 12px;
-      color: #666;
-    }
-    .nums {
-      position: relative;
-      .pri {
-        color: #f00;
-      }
-      .num {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        font-size: 12px;
-        color: #666;
-      }
     }
   }
 </style>

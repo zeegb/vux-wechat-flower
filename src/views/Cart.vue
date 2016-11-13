@@ -4,18 +4,21 @@
               @on-click-more="showMenus = true" class="v-hd">购物车
     </x-header>
     <div style="margin-top: 10px;">
-      <cartpanel :type="'1'" :list.sync="list"></cartpanel>
+      <div class="bd">
+        <cartpanel :list.sync="list"></cartpanel>
+      </div>
       <!--<group>-->
-        <!--<cell title="总计">-->
-          <!--<div slot="value">-->
-            <!--<span class="rmb">￥</span>-->
-            <!--<span style="color: red">{{total}}</span>-->
-          <!--</div>-->
-        <!--</cell>-->
+      <!--<cell title="总计">-->
+      <!--<div slot="value">-->
+      <!--<span class="rmb">￥</span>-->
+      <!--<span style="color: red">{{total}}</span>-->
+      <!--</div>-->
+      <!--</cell>-->
       <!--</group>-->
       <group style="padding:0 10px;">
         <x-button :disabled="disable001" @click="processButton001" type="primary"
-                  v-link="'/order'">提交订单&nbsp;￥{{total}}</x-button>
+                  v-link="'/order'">提交订单&nbsp;￥{{total}}
+        </x-button>
       </group>
     </div>
   </div>
@@ -24,7 +27,7 @@
 <script>
   import Tabbar from '../components/tabbar.vue'
   import XHeader from 'vux/dist/components/x-header'
-  import Cartpanel from '../components/Cart-panel.vue'
+  import Cartpanel from '../components/Cart-panel2.vue'
   import Group from 'vux/dist/components/group'
   import XButton from 'vux/dist/components/x-button'
   import Cell from 'vux/dist/components/cell'
@@ -90,7 +93,17 @@
     }
   }
 </script>
-<style scoped>
+<style lang="scss" scoped>
+  @mixin borderBottom {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid #cecece;
+    transform: scaleY(.5);
+  }
+
   .v-cart {
     padding-top: 44px;
   }
@@ -104,6 +117,13 @@
     height: 44px;
     background-color: #000011;
     opacity: 0.7;
+  }
+
+  .bd {
+    position: relative;
+    &:before {
+      @include borderBottom;
+    }
   }
 
   .rmb {

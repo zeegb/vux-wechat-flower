@@ -17,9 +17,9 @@
             <div class="c">分享</div>
           </div>
           <div class="price">
-            <div class="pri1">￥{{productDetail.price}}</div>
-            <del class="pri2" v-if="productDetail.price < productDetail.price">
-              ￥{{productDetail.price}}
+            <div class="pri1">￥{{total}}</div>
+            <del class="pri2">
+              ￥{{productDetail.price_text}}
             </del>
           </div>
           <div class="info">
@@ -144,27 +144,6 @@
     content: '居然没抢到沙发'
   }]
 
-  //  const baseList =
-  //    [{
-  //      url: 'javascript:',
-  //      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/1.jpg',
-  //      title: '如何挑选盆栽？'
-  //    }, {
-  //      url: 'javascript:',
-  //      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/2.jpg',
-  //      title: '如何挑选盆栽？'
-  //    }, {
-  //      url: 'javascript:',
-  //      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/3.jpg',
-  //      title: '如何挑选盆栽？'
-  //    }]
-  //
-  //  const urlList = baseList.map((item, index) => ({
-  //    url: 'http://m.baidu.com',
-  //    img: item.img,
-  //    title: `[精选]${item.title}`
-  //  }))
-
   export default {
     components: {
       XHeader,
@@ -183,72 +162,6 @@
     },
     data () {
       return {
-//        productData: {
-//          address: '北京',
-//          shop: '',
-//          id: '',
-//          goods: {
-//            goods_name: '我也不知道卖啥',
-//            supplier: '哔哔哔的花店',
-//            current_price: '110.00',
-//            price_new: '10.00'
-//          },
-//          goods_picture: urlList,
-//          total_sales: '',
-//          freightage: '',
-//          detail: '<h1>这里是商品详情</h1><img src="http://temp.im/320x100">',
-//          // 收藏后获得的id
-//          collect_id: '',
-//          pros_collect: false
-//        },
-//        standardList: [
-//          {
-//            standardName: '商品规格',
-//            optionList: [{
-//              option: '单月(4束)1111111111111111111111',
-//              standard_collect: false
-//            }, {
-//              option: '3个月(12束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }]
-//          }, {
-//            standardName: '收花时间',
-//            optionList: [{
-//              option: '单月(4束)',
-//              standard_collect: false
-//            }, {
-//              option: '3个月(12束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }]
-//          }, {
-//            standardName: '套餐',
-//            optionList: [{
-//              option: '单月(4束)',
-//              standard_collect: false
-//            }, {
-//              option: '3个月(12束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }]
-//          }
-//        ],
         showSuccess: false,
         showFail: false,
         tabSel: 0,
@@ -278,7 +191,7 @@
               img: item,
               title: ''
             }))
-            console.log(this.productPictures)
+            console.log(JSON.stringify(this.productDetail))
           } else {
 
           }
@@ -288,21 +201,25 @@
       }
     },
     ready () {
-//      let pro = this.$route.query.pro || 0
-//      let url = `/api/shopping/goods_details.htm?goods_id=${pro}`
-//      this.$http.get(url).then(res => {
-//        console.log(res)
-//        if (res.ok) {
-//          this.productData = Object.assign({}, JSON.parse(res.data))
-//
-//          // 手动转换数组属性
-//          this.productData.hz_goods_picture.img = this.productData.hz_goods_picture
-//          this.productData.hz_goods_picture = this.productData.hz_goods_picture.map(v => {
-//            v.img = v.picture_url
-//            return v
-//          })
-//        }
-//      })
+    },
+    computed: {
+      total () {
+        var selectSub = []
+        var total = this.productDetail.price * 1
+        this.standardList.map((subItem, index) => {
+          subItem.sub_type.map((item, i) => {
+            if (item.standard_collect) selectSub.push(item)
+          })
+        })
+        if (selectSub.length === 0) {
+          return this.productDetail.price_min + '~' + this.productDetail.price_man
+        } else {
+          selectSub.map((item) => {
+            total += item.price
+          })
+          return total
+        }
+      }
     },
     methods: {
       selectStandard (bool, si, oi) {
@@ -314,10 +231,6 @@
         console.log(this.standardList[si].sub_type)
         this.standardList[si].sub_type[oi].standard_collect = !!bool
       },
-//      markShop (bool) {
-//        this.productData.shop_collect = !!bool
-//        // ajax传送给服务器
-//      },
       markpro (bool) {
         let id = this.pro
         let type = 'goods'

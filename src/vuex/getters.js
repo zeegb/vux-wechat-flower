@@ -12,4 +12,5 @@ export const isEmpty = ({business}) => business.isEmpty
 export const selectAddress = ({business}) => business.selectAddress
 
 export const getUserId = ({user}) => user.openid
+export const userInfo = ({user}) => user.userInfo
 export const showAlert = ({user}) => user.showAlert

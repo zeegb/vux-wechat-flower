@@ -18,7 +18,7 @@
           <!-- 1送货上门 -->
           <div class="v-way" v-if="sendVal === '送货上门'">
             <cell title="送货形式：">快递</cell>
-            <div class="v-address" v-if="isHaveselectAddress" v-link="{path:'select-address',query:{type:order}}">
+            <div class="v-address" v-if="isHaveselectAddress" v-link="{path:'select-address',query:{type:'order'}}">
               <div class="hd">
                 <div class="name">收货人：{{selectAddress.name}}</div>
                 <div class="tel">{{selectAddress.phone}}</div>
@@ -94,7 +94,7 @@
       <!-- 底部菜单 -->
       <div class="v-ft">
         <div class="total">合计：￥<span class="pri">0.00</span></div>
-        <div class="buy" v-link="{path:'pay-result'}">立即购买</div>
+        <div class="buy" v-link="{path:'wechat-pay'}">立即购买</div>
       </div>
 
       <!-- 日期选择 -->

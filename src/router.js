@@ -109,6 +109,13 @@ export default function (router) {
       auth: true,
       name: 'payResult'
     },
+    '/wechat-pay': {
+      component: function (resolve) {
+        require(['./views/WXpay.vue'], resolve)
+      },
+      auth: true,
+      name: 'wechatPay'
+    },
     '/feedback': {
       component: function (resolve) {
         require(['./views/Feedback.vue'], resolve)

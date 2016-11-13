@@ -16,14 +16,14 @@
             优惠券
           </div>
           <!--<div class="vux-1px-r">-->
-            <!--<span>0</span>-->
-            <!--<br/>-->
-            <!--余额-->
+          <!--<span>0</span>-->
+          <!--<br/>-->
+          <!--余额-->
           <!--</div>-->
           <!--<div>-->
-            <!--<span>88</span>-->
-            <!--<br/>-->
-            <!--代金卡-->
+          <!--<span>88</span>-->
+          <!--<br/>-->
+          <!--代金卡-->
           <!--</div>-->
         </div>
       </card>
@@ -45,15 +45,32 @@
   import Cell from 'vux/dist/components/cell'
   import Panel from '../components/panel'
   import XHeader from 'vux/dist/components/x-header'
+  import {userInfo} from '../vuex/getters'
 
-  const panelList = [{
-    src: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-    title: '王泽',
-    desc: '用户名:11122233',
-    url: '/person-setting'
-  }]
+  //  const panelList = [{
+  //    src: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
+  //    title: '王泽',
+  //    desc: '用户名:11122233',
+  //    url: '/person-setting'
+  //  }]
 
   export default {
+    vuex: {
+      getters: {
+        userInfo
+      }
+    },
+    route: {
+      data (transition) {
+        var user = {
+          src: this.userInfo.avatar,
+          title: this.userInfo.nickname,
+          desc: '用户名:' + this.userInfo.name,
+          url: '/person-setting'
+        }
+        this.panel_list[0] = user
+      }
+    },
     components: {
       Tabbar,
       XHeader,
@@ -65,7 +82,7 @@
     data () {
       return {
         panel_type: '1',
-        panel_list: panelList
+        panel_list: []
       }
     }
   }

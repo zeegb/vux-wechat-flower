@@ -77,8 +77,6 @@
     line-height: 20px;
     .name {
       display: -webkit-box;
-      height: 40px;
-      line-height: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
       -webkit-box-orient: vertical;

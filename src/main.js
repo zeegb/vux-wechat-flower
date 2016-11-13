@@ -37,21 +37,22 @@ router.beforeEach(({to, from, next, redirect}) => {
     if (history.getItem('openid')) {
       toNext()
     } else {
-      Vue.http.post('/wx/user/cookie').then((res) => {
-        if (res.body && res.body.code === '200' && res.body.data) {
-          history.setItem('openid', res.body.data.openid)
-          dispatch('SET_OPENID', res.body.data.openid)
-          dispatch('SET_USERINFO', res.body.data)
-          toNext()
-        }
-      })
+      // Vue.http.post('/wx/user/cookie').then((res) => {
+      //   if (res.body && res.body.code === '200' && res.body.data) {
+      //     history.setItem('openid', res.body.data.openid)
+      //     dispatch('SET_OPENID', res.body.data.openid)
+      //     dispatch('SET_USERINFO', res.body.data)
+      //     toNext()
+      //   }
+      // })
+      toNext()
       // redirect('/')
       // dispatch('SHOW_ALERT', true)
     }
   } else {
     toNext()
   }
-  function toNext() {
+  function toNext () {
     const toIndex = history.getItem(to.path)
     const fromIndex = history.getItem(from.path)
     if (toIndex) {

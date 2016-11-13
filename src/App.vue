@@ -3,9 +3,9 @@
     <loading :show="isLoading" position="fixed"></loading>
     <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
     <tabbar v-if="isTabbar" :tab="pathName"></tabbar>
+    <toast :show="addressSuccess">操作成功</toast>
+    <toast :show="addressError" type="cancel">操作失败</toast>
   </div>
-  <toast :show="addressSuccess">保存成功</toast>
-  <toast :show="addressError" type="cancel">保存失败</toast>
 </template>
 
 <script>

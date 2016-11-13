@@ -14,6 +14,9 @@
       <address title="选择省市" :value.sync="addr.editVal" raw-value :list="addressData" placeholder="请选择地址"></address>
       <x-input title="详细地址" :value.sync="addr.addrText" placeholder="无需再写省市区"></x-input>
     </div>
+    <div style="margin:10px 10px;">
+      <x-button type="warn" v-if="!isInsert" @click="deleteAddr">删除地址</x-button>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -42,11 +45,12 @@
   import XInput from 'vux/dist/components/x-input'
   import Address from 'vux/dist/components/address'
   import Toast from 'vux/dist/components/toast'
+  import XButton from 'vux/dist/components/x-button'
   import AddressChinaData from '../libs/list.json'
   import value2name from '../libs/filter'
   import {addressList, getUserId, addressError, addressSuccess} from '../vuex/getters'
-  import {setAddress, editAddress, resetAddressError, resetAddressSuccess} from '../vuex/actions'
-  import {go} from '../libs/router'
+  import {setAddress, editAddress, resetAddressError, resetAddressSuccess, deleteAddress} from '../vuex/actions'
+  //  import {go} from '../libs/router'
   export default{
     vuex: {
       getters: {
@@ -59,7 +63,8 @@
         setAddress,
         editAddress,
         resetAddressError,
-        resetAddressSuccess
+        resetAddressSuccess,
+        deleteAddress
       }
     },
     route: {
@@ -96,7 +101,8 @@
       XHeader,
       XInput,
       Address,
-      Toast
+      Toast,
+      XButton
     },
     methods: {
       getName (value) {
@@ -111,9 +117,15 @@
             window.history.back()
           })
         } else {
-          this.editAddress(this.addr, this.getUserId)
-          go('/select-address', this.$router)
+          this.editAddress(this.addr, this.getUserId, () => {
+            window.history.back()
+          })
         }
+      },
+      deleteAddr () {
+        this.deleteAddress(this.addr._id, this.getUserId, () => {
+          window.history.back()
+        })
       }
     }
   }

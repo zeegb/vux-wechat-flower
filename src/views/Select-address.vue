@@ -9,7 +9,7 @@
     <div class="v-bd-1">
       <div class="v-addrList" v-if="!isEmpty">
         <div class="v-addrbd" v-for="(index,addrItem) in addressList">
-          <div class="stat"><i class="iconfont">&#xe60b;</i></div>
+          <!--<div class="stat"><i class="iconfont">&#xe60b;</i></div>-->
           <div class="cont">
             <div class="hd">
               <div class="name">{{addrItem.name}}</div>
@@ -17,7 +17,7 @@
             </div>
             <div class="bd"><span class="defa" v-if="addrItem.is_default">默认</span>{{addrItem.address}}</div>
           </div>
-          <div class="edit">
+          <div class="edit" v-link="{path:'edit-address',query:{id:index}}">
             <i class="iconfont">&#xe60a;</i>
           </div>
         </div>
@@ -183,7 +183,7 @@
     },
     watch: {
       addressList (curVal, oldVal) {
-        var classObj = document.getElementsByClassName('v-addrbd')
+        var classObj = document.getElementsByClassName('cont')
         for (var i = 0; i < classObj.length; i++) {
           classObj[i].addEventListener('click', this.setDefault.bind(classObj[i], i))
         }
@@ -194,9 +194,10 @@
     },
     methods: {
       setDefault (index) {
-        if (this.pathFrom === 'order') {
+        console.log('--------点击默认-------')
+        if (this.pathFrom === 'person') {
           this.setDefaultAddress(this.addressList[index]._id, this.getUserId)
-        } else {
+        } else if (this.pathFrom === 'order') {
           this.setSelectAddress(this.addressList[index])
           window.history.back()
         }

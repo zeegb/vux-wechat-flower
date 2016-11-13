@@ -54,7 +54,7 @@ export const setAddress = ({dispatch}, address, userId, cb) => {
     cb()
   })
 }
-export const editAddress = ({dispatch}, address, userId) => {
+export const editAddress = ({dispatch}, address, userId, cb) => {
   return Vue.http.post('/wx/user-center/address-edit', {
     userId: userId,
     addressId: address._id,
@@ -67,12 +67,15 @@ export const editAddress = ({dispatch}, address, userId) => {
   }).then((res) => {
     if (res.body && res.body.code === '200' && res.body.data) {
       dispatch('UPDATE_ADDRESS_SUCCESS', true)
+      setTimeout(cb, 0)
     } else {
       dispatch('UPDATE_ADDRESS_ERROR', true)
+      cb()
     }
   }, (err) => {
     console.log(err)
     dispatch('UPDATE_ADDRESS_ERROR', true)
+    cb()
   })
 }
 export const getAddress = ({dispatch}, userId) => {
@@ -114,6 +117,24 @@ export const getSelectAddress = ({dispatch}, userId) => {
   }, (err) => {
     console.log(err)
     dispatch('GET_ADDRESS_ERROR', true)
+  })
+}
+export const deleteAddress = ({dispatch}, addressId, userId, cb) => {
+  return Vue.http.post('/wx/user-center/address-del', {
+    userId: userId,
+    addressId: addressId
+  }).then((res) => {
+    if (res.body && res.body.code === '200' && res.body.data) {
+      dispatch('UPDATE_ADDRESS_SUCCESS', true)
+      setTimeout(cb, 0)
+    } else {
+      dispatch('UPDATE_ADDRESS_ERROR', true)
+      cb()
+    }
+  }, (err) => {
+    console.log(err)
+    dispatch('UPDATE_ADDRESS_ERROR', true)
+    cb()
   })
 }
 export const setSelectAddress = ({dispatch}, selectAddress) => {

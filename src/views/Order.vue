@@ -28,9 +28,10 @@
                 收货地址：{{selectAddress.address}}
               </div>
             </div>
-            <div class="v-address" v-show="!isHaveselectAddress" v-link="{path:'select-address',query:{type:order}}">
+            <div class="v-address" v-show="!isHaveselectAddress" v-link="{path:'select-address',query:{type:'order'}}">
               <div class="hd">
-                <div class="name">请选择收货地址</div>
+                <div class="name">暂无可选地址</div>
+                <div class="tel">请点击创建收货地址信息</div>
                 <div class="arrow"></div>
               </div>
             </div>
@@ -370,7 +371,8 @@
       }
       .arrow {
         @include arrow;
-        align-items: center;
+        position: relative;
+        top: 20px;
         margin-left: .3em;
       }
     }

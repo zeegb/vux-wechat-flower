@@ -11,8 +11,7 @@
     </swiper>
     <div style="margin:10px 0px 0px 0px;">
       <panel v-for="(index,panel_item) in panel_list" :header="panel_item.type" :footer="panel_footer"
-             :list="panel_item.products"
-             :type="panel_type"></panel>
+             :list="panel_item.products"></panel>
       <!--<panel header="种子" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>-->
       <!--<panel header="多肉" :footer="panel_footer" :list="panel_list" :type="panel_type"></panel>-->
     </div>
@@ -53,7 +52,7 @@
   import Swiper from '../components/swiper'
   import SwiperItem from 'vux/dist/components/swiper-item'
   import Search from 'vux/dist/components/search'
-  import Panel from 'vux/dist/components/panel'
+  import Panel from '../components/panel'
   import XButton from 'vux/dist/components/x-button'
   import Dialog from 'vux/dist/components/dialog'
   import {setLoadingState, closeAlert} from '../vuex/actions'
@@ -118,7 +117,6 @@
         showNoScroll: false,
         showDots: false,
         clickIndex: 0,
-        panel_type: '1',
         panel_list: [],
         panel_footer: {
           title: '查看更多',

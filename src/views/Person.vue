@@ -2,7 +2,7 @@
   <div class="v-person">
     <x-header :left-options="{showBack: false}" :right-options="{showMore: false}" class="v-hd">我的</x-header>
     <div>
-      <panel :list="panel_list" :type="panel_type"></panel>
+      <panel :list="panel_list"></panel>
       <card :header="{title:'我的钱包'}">
         <div slot="content" class="card-demo-flex card-demo-content01">
           <div class="vux-1px-l vux-1px-r">
@@ -30,7 +30,7 @@
 
       <group>
         <cell title="我的订单" is-link v-link="{path:'order-list'}"></cell>
-        <cell title="地址管理" is-link v-link="{path:'select-address'}"></cell>
+        <cell title="地址管理" is-link v-link="{path:'select-address',query:{type:'person'}}"></cell>
         <!--<cell title="实名认证" is-link></cell>-->
         <!--<cell title="账号安全" is-link></cell>-->
       </group>
@@ -43,7 +43,7 @@
   import Card from 'vux/dist/components/card'
   import Group from 'vux/dist/components/group'
   import Cell from 'vux/dist/components/cell'
-  import Panel from 'vux/dist/components/panel'
+  import Panel from '../components/panel'
   import XHeader from 'vux/dist/components/x-header'
 
   const panelList = [{

@@ -24,8 +24,7 @@
           openid: this.getUserId
         }).then((res) => {
           if (res.body && res.body.code === '200' && res.body.data) {
-            this.activity_list = res.body.data
-            console.log(JSON.stringify(this.activity_list))
+            this.wxPayConfig = res.body.data
           } else {
           }
         }, (err) => {

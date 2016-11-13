@@ -29,10 +29,10 @@ export const closeAlert = ({dispatch}, isShow) => {
 export const setCacheOrder = ({dispatch}, cacheOrder) => {
   dispatch('UPDATE_CACHE_ORDER', cacheOrder)
 }
-export const setAddress = ({dispatch}, address, userId, cb) => {
+export const setAddress = ({dispatch}, address, userId, addressText, cb) => {
   return Vue.http.post('/wx/user-center/address-add', {
     userId: userId,
-    address: address.editVal.join('') + address.addrText,
+    address: addressText + address.addrText,
     editVal: address.editVal,
     addrText: address.addrText,
     is_default: address.is_default,
@@ -54,11 +54,11 @@ export const setAddress = ({dispatch}, address, userId, cb) => {
     cb()
   })
 }
-export const editAddress = ({dispatch}, address, userId, cb) => {
+export const editAddress = ({dispatch}, address, userId, addressText, cb) => {
   return Vue.http.post('/wx/user-center/address-edit', {
     userId: userId,
     addressId: address._id,
-    address: address.editVal.join('') + address.addrText,
+    address: addressText + address.addrText,
     editVal: address.editVal,
     addrText: address.addrText,
     is_default: address.is_default,

@@ -94,7 +94,8 @@
         aeditTel: '',
         aeditVal: ['北京市', '北京市市辖区', '东城区'],
         aeditTxt: '',
-        aeditCon: ''
+        aeditCon: '',
+        editValText: ''
       }
     },
     components: {
@@ -110,14 +111,15 @@
       },
       saveAddr () {
         if (this.isInsert) {
-          var addrInfo = this.addr
-//          addrInfo.editVal = this.getName(addrInfo.editVal).split(' ')
-//          console.log(addrInfo.editVal)
-          this.setAddress(addrInfo, this.getUserId, () => {
+//          var addrInfo = this.addr
+          this.editValText = this.getName(this.addr.editVal)
+          console.log(this.editValText)
+          this.setAddress(this.addr, this.getUserId, this.editValText, () => {
             window.history.back()
           })
         } else {
-          this.editAddress(this.addr, this.getUserId, () => {
+          this.editValText = this.getName(this.addr.editVal)
+          this.editAddress(this.addr, this.getUserId, this.editValText, () => {
             window.history.back()
           })
         }

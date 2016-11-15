@@ -153,7 +153,6 @@
   }
 </script>
 <style lang="scss">
-  @import '../assets/styles/iconfont.scss';
   // 修改组件样式
   .v-search {
     .weui_search_bar {

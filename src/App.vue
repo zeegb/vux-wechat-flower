@@ -72,6 +72,7 @@
 <style lang="less">
   @import './styles/close';
   @import '~vux/dist/vux.css';
+  @import './styles/font-awesome-4.7.0/less/font-awesome';
 
   html, body {
     width: 100%;

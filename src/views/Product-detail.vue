@@ -2,7 +2,7 @@
   <div class="v-product">
     <!-- 头部 -->
     <x-header class="v-hd">商品详情
-      <i class="iconfont v-cart" slot="right" v-link="{name:'Cart',append: false}">&#xe601;</i>
+      <i class="fa fa-shopping-cart v-cart" aria-hidden="true" slot="right" v-link="{name:'Cart',append: false}"></i>
     </x-header>
     <!-- 主内容 -->
     <div class="v-detail">
@@ -13,13 +13,13 @@
         <div class="v-prodtl">
           <div class="name">{{productDetail.name}}</div>
           <div class="share">
-            <i class="iconfont">&#xe604;</i>
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
             <div class="c">分享</div>
           </div>
           <div class="price">
-            <div class="pri1">￥{{productDetail.price}}</div>
-            <del class="pri2" v-if="productDetail.price < productDetail.price">
-              ￥{{productDetail.price}}
+            <div class="pri1">￥{{total}}</div>
+            <del class="pri2">
+              ￥{{productDetail.price_text}}
             </del>
           </div>
           <div class="info">
@@ -47,14 +47,14 @@
           </div>
         </div>
 
-        <div class="v-favorable">
-          <cell link="javascript;">
-            <span slot="after-title">领取优惠券</span>
-          </cell>
-          <cell link="javascript;">
-            <span slot="after-title">领取积分</span>
-          </cell>
-        </div>
+        <!--<div class="v-favorable">-->
+        <!--<cell link="javascript;">-->
+        <!--<span slot="after-title">领取优惠券</span>-->
+        <!--</cell>-->
+        <!--<cell link="javascript;">-->
+        <!--<span slot="after-title">领取积分</span>-->
+        <!--</cell>-->
+        <!--</div>-->
         <!--<div class="v-myshop">-->
         <!--<div class="hd">{{productData.goods.supplier}}</div>-->
         <!--<div class="bd">-->
@@ -92,11 +92,11 @@
     <!-- 底部 -->
     <div class="v-ft">
       <div class="contact">
-        <i class="iconfont">&#xe605;</i>
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </div>
       <div class="markpro">
-        <i class="iconfont" v-show="pros_collect" @click="markpro(0)">&#xe606;</i>
-        <i class="iconfont z-act" @click="markpro(1)" v-show="!pros_collect">&#xe609;</i>
+        <i class="fa fa-star z-act" aria-hidden="true" @click="markpro(1)" v-show="!pros_collect"></i>
+        <i class="fa fa-star" aria-hidden="true" v-show="pros_collect" @click="markpro(0)"></i>
       </div>
       <div class="cart" @click="pushCart">加入购物车</div>
       <div class="buy" @click="cacheOrder">立即购买
@@ -105,6 +105,7 @@
 
     <toast :show.sync="showSuccess">已加入购物车</toast>
     <toast :show.sync="showFail" type="cancel">购物车撑坏啦</toast>
+    <toast :show.sync="showSelect" type="cancel">请选择商品类别</toast>
   </div>
 </template>
 
@@ -117,6 +118,7 @@
   import Spinner from 'vux/dist/components/spinner'
   import Toast from 'vux/dist/components/toast'
   import Comment from '../components/Comment'
+  import {getUserId} from '../vuex/getters'
   import {setCacheOrder} from '../vuex/actions'
   import {go} from '../libs/router'
   const list = [{
@@ -144,27 +146,6 @@
     content: '居然没抢到沙发'
   }]
 
-  //  const baseList =
-  //    [{
-  //      url: 'javascript:',
-  //      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/1.jpg',
-  //      title: '如何挑选盆栽？'
-  //    }, {
-  //      url: 'javascript:',
-  //      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/2.jpg',
-  //      title: '如何挑选盆栽？'
-  //    }, {
-  //      url: 'javascript:',
-  //      img: 'http://7xqzw4.com2.z0.glb.qiniucdn.com/3.jpg',
-  //      title: '如何挑选盆栽？'
-  //    }]
-  //
-  //  const urlList = baseList.map((item, index) => ({
-  //    url: 'http://m.baidu.com',
-  //    img: item.img,
-  //    title: `[精选]${item.title}`
-  //  }))
-
   export default {
     components: {
       XHeader,
@@ -177,80 +158,18 @@
       Toast
     },
     vuex: {
+      getters: {
+        getUserId
+      },
       actions: {
         setCacheOrder
       }
     },
     data () {
       return {
-//        productData: {
-//          address: '北京',
-//          shop: '',
-//          id: '',
-//          goods: {
-//            goods_name: '我也不知道卖啥',
-//            supplier: '哔哔哔的花店',
-//            current_price: '110.00',
-//            price_new: '10.00'
-//          },
-//          goods_picture: urlList,
-//          total_sales: '',
-//          freightage: '',
-//          detail: '<h1>这里是商品详情</h1><img src="http://temp.im/320x100">',
-//          // 收藏后获得的id
-//          collect_id: '',
-//          pros_collect: false
-//        },
-//        standardList: [
-//          {
-//            standardName: '商品规格',
-//            optionList: [{
-//              option: '单月(4束)1111111111111111111111',
-//              standard_collect: false
-//            }, {
-//              option: '3个月(12束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }]
-//          }, {
-//            standardName: '收花时间',
-//            optionList: [{
-//              option: '单月(4束)',
-//              standard_collect: false
-//            }, {
-//              option: '3个月(12束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }]
-//          }, {
-//            standardName: '套餐',
-//            optionList: [{
-//              option: '单月(4束)',
-//              standard_collect: false
-//            }, {
-//              option: '3个月(12束)',
-//              standard_collect: false
-//            }, {
-//              option: '6个月(24束)',
-//              standard_collect: false
-//            }]
-//          }
-//        ],
         showSuccess: false,
         showFail: false,
+        showSelect: false,
         tabSel: 0,
         tabArgsCon: '',
         tabAssessCon: '',
@@ -260,7 +179,9 @@
 
         productDetail: {},
         standardList: [],
-        productPictures: []
+        productPictures: [],
+        selectSubType: [],
+        selectStandardList: []
       }
     },
     route: {
@@ -278,7 +199,7 @@
               img: item,
               title: ''
             }))
-            console.log(this.productPictures)
+            console.log(JSON.stringify(this.productDetail))
           } else {
 
           }
@@ -288,21 +209,28 @@
       }
     },
     ready () {
-//      let pro = this.$route.query.pro || 0
-//      let url = `/api/shopping/goods_details.htm?goods_id=${pro}`
-//      this.$http.get(url).then(res => {
-//        console.log(res)
-//        if (res.ok) {
-//          this.productData = Object.assign({}, JSON.parse(res.data))
-//
-//          // 手动转换数组属性
-//          this.productData.hz_goods_picture.img = this.productData.hz_goods_picture
-//          this.productData.hz_goods_picture = this.productData.hz_goods_picture.map(v => {
-//            v.img = v.picture_url
-//            return v
-//          })
-//        }
-//      })
+    },
+    computed: {
+      total () {
+        var selectSub = []
+        var total = 0
+        this.standardList.map((subItem, index) => {
+          subItem.sub_type.map((item, i) => {
+            if (item.standard_collect) {
+              selectSub.push(item)
+            }
+          })
+        })
+        this.selectSubType = selectSub
+        if (selectSub.length === 0) {
+          return this.productDetail.price_min + '~' + this.productDetail.price_man
+        } else {
+          selectSub.map((item) => {
+            total += (item.price * item.discount - item.reduce)
+          })
+          return total
+        }
+      }
     },
     methods: {
       selectStandard (bool, si, oi) {
@@ -314,10 +242,6 @@
         console.log(this.standardList[si].sub_type)
         this.standardList[si].sub_type[oi].standard_collect = !!bool
       },
-//      markShop (bool) {
-//        this.productData.shop_collect = !!bool
-//        // ajax传送给服务器
-//      },
       markpro (bool) {
         let id = this.pro
         let type = 'goods'
@@ -351,48 +275,67 @@
         }
       },
       pushCart () {
-        var cartData = {
-          src: this.productPictures[0].img,
-          title: this.productDetail.name,
-          price: this.productDetail.price,
-          soldOut: this.productDetail.freightage,
-          count: this.productDetail.reserve,
-          checked: true
-        }
-        this.$http.post('/wx/data/cart/save', {
-          uid: 'system',
-          data: JSON.stringify(cartData)
-        }).then((res) => {
-          if (res.body && res.body.code === '200' && res.body.data) {
-            this.showSuccess = true
-          } else {
-            this.showFail = true
+        if (this.selectSubType.length < this.standardList.length) {
+          this.showSelect = true
+        } else {
+          var selectStandardList = []
+          var jsonStandardList = JSON.parse(JSON.stringify(this.standardList))
+          selectStandardList = jsonStandardList.map((subItem, index) => {
+            subItem.sub_type = subItem.sub_type.filter((item, i) => {
+              return item.standard_collect
+            })
+            return subItem
+          })
+          var cartDetail = {
+            openid: this.getUserId,
+            pid: this.productDetail._id,
+            price: this.total,
+            price_list: selectStandardList
           }
-        }, (err) => {
-          this.showFail = true
-          console.log('加入购物车失败:' + err)
-        })
+          console.log(JSON.stringify(cartDetail))
+          this.$http.post('/wx/cart/add-product', cartDetail).then((res) => {
+            console.log(res)
+            if (res.body && res.body.code === '200' && res.body.data) {
+              this.showSuccess = true
+            } else {
+              this.showFail = true
+            }
+          }, (err) => {
+            this.showFail = true
+            console.log('加入购物车失败:' + err)
+          })
+        }
       },
       cacheOrder () {
-        var cacheOrder = []
-        cacheOrder[0] = {
-          img: this.productPictures[0].img,
-          name: this.productDetail.name,
-          sku: this.productDetail.discount,
-          pri: this.productDetail.price,
-          num: 1
+        if (this.selectSubType.length < this.standardList.length) {
+          this.showSelect = true
+        } else {
+          var cacheOrder = []
+          var skuText = ''
+          this.standardList.map((subItem, index) => {
+            subItem.sub_type.map((item, i) => {
+              if (item.standard_collect) {
+                skuText += (subItem.title + ':' + item.name + '   ')
+              }
+            })
+          })
+          cacheOrder[0] = {
+            img: this.productPictures[0].img,
+            name: this.productDetail.name,
+            sku: skuText,
+            pri: this.productDetail.price,
+            num: 1
+          }
+          this.setCacheOrder(cacheOrder)
+          this.$nextTick(function () {
+            go('/order', this.$router)
+          })
         }
-        this.setCacheOrder(cacheOrder)
-        this.$nextTick(function () {
-          go('/order', this.$router)
-        })
       }
     }
   }
 </script>
 <style lang="scss" scoped>
-  @import '../assets/styles/iconfont.scss';
-
   .v-product {
     padding-top: 44px;
     background: #efefef;

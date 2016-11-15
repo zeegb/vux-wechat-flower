@@ -24,7 +24,6 @@
   }
 </script>
 <style lang="scss" scoped>
-  @import '../assets/styles/iconfont.scss';
   // 产品列表
   .v-pro {
     box-sizing: border-box;

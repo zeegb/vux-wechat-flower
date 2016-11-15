@@ -77,7 +77,6 @@
   }
 </script>
 <style lang="scss" scoped>
-  @import '../assets/styles/iconfont.scss';
   // 箭头
   @mixin arrow {
     content: " ";

@@ -29,8 +29,12 @@
       </card>
 
       <group>
-        <cell title="我的订单" is-link v-link="{path:'order-list'}"></cell>
-        <cell title="地址管理" is-link v-link="{path:'select-address',query:{type:'person'}}"></cell>
+        <cell title="我的订单" is-link v-link="{path:'order-list'}">
+          <i slot="icon" class="fa fa-list-ul" aria-hidden="true">&nbsp;&nbsp;</i>
+        </cell>
+        <cell title="地址管理" is-link v-link="{path:'select-address',query:{type:'person'}}">
+          <i slot="icon" class="fa fa-address-card-o" aria-hidden="true">&nbsp;&nbsp;</i>
+        </cell>
         <!--<cell title="实名认证" is-link></cell>-->
         <!--<cell title="账号安全" is-link></cell>-->
       </group>

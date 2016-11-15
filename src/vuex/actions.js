@@ -109,6 +109,9 @@ export const getSelectAddress = ({dispatch}, userId) => {
       var selectAddress = res.body.data.filter((item) => {
         return item.is_default
       })
+      if (selectAddress.length === 0) {
+        selectAddress[0] = {}
+      }
       console.log(JSON.stringify(selectAddress[0]))
       dispatch('UPDATE_SELECT_ADDRESS', selectAddress[0])
     } else {

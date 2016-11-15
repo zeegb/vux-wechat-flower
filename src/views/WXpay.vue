@@ -25,7 +25,7 @@
         }).then((res) => {
           if (res.body && res.body.code === '200' && res.body.data) {
             this.wxPayConfig = res.body.data
-            this.onBridgeReady();
+            this.onBridgeReady()
           } else {
           }
         }, (err) => {

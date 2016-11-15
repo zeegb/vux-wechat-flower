@@ -168,6 +168,8 @@
       data (transition) {
         if (transition.from.name !== 'selectAddress') {
           this.getSelectAddress(this.getUserId)
+        } else {
+          this.isHaveselectAddress = Object.keys(this.selectAddress).length !== 0
         }
         this.productCount = this.cacheOrder.length
       }
@@ -190,7 +192,6 @@
         this.calendarShow = false
       },
       selectAddress (val) {
-        console.log(this.selectAddress)
         this.isHaveselectAddress = Object.keys(this.selectAddress).length !== 0
       }
     },

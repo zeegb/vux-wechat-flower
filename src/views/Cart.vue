@@ -4,17 +4,7 @@
               @on-click-more="showMenus = true" class="v-hd">购物车
     </x-header>
     <div style="margin-top: 10px;">
-      <div class="bd">
-        <cartpanel :list.sync="list"></cartpanel>
-      </div>
-      <!--<group>-->
-      <!--<cell title="总计">-->
-      <!--<div slot="value">-->
-      <!--<span class="rmb">￥</span>-->
-      <!--<span style="color: red">{{total}}</span>-->
-      <!--</div>-->
-      <!--</cell>-->
-      <!--</group>-->
+      <cartpanel :list.sync="list"></cartpanel>
       <group style="padding:0 10px;">
         <x-button :disabled="disable001" @click="processButton001" type="primary"
                   v-link="'/order'">提交订单&nbsp;￥{{total}}
@@ -68,10 +58,6 @@
       }
     },
     ready: function () {
-//      let isLogin = window.sessionStorage.getItem('logined')
-//      if (!isLogin) {
-//        this.$route.router.go('/user/login')
-//      }
     },
     computed: {
       total: function () {

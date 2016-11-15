@@ -6,8 +6,8 @@
       </div>
       <div class="bd">
         <div class="v-txt">
-          <div class="name">{{items.name}}11</div>
-          <div class="sku">折扣:{{items.sku}}</div>
+          <div class="name">{{items.name}}</div>
+          <div class="sku">{{items.sku}}</div>
           <div class="nums">
             <div class="pri f-c2">{{items.pri}}</div>
             <div class="num">x{{items.num}}</div>
@@ -69,6 +69,11 @@
           font-size: 14px;
         }
         .sku {
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
           font-size: 12px;
           color: #666;
         }

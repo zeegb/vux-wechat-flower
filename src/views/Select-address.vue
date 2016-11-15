@@ -18,7 +18,7 @@
             <div class="bd"><span class="defa" v-if="addrItem.is_default">默认</span>{{addrItem.address}}</div>
           </div>
           <div class="edit" v-link="{path:'edit-address',query:{id:index}}">
-            <i class="iconfont">&#xe60a;</i>
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </div>
         </div>
       </div>
@@ -30,7 +30,6 @@
   </div>
 </template>
 <style lang="scss" scoped>
-  @import '../assets/styles/iconfont.scss';
 
   @mixin borderBottom {
     content: '';

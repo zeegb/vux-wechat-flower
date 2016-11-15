@@ -2,7 +2,7 @@
   <div class="v-product">
     <!-- 头部 -->
     <x-header class="v-hd">商品详情
-      <i class="iconfont v-cart" slot="right" v-link="{name:'Cart',append: false}">&#xe601;</i>
+      <i class="fa fa-shopping-cart v-cart" aria-hidden="true" slot="right" v-link="{name:'Cart',append: false}"></i>
     </x-header>
     <!-- 主内容 -->
     <div class="v-detail">
@@ -13,7 +13,7 @@
         <div class="v-prodtl">
           <div class="name">{{productDetail.name}}</div>
           <div class="share">
-            <i class="iconfont">&#xe604;</i>
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
             <div class="c">分享</div>
           </div>
           <div class="price">
@@ -47,14 +47,14 @@
           </div>
         </div>
 
-        <div class="v-favorable">
-          <cell link="javascript;">
-            <span slot="after-title">领取优惠券</span>
-          </cell>
-          <cell link="javascript;">
-            <span slot="after-title">领取积分</span>
-          </cell>
-        </div>
+        <!--<div class="v-favorable">-->
+        <!--<cell link="javascript;">-->
+        <!--<span slot="after-title">领取优惠券</span>-->
+        <!--</cell>-->
+        <!--<cell link="javascript;">-->
+        <!--<span slot="after-title">领取积分</span>-->
+        <!--</cell>-->
+        <!--</div>-->
         <!--<div class="v-myshop">-->
         <!--<div class="hd">{{productData.goods.supplier}}</div>-->
         <!--<div class="bd">-->
@@ -92,11 +92,11 @@
     <!-- 底部 -->
     <div class="v-ft">
       <div class="contact">
-        <i class="iconfont">&#xe605;</i>
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
       </div>
       <div class="markpro">
-        <i class="iconfont" v-show="pros_collect" @click="markpro(0)">&#xe606;</i>
-        <i class="iconfont z-act" @click="markpro(1)" v-show="!pros_collect">&#xe609;</i>
+        <i class="fa fa-star z-act" aria-hidden="true" @click="markpro(1)" v-show="!pros_collect"></i>
+        <i class="fa fa-star" aria-hidden="true" v-show="pros_collect" @click="markpro(0)"></i>
       </div>
       <div class="cart" @click="pushCart">加入购物车</div>
       <div class="buy" @click="cacheOrder">立即购买
@@ -105,6 +105,7 @@
 
     <toast :show.sync="showSuccess">已加入购物车</toast>
     <toast :show.sync="showFail" type="cancel">购物车撑坏啦</toast>
+    <toast :show.sync="showSelect" type="cancel">请选择商品类别</toast>
   </div>
 </template>
 
@@ -117,6 +118,7 @@
   import Spinner from 'vux/dist/components/spinner'
   import Toast from 'vux/dist/components/toast'
   import Comment from '../components/Comment'
+  import {getUserId} from '../vuex/getters'
   import {setCacheOrder} from '../vuex/actions'
   import {go} from '../libs/router'
   const list = [{
@@ -156,6 +158,9 @@
       Toast
     },
     vuex: {
+      getters: {
+        getUserId
+      },
       actions: {
         setCacheOrder
       }
@@ -164,6 +169,7 @@
       return {
         showSuccess: false,
         showFail: false,
+        showSelect: false,
         tabSel: 0,
         tabArgsCon: '',
         tabAssessCon: '',
@@ -173,7 +179,9 @@
 
         productDetail: {},
         standardList: [],
-        productPictures: []
+        productPictures: [],
+        selectSubType: [],
+        selectStandardList: []
       }
     },
     route: {
@@ -208,9 +216,12 @@
         var total = this.productDetail.price * 1
         this.standardList.map((subItem, index) => {
           subItem.sub_type.map((item, i) => {
-            if (item.standard_collect) selectSub.push(item)
+            if (item.standard_collect) {
+              selectSub.push(item)
+            }
           })
         })
+        this.selectSubType = selectSub
         if (selectSub.length === 0) {
           return this.productDetail.price_min + '~' + this.productDetail.price_man
         } else {
@@ -264,48 +275,66 @@
         }
       },
       pushCart () {
-        var cartData = {
-          src: this.productPictures[0].img,
-          title: this.productDetail.name,
-          price: this.productDetail.price,
-          soldOut: this.productDetail.freightage,
-          count: this.productDetail.reserve,
-          checked: true
-        }
-        this.$http.post('/wx/data/cart/save', {
-          uid: 'system',
-          data: JSON.stringify(cartData)
-        }).then((res) => {
-          if (res.body && res.body.code === '200' && res.body.data) {
-            this.showSuccess = true
-          } else {
-            this.showFail = true
+        if (this.selectSubType.length < this.standardList.length) {
+          this.showSelect = true
+        } else {
+          var selectStandardList = []
+          var jsonStandardList = JSON.parse(JSON.stringify(this.standardList))
+          selectStandardList = jsonStandardList.map((subItem, index) => {
+            subItem.sub_type = subItem.sub_type.filter((item, i) => {
+              return item.standard_collect
+            })
+            return subItem
+          })
+          var cartDetail = {
+            openid: this.getUserId,
+            pid: this.productDetail._id,
+            price: this.total,
+            price_list: selectStandardList
           }
-        }, (err) => {
-          this.showFail = true
-          console.log('加入购物车失败:' + err)
-        })
+          console.log(JSON.stringify(cartDetail))
+          this.$http.post('/wx/data/cart/save', cartDetail).then((res) => {
+            if (res.body && res.body.code === '200' && res.body.data) {
+              this.showSuccess = true
+            } else {
+              this.showFail = true
+            }
+          }, (err) => {
+            this.showFail = true
+            console.log('加入购物车失败:' + err)
+          })
+        }
       },
       cacheOrder () {
-        var cacheOrder = []
-        cacheOrder[0] = {
-          img: this.productPictures[0].img,
-          name: this.productDetail.name,
-          sku: this.productDetail.discount,
-          pri: this.productDetail.price,
-          num: 1
+        if (this.selectSubType.length < this.standardList.length) {
+          this.showSelect = true
+        } else {
+          var cacheOrder = []
+          var skuText = ''
+          this.standardList.map((subItem, index) => {
+            subItem.sub_type.map((item, i) => {
+              if (item.standard_collect) {
+                skuText += (subItem.title + ':' + item.name + '   ')
+              }
+            })
+          })
+          cacheOrder[0] = {
+            img: this.productPictures[0].img,
+            name: this.productDetail.name,
+            sku: skuText,
+            pri: this.productDetail.price,
+            num: 1
+          }
+          this.setCacheOrder(cacheOrder)
+          this.$nextTick(function () {
+            go('/order', this.$router)
+          })
         }
-        this.setCacheOrder(cacheOrder)
-        this.$nextTick(function () {
-          go('/order', this.$router)
-        })
       }
     }
   }
 </script>
 <style lang="scss" scoped>
-  @import '../assets/styles/iconfont.scss';
-
   .v-product {
     padding-top: 44px;
     background: #efefef;

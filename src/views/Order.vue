@@ -48,7 +48,7 @@
         <!-- 产品信息 -->
         <div class="v-pro">
           <div class="v-cellhd">
-            <div class="hd">哔哔哔的花店</div>
+            <div class="hd">FlowerGifts</div>
           </div>
           <productcell :proslist="cacheOrder"></productcell>
         </div>
@@ -85,7 +85,7 @@
           <div class="v-cellbd">
             <div class="cellbd"></div>
             <div class="ft">
-              共2件商品 合计：<span class="f-c2">￥4939.00</span>
+              共{{productCount}}件商品 合计：<span class="f-c2">￥{{total}}</span>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@
 
       <!-- 底部菜单 -->
       <div class="v-ft">
-        <div class="total">合计：￥<span class="pri">0.00</span></div>
+        <div class="total">合计：￥<span class="pri">{{total}}</span></div>
         <div class="buy" v-link="{path:'wechat-pay'}">立即购买</div>
       </div>
 
@@ -103,12 +103,6 @@
                        :weeks-list="weeksList">
       </inline-calendar>
     </div>
-
-    <!-- 收货地址页面 -->
-
-    <!-- 编辑收货地址页面 -->
-
-
   </div>
 </template>
 
@@ -165,20 +159,9 @@
         linkDate: '2016-10-10',
         // 订单中的所含产品临时变量
         isCoupon: false,
-        proscellList: [{
-          img: 'http://temp.im/80x80',
-          name: '产品名称11123123',
-          sku: '123',
-          pri: '99992.00',
-          num: 2
-        }, {
-          img: 'http://temp.im/80x80',
-          name: '产品名称11123123',
-          sku: '123',
-          pri: '99992.00',
-          num: 2
-        }],
-        isHaveselectAddress: true
+
+        isHaveselectAddress: true,
+        productCount: 0
       }
     },
     route: {
@@ -186,11 +169,21 @@
         if (transition.from.name !== 'selectAddress') {
           this.getSelectAddress(this.getUserId)
         }
+        this.productCount = this.cacheOrder.length
       }
     },
     created () {
     },
     ready () {
+    },
+    computed: {
+      total () {
+        let sum = 0
+        this.$get('cacheOrder').forEach((item) => {
+          sum += parseFloat(item.pri * item.num)
+        })
+        return sum.toFixed(2)
+      }
     },
     watch: {
       calendarVal (val) {
@@ -201,13 +194,10 @@
       }
     },
     methods: {
-      todayDay () {
-      }
     }
   }
 </script>
 <style lang="scss" scoped>
-  @import '../assets/styles/iconfont.scss';
   // 箭头
   @mixin arrow {
     content: " ";

@@ -112,8 +112,6 @@
   }
 </script>
 <style lang="scss" scoped>
-  @import '../assets/styles/iconfont.scss';
-
   .v-cou {
     padding-top: 44px;
   }

@@ -213,7 +213,7 @@
     computed: {
       total () {
         var selectSub = []
-        var total = this.productDetail.price * 1
+        var total = 0
         this.standardList.map((subItem, index) => {
           subItem.sub_type.map((item, i) => {
             if (item.standard_collect) {
@@ -226,7 +226,7 @@
           return this.productDetail.price_min + '~' + this.productDetail.price_man
         } else {
           selectSub.map((item) => {
-            total += item.price
+            total += (item.price * item.discount - item.reduce)
           })
           return total
         }
@@ -293,7 +293,8 @@
             price_list: selectStandardList
           }
           console.log(JSON.stringify(cartDetail))
-          this.$http.post('/wx/data/cart/save', cartDetail).then((res) => {
+          this.$http.post('/wx/cart/add-product', cartDetail).then((res) => {
+            console.log(res)
             if (res.body && res.body.code === '200' && res.body.data) {
               this.showSuccess = true
             } else {

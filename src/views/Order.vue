@@ -160,7 +160,7 @@
         // 订单中的所含产品临时变量
         isCoupon: false,
 
-        isHaveselectAddress: true,
+        isHaveselectAddress: false,
         productCount: 0
       }
     },
@@ -190,11 +190,11 @@
         this.calendarShow = false
       },
       selectAddress (val) {
+        console.log(this.selectAddress)
         this.isHaveselectAddress = Object.keys(this.selectAddress).length !== 0
       }
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 <style lang="scss" scoped>

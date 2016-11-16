@@ -21,8 +21,26 @@
   import Group from 'vux/dist/components/group'
   import XButton from 'vux/dist/components/x-button'
   import Cell from 'vux/dist/components/cell'
+  import {getUserId, cartList} from '../vuex/getters'
+  import {getCartList} from '../vuex/actions'
 
   export default {
+    vuex: {
+      getters: {
+        getUserId, cartList
+      },
+      actions: {
+        getCartList
+      }
+    },
+    route: {
+      data (transition) {
+        this.getCartList(this.getUserId)
+      },
+      deactivate (transition) {
+        transition.next()
+      }
+    },
     components: {
       Tabbar,
       XHeader,
@@ -35,26 +53,7 @@
       return {
         submit001: '提交订单',
         disable001: false,
-        list: [{
-          src: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-          title: '牡丹花',
-          price: 25.2,
-          soldOut: 2258,
-          count: 2,
-          checked: false
-        }, {
-          src: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-          title: '茉莉花',
-          price: 15.3,
-          soldOut: 3389,
-          count: 3,
-          checked: false
-        }]
-      }
-    },
-    route: {
-      data (transition) {
-
+        list: []
       }
     },
     ready: function () {
@@ -63,9 +62,26 @@
       total: function () {
         let sum = 0
         this.$get('list').forEach(function (item) {
-          if (item.checked) sum += parseFloat(item.price * item.count)
+          if (item.checked) sum += parseFloat(item.pri * item.num)
         })
         return sum.toFixed(2)
+      }
+    },
+    watch: {
+      cartList () {
+        this.cartList.map((item, index) => {
+          this.$set(`list[${index}]`, {
+            img: item.product.pictures[0],
+            name: item.product.name,
+            pri: item.total_fee,
+            num: item.count,
+            sku: '',
+            checked: false
+          })
+          item.price_list.map((pItem, pIndex) => {
+            this.list[index].sku += (pItem.title + ':' + pItem.sub_type[0].name + '   ')
+          })
+        })
       }
     },
     methods: {

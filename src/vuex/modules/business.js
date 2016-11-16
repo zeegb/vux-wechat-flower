@@ -7,7 +7,9 @@ import {
   UPDATE_ADDRESS_ERROR,
   UPDATE_ADDRESS_LIST,
   GET_ADDRESS_ERROR,
-  UPDATE_SELECT_ADDRESS
+  UPDATE_SELECT_ADDRESS,
+  UPDATE_CART_LIST,
+  UPDATE_CART_ERROR
 } from '../mutation-types'
 
 let state = {
@@ -16,7 +18,9 @@ let state = {
   addressError: false,
   addressSuccess: false,
   isEmpty: false,
-  selectAddress: {}
+  selectAddress: {},
+  cartList: [],
+  cartError: false
 }
 
 const mutations = {
@@ -37,6 +41,12 @@ const mutations = {
   },
   [UPDATE_SELECT_ADDRESS] (state, selectAddress) {
     state.selectAddress = selectAddress
+  },
+  [UPDATE_CART_LIST] (state, cartList) {
+    state.cartList = cartList
+  },
+  [UPDATE_CART_ERROR] (state, cartError) {
+    state.cartError = cartError
   }
 }
 

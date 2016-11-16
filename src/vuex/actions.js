@@ -40,11 +40,9 @@ export const setAddress = ({dispatch}, address, userId, addressText, cb) => {
     name: address.name
   }).then((res) => {
     if (res.body && res.body.code === '200' && res.body.data) {
-      console.log(1111)
       dispatch('UPDATE_ADDRESS_SUCCESS', true)
       setTimeout(cb, 0)
     } else {
-      console.log(2222)
       dispatch('UPDATE_ADDRESS_ERROR', true)
       cb()
     }
@@ -158,4 +156,23 @@ export const setDefaultAddress = ({dispatch}, addressId, userId) => {
     console.log(err)
     // dispatch('GET_ADDRESS_ERROR', true)
   })
+}
+export const getCartList = ({dispatch}, userId) => {
+  return Vue.http.post('/wx/data/cart/list', {
+    uid: userId,
+    ops: `{"openid": "${userId}"}`
+  }).then((res) => {
+    console.log(res)
+    if (res.body && res.body.code === '200' && res.body.data && res.body.data.items.length > 0) {
+      dispatch('UPDATE_CART_LIST', res.body.data.items)
+    } else {
+      dispatch('UPDATE_CART_ERROR', true)
+    }
+  }, (err) => {
+    console.log(err)
+    dispatch('UPDATE_CART_ERROR', true)
+  })
+}
+export const resetCartError = ({dispatch}) => {
+  dispatch('UPDATE_CART_ERROR', false)
 }

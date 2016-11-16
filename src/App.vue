@@ -5,14 +5,15 @@
     <tabbar v-if="isTabbar" :tab="pathName"></tabbar>
     <toast :show="addressSuccess">操作成功</toast>
     <toast :show="addressError" type="cancel">操作失败</toast>
+    <toast :show="cartError" type="cancel">打开购物车失败</toast>
   </div>
 </template>
 
 <script>
   import Tabbar from './components/tabbar.vue'
   import store from './vuex/store'
-  import {isLoading, direction, addressSuccess, addressError} from './vuex/getters'
-  import {resetAddressError, resetAddressSuccess} from './vuex/actions'
+  import {isLoading, direction, addressSuccess, addressError, cartError} from './vuex/getters'
+  import {resetAddressError, resetAddressSuccess, resetCartError} from './vuex/actions'
   import Loading from 'vux/dist/components/loading'
   import Toast from 'vux/dist/components/toast'
   export default {
@@ -50,6 +51,11 @@
         setTimeout(() => {
           this.resetAddressError()
         }, 2000)
+      },
+      cartError (curVal, oldVal) {
+        setTimeout(() => {
+          this.resetCartError()
+        }, 2000)
       }
     },
     store: store,
@@ -59,11 +65,13 @@
         isLoading,
         direction,
         addressSuccess,
-        addressError
+        addressError,
+        cartError
       },
       actions: {
         resetAddressError,
-        resetAddressSuccess
+        resetAddressSuccess,
+        resetCartError
       }
     }
   }

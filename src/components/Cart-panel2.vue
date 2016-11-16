@@ -1,21 +1,21 @@
 <template>
   <div class="cart-box">
-    <div class="v-proscell" v-for="(index,item) in list" v-show="item.count > 0">
+    <div class="v-proscell" v-for="(index,item) in list" v-show="item.num > 0">
       <div class="sel">
         <label>
           <input type="checkbox" name="" id="" v-model="item.checked">
         </label>
       </div>
       <div class="hd">
-        <img :src="item.src" alt="" class="img">
+        <img :src="item.img" alt="" class="img" style="width: 60px;height: 60px;">
       </div>
       <div class="right-bd">
-        <div class="name">{{item.title}}</div>
-        <div class="sku">{{item.soldOut}}</div>
+        <div class="name">{{item.name}}</div>
+        <div class="sku">{{item.sku}}</div>
         <div class="nums">
-          <div class="pri f-c2">{{item.price}}</div>
+          <div class="pri f-c2">{{item.pri}}</div>
           <div class="num">
-            <x-number :min=0 :max=8 :value.sync="item.count"></x-number>
+            <x-number :min=0 :max=8 :value.sync="item.num"></x-number>
           </div>
         </div>
       </div>
@@ -31,8 +31,7 @@
     },
     props: {
       list: {
-        type: Array,
-        default: []
+        type: Array
       }
     }
   }

@@ -6,11 +6,11 @@
     <div style="margin-top: 10px;">
       <cartpanel :list.sync="list"></cartpanel>
       <group style="padding:0 10px;">
-        <x-button :disabled="disable001" @click="processButton001" type="primary"
-                  v-link="'/order'">提交订单&nbsp;￥{{total}}
+        <x-button :disabled="disable001" @click="cacheOrder" type="primary">提交订单&nbsp;￥{{total}}
         </x-button>
       </group>
     </div>
+    <toast :show.sync="orderIsEmpty" type="cancel">再逛逛啦~</toast>
   </div>
 </template>
 
@@ -21,8 +21,9 @@
   import Group from 'vux/dist/components/group'
   import XButton from 'vux/dist/components/x-button'
   import Cell from 'vux/dist/components/cell'
+  import Toast from 'vux/dist/components/toast'
   import {getUserId, cartList} from '../vuex/getters'
-  import {getCartList} from '../vuex/actions'
+  import {getCartList, setCacheOrder} from '../vuex/actions'
 
   export default {
     vuex: {
@@ -30,7 +31,7 @@
         getUserId, cartList
       },
       actions: {
-        getCartList
+        getCartList, setCacheOrder
       }
     },
     route: {
@@ -47,13 +48,15 @@
       Cartpanel,
       Group,
       XButton,
-      Cell
+      Cell,
+      Toast
     },
     data () {
       return {
         submit001: '提交订单',
         disable001: false,
-        list: []
+        list: [],
+        orderIsEmpty: false
       }
     },
     ready: function () {
@@ -88,9 +91,23 @@
       change (value) {
         console.log('change:', value)
       },
-      processButton001 () {
+      cacheOrder () {
         this.submit001 = '结算中'
         this.disable001 = true
+        var cacheOrder = []
+        this.$get('list').forEach(item => {
+          if (item.checked) cacheOrder.push(item)
+        })
+        if (cacheOrder.length > 0) {
+          this.setCacheOrder(cacheOrder)
+          this.$nextTick(function () {
+            this.$route.router.go('/order')
+          })
+        } else {
+          this.orderIsEmpty = true
+          this.submit001 = '提交订单'
+          this.disable001 = false
+        }
       }
     }
   }

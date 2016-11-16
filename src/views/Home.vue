@@ -161,7 +161,6 @@
         }).then((res) => {
           if (res.body && res.body.code === '200' && res.body.data && res.body.data.items.length > 0) {
             this.activity_list = res.body.data.items
-            console.log(JSON.stringify(this.activity_list))
           } else {
           }
         }, (err) => {
@@ -186,7 +185,6 @@
               }))
               return type
             })
-            console.log(JSON.stringify(this.panel_list))
 //            this.panel_list = res.body.data
           } else {
           }

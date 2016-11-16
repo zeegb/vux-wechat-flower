@@ -199,7 +199,6 @@
               img: item,
               title: ''
             }))
-            console.log(JSON.stringify(this.productDetail))
           } else {
 
           }

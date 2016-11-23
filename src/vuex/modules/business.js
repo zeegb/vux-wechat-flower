@@ -9,7 +9,10 @@ import {
   GET_ADDRESS_ERROR,
   UPDATE_SELECT_ADDRESS,
   UPDATE_CART_LIST,
-  UPDATE_CART_ERROR
+  UPDATE_CART_ERROR,
+  UPDATE_CAN_EXPRESS,
+  GET_EXPRESS_FEE,
+  SHOW_EXPRESS_ALERT
 } from '../mutation-types'
 
 let state = {
@@ -20,7 +23,10 @@ let state = {
   isEmpty: false,
   selectAddress: {},
   cartList: [],
-  cartError: false
+  cartError: false,
+  fee: 0,
+  canExpress: true,
+  showExpressAlert: false
 }
 
 const mutations = {
@@ -47,6 +53,16 @@ const mutations = {
   },
   [UPDATE_CART_ERROR] (state, cartError) {
     state.cartError = cartError
+  },
+  [UPDATE_CAN_EXPRESS] (state, canExpress) {
+    state.canExpress = canExpress
+    state.showExpressAlert = !canExpress
+  },
+  [GET_EXPRESS_FEE] (state, fee) {
+    state.fee = fee
+  },
+  [SHOW_EXPRESS_ALERT] (state, showExpressAlert) {
+    state.showExpressAlert = showExpressAlert
   }
 }
 

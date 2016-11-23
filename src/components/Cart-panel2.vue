@@ -15,7 +15,7 @@
         <div class="nums">
           <div class="pri f-c2">{{item.pri}}</div>
           <div class="num">
-            <x-number :min=0 :max=8 :value.sync="item.num"></x-number>
+            <x-number :min=0 :max=8 :value.sync="item.num" :cid="item.cartId" @on-change="change"></x-number>
           </div>
         </div>
       </div>
@@ -25,13 +25,29 @@
 
 <script>
   import XNumber from '../components/x-number2/index.vue'
+  import {getUserId} from '../vuex/getters'
+  import {updateCartData} from '../vuex/actions'
   export default {
+    vuex: {
+      getters: {
+        getUserId
+      },
+      actions: {
+        updateCartData
+      }
+    },
     components: {
       XNumber
     },
     props: {
       list: {
         type: Array
+      }
+    },
+    methods: {
+      change (value, cid) {
+        console.log('change:', value, cid)
+        this.updateCartData(this.getUserId, cid, value)
       }
     }
   }

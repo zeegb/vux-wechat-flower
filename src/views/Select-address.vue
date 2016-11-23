@@ -142,7 +142,7 @@
   import XHeader from 'vux/dist/components/x-header'
   import AddressChinaData from '../libs/list.json'
   import {addressList, isEmpty, getUserId} from '../vuex/getters'
-  import {getAddress, setDefaultAddress, setSelectAddress} from '../vuex/actions'
+  import {getAddress, setDefaultAddress, setSelectAddress, getFreight} from '../vuex/actions'
   export default{
     vuex: {
       getters: {
@@ -153,7 +153,8 @@
       actions: {
         getAddress,
         setDefaultAddress,
-        setSelectAddress
+        setSelectAddress,
+        getFreight
       }
     },
     route: {
@@ -198,6 +199,7 @@
           this.setDefaultAddress(this.addressList[index]._id, this.getUserId)
         } else if (this.pathFrom === 'order') {
           this.setSelectAddress(this.addressList[index])
+          this.getFreight(this.addressList[index].editVal)
           window.history.back()
         }
       }

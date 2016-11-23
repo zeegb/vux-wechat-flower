@@ -79,7 +79,8 @@
             pri: item.total_fee,
             num: item.count,
             sku: '',
-            checked: false
+            checked: false,
+            cartId: item._id
           })
           item.price_list.map((pItem, pIndex) => {
             this.list[index].sku += (pItem.title + ':' + pItem.sub_type[0].name + '   ')
@@ -88,9 +89,6 @@
       }
     },
     methods: {
-      change (value) {
-        console.log('change:', value)
-      },
       cacheOrder () {
         this.submit001 = '结算中'
         this.disable001 = true
@@ -108,6 +106,11 @@
           this.submit001 = '提交订单'
           this.disable001 = false
         }
+      }
+    },
+    events: {
+      change (value) {
+        console.log('change:', value)
       }
     }
   }

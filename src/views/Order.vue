@@ -80,7 +80,8 @@
         <div class="v-cast">
           <div class="v-cellbd">
             <div class="cellbd">运费</div>
-            <div class="ft f-c2">+ 0.00</div>
+            <div v-if="canExpress" class="ft f-c2">+ {{fee}}</div>
+            <div v-if="!canExpress" class="ft f-c5">该地区暂不支持配送</div>
           </div>
           <div class="v-cellbd">
             <div class="cellbd"></div>
@@ -116,16 +117,16 @@
   import AddressChinaData from '../libs/list.json'
   import productcell from '../components/Prodect-cell.vue'
   import moment from 'moment'
-  import {selectAddress, getUserId, cacheOrder} from '../vuex/getters'
-  import {getSelectAddress} from '../vuex/actions'
+  import {selectAddress, getUserId, cacheOrder, canExpress, fee} from '../vuex/getters'
+  import {getSelectAddress, getFreight} from '../vuex/actions'
 
   export default {
     vuex: {
       getters: {
-        selectAddress, getUserId, cacheOrder
+        selectAddress, getUserId, cacheOrder, canExpress, fee
       },
       actions: {
-        getSelectAddress
+        getSelectAddress, getFreight
       }
     },
     components: {
@@ -192,7 +193,11 @@
         this.calendarShow = false
       },
       selectAddress (val) {
+        console.log('地址变咯!')
         this.isHaveselectAddress = Object.keys(this.selectAddress).length !== 0
+        if (this.isHaveselectAddress) {
+          this.getFreight(this.selectAddress.editVal)
+        }
       }
     },
     methods: {}
@@ -519,6 +524,10 @@
 
   .f-c2 {
     color: #f00;
+  }
+
+  .f-c5 {
+    color: #747474;
   }
 
   .f-c3 {

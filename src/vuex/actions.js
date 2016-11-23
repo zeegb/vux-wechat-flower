@@ -160,7 +160,7 @@ export const setDefaultAddress = ({dispatch}, addressId, userId) => {
 export const getCartList = ({dispatch}, userId) => {
   return Vue.http.post('/wx/data/cart/list', {
     uid: userId,
-    ops: `{"openid": "${userId}"}`
+    ops: `{"openid": "${userId}","disabled":false}`
   }).then((res) => {
     console.log(res)
     if (res.body && res.body.code === '200' && res.body.data && res.body.data.items.length > 0) {
@@ -175,4 +175,39 @@ export const getCartList = ({dispatch}, userId) => {
 }
 export const resetCartError = ({dispatch}) => {
   dispatch('UPDATE_CART_ERROR', false)
+}
+export const updateCartData = ({dispatch}, userId, cartId, count) => {
+  return Vue.http.post('/wx/cart/update-product', {
+    openid: userId,
+    cart_id: cartId,
+    count: count
+  }).then((res) => {
+    console.log(res)
+    if (res.body && res.body.code === '200' && res.body.data) {
+      console.log('购物车数据更新成功,count:', res.body.data.count)
+    } else {
+      console.log('购物车数据更新失败,id:', cartId)
+    }
+  }, (err) => {
+    console.log(err)
+    console.log('购物车数据更新失败,id:', cartId)
+  })
+}
+export const resetCanExpress = ({dispatch}) => {
+  dispatch('SHOW_EXPRESS_ALERT', false)
+}
+export const getFreight = ({dispatch}, locations) => {
+  return Vue.http.post('/wx/freight/query', {
+    locations: locations
+  }).then((res) => {
+    console.log(res)
+    if (res.body && res.body.code === '200') {
+      dispatch('GET_EXPRESS_FEE', res.body.data.fee)
+    } else {
+      dispatch('UPDATE_CAN_EXPRESS', false)
+    }
+  }, (err) => {
+    console.log(err)
+    dispatch('UPDATE_CAN_EXPRESS', false)
+  })
 }

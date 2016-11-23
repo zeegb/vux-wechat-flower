@@ -35,7 +35,8 @@
       width: {
         type: Number,
         default: 30
-      }
+      },
+      cid: String
     },
     computed: {
       disabledMin () {
@@ -55,7 +56,7 @@
         if (this.max && this.value > this.max) {
           this.value = this.max
         }
-        this.$emit('on-change', this.value)
+        this.$emit('on-change', newValue - old, this.cid)
       }
     },
     methods: {

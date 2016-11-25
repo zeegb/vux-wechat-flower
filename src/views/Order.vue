@@ -66,8 +66,8 @@
             <div class="arrow"></div>
           </div>
           <div class="v-cellbd">
-            <div class="cellbd">店铺活动：满2件减50</div>
-            <div class="ft f-c2">- 50.00</div>
+            <div class="cellbd">店铺活动：{{activityInfo.name}}</div>
+            <div class="ft f-c2">- {{activityInfo.reduce}}</div>
           </div>
         </div>
 
@@ -166,7 +166,8 @@
 
         isHaveselectAddress: false,
         productCount: 0,
-        reduce: 0
+        reduce: 0,
+        activityInfo: {}
       }
     },
     route: {
@@ -180,6 +181,23 @@
           this.setCurrentCoupon({})
         }
         this.productCount = this.cacheOrder.length
+
+        console.log({
+          openid: this.getUserId,
+          total_fee: this.total,
+          count: this.productCount
+        })
+        this.$http.post('/wx/cart/valid-activity', {
+          openid: this.getUserId,
+          total_fee: this.total,
+          count: this.productCount
+        }).then((res) => {
+          if (res.body && res.body.code === '200') {
+            this.$set('activityInfo', res.body.data)
+          } else {
+
+          }
+        })
       }
     },
     created () {
@@ -192,7 +210,7 @@
         this.$get('cacheOrder').forEach((item) => {
           sum += parseFloat(item.pri * item.num)
         })
-        sum += (this.fee - this.reduce)
+        sum += (this.fee - this.reduce - this.activityInfo.reduce)
         return sum.toFixed(2)
       }
     },

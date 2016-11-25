@@ -80,7 +80,8 @@
             num: item.count,
             sku: '',
             checked: false,
-            cartId: item._id
+            cartId: item._id,
+            pid: item.product_id
           })
           item.price_list.map((pItem, pIndex) => {
             this.list[index].sku += (pItem.title + ':' + pItem.sub_type[0].name + '   ')

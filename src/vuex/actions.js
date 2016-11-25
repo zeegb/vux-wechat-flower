@@ -196,18 +196,46 @@ export const updateCartData = ({dispatch}, userId, cartId, count) => {
 export const resetCanExpress = ({dispatch}) => {
   dispatch('SHOW_EXPRESS_ALERT', false)
 }
-export const getFreight = ({dispatch}, locations) => {
+export const getFreight = ({dispatch}, locations, fn) => {
   return Vue.http.post('/wx/freight/query', {
     locations: locations
   }).then((res) => {
     console.log(res)
     if (res.body && res.body.code === '200') {
       dispatch('GET_EXPRESS_FEE', res.body.data.fee)
+      dispatch('UPDATE_CAN_EXPRESS', true)
+      !!fn && fn()
     } else {
+      dispatch('GET_EXPRESS_FEE', 0)
       dispatch('UPDATE_CAN_EXPRESS', false)
+      !!fn && fn()
     }
   }, (err) => {
     console.log(err)
+    dispatch('GET_EXPRESS_FEE', 0)
     dispatch('UPDATE_CAN_EXPRESS', false)
+    !!fn && fn()
   })
+}
+export const setFreight = ({dispatch}) => {
+  dispatch('GET_EXPRESS_FEE', 0)
+}
+export const getCouponList = ({dispatch}, userID) => {
+  return Vue.http.post('/wx/coupons/list', {
+    openid: userID
+  }).then((res) => {
+    console.log(res)
+    if (res.body && res.body.code === '200') {
+      if (userID) dispatch('PERSON_COUPON_LIST', res.body.data)
+      else dispatch('ALL_COUPON_LIST', res.body.data)
+    } else {
+      dispatch('GET_COUPON_ERROR', false)
+    }
+  }, (err) => {
+    console.log(err)
+    dispatch('GET_COUPON_ERROR', false)
+  })
+}
+export const setCurrentCoupon = ({dispatch}, coupon) => {
+  dispatch('SET_CURRENT_COUPON', coupon)
 }

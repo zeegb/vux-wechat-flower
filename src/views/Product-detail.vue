@@ -323,7 +323,8 @@
             name: this.productDetail.name,
             sku: skuText,
             pri: this.productDetail.price,
-            num: 1
+            num: 1,
+            pid: this.productDetail._id
           }
           this.setCacheOrder(cacheOrder)
           this.$nextTick(function () {

@@ -15,6 +15,10 @@ export const cartError = ({business}) => business.cartError
 export const canExpress = ({business}) => business.canExpress
 export const fee = ({business}) => business.fee
 export const showExpressAlert = ({business}) => business.showExpressAlert
+export const allCouponList = ({business}) => business.allCouponList
+export const personCouponList = ({business}) => business.personCouponList
+export const getCouponStatus = ({business}) => business.getCouponStatus
+export const currentCoupon = ({business}) => business.currentCoupon
 
 export const getUserId = ({user}) => user.openid
 export const userInfo = ({user}) => user.userInfo

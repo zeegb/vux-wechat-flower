@@ -5,20 +5,20 @@
       我的优惠券
     </x-header>
     <tab>
-      <tab-item :selected="this.tabProsNum === 0" @click="tabProsFn(0)">未领取</tab-item>
-      <tab-item :selected="this.tabProsNum === 1" @click="tabProsFn(1)">已领取</tab-item>
+      <tab-item :selected="tabProsNum === 1" @click="tabProsFn(1)">已领取</tab-item>
+      <tab-item :selected="tabProsNum === 0" @click="tabProsFn(0)">未领取</tab-item>
     </tab>
     <!-- 未领取列表 -->
     <div class="v-coupons" v-show="!isShowGet">
-      <div class="v-coupon" v-for="(key,items) of noGetList" track-by="$index" :class="items.isEmpty ? 'z-dis': ''">
+      <div class="v-coupon" v-for="(key,items) of noGetList" track-by="$index" :class="items.disabled ? 'z-dis': ''">
         <div class="l">
-          <div class="hd">￥{{items.value}}</div>
-          <div class="bd">满{{items.lower_price}}使用</div>
+          <div class="hd">￥{{items.voucher_value}}</div>
+          <!--<div class="bd">满{{items.lower_price}}使用</div>-->
         </div>
         <div class="m">
-          <div class="name">{{items.coupon_name}}</div>
-          <div class="txt">{{items.use_range}}</div>
-          <div class="txt">使用期限:{{items.use_time}}</div>
+          <div class="name">{{items.name}}</div>
+          <div class="txt">{{items.usage}}</div>
+          <div class="txt">使用详情:{{items.description}}</div>
         </div>
         <div class="r" @click="getFn(key)">
           <div class="get">立即领取</div>
@@ -28,21 +28,22 @@
 
     <!-- 已领取列表 -->
     <div class="v-coupons" v-show="isShowGet">
-      <div class="v-coupon" v-for="items of getList" track-by="$index" :class="items.isPast ? 'z-past': ''">
+      <div class="v-coupon" v-for="(key,items) of getList" track-by="$index" :class="items.disabled ? 'z-past': ''">
         <div class="l">
-          <div class="hd">￥{{items.value}}</div>
-          <div class="bd">满{{items.lower_price}}使用</div>
+          <div class="hd">￥{{items.voucher_value}}</div>
         </div>
         <div class="m">
-          <div class="name">{{items.coupon_name}}</div>
-          <div class="txt">{{items.use_range}}</div>
-          <div class="txt">使用期限:{{items.use_time}}</div>
+          <div class="name">{{items.name}}</div>
+          <div class="txt">{{items.usage}}</div>
+          <div class="txt">使用详情:{{items.description}}</div>
         </div>
         <div class="r">
-          <div class="get">立即使用</div>
+          <div class="get" @click="setCurrent(key)">立即使用</div>
         </div>
       </div>
     </div>
+    <toast :show.sync="applySuccess">领取成功</toast>
+    <toast :show.sync="applyError" type="cancel">领取失败</toast>
   </div>
 </template>
 
@@ -50,63 +51,99 @@
   import XHeader from 'vux/dist/components/x-header'
   import Tab from 'vux/dist/components/tab'
   import TabItem from 'vux/dist/components/tab-item'
+  import Toast from 'vux/dist/components/toast'
+  import {getUserId, cacheOrder, allCouponList, personCouponList} from '../vuex/getters'
+  import {getCouponList, setCurrentCoupon} from '../vuex/actions'
+  import {haveSame} from '../libs/utils'
 
   export default {
+    vuex: {
+      getters: {
+        getUserId, cacheOrder, allCouponList, personCouponList
+      },
+      actions: {
+        getCouponList, setCurrentCoupon
+      }
+    },
     components: {
       XHeader,
       Tab,
-      TabItem
+      TabItem,
+      Toast
+    },
+    route: {
+      data (transition) {
+        this.getCouponList(this.getUserId)
+        this.getCouponList('')
+      }
     },
     data () {
       return {
-        tabProsNum: 0,
-        isShowGet: false,
-        noGetList: [{
-          id: Date.now(),
-          value: '20',
-          lower_price: '100',
-          coupon_name: '名称',
-          use_range: '仅可购买牡丹花',
-          use_time: '2016.01.01~2016.12.12',
-          isEmpty: false,
-          isPast: false,
-          isGet: false
-        }],
-        getList: [{
-          id: Date.now(),
-          value: '15',
-          lower_price: '50',
-          coupon_name: '名称',
-          use_range: '仅可购买牡丹花',
-          use_time: '2016.01.01~2016.12.12',
-          isEmpty: true,
-          isPast: true,
-          isGet: false
-        }]
+        tabProsNum: 1,
+        isShowGet: true,
+        noGetList: [],
+        getList: [],
+        applyError: false,
+        applySuccess: false
       }
     },
     ready () {
-//        this.$http.get('/api/shopping/coupons.htm').then(res => {
-//            if (res.ok) {
-//                let data = JSON.parse(res.data)
-//                this.noGetList = data.rows
-//                this.getList = data.rows2
-//            }
-//        })
+    },
+    watch: {
+      allCouponList () {
+        let productArr = this.cacheOrder.map(item => {
+          return item.pid
+        })
+        let getArr = this.personCouponList.map(item => {
+          return item._id
+        })
+        let nGList = this.allCouponList.filter(item => {
+          let isMatch = haveSame(productArr, item.products) && getArr.indexOf(item._id) === -1
+          return isMatch
+        })
+        this.$set('noGetList', nGList)
+      },
+      personCouponList () {
+        let productArr = this.cacheOrder.map(item => {
+          return item.pid
+        })
+        let gList = this.personCouponList.filter(item => {
+          let isMatch = haveSame(productArr, item.products)
+          return isMatch
+        })
+        this.$set('getList', gList)
+      }
     },
     methods: {
       tabProsFn (n) {
         this.tabProsNum = n
         this.isShowGet = !!n
+        if (this.isShowGet) {
+          this.getCouponList(this.getUserId)
+        } else {
+          this.getCouponList('')
+        }
       },
       getFn (key) {
-        this.getList.unshift(this.noGetList[key])
-        this.noGetList.splice(key, 1)
-
-        // 提交数据变更
-        // this.$http.past('/api/shopping/coupons-update.htm').then(res => {
-        //     console.log(res.ok)
-        // })
+        this.$http.post('/wx/coupons/apply', {
+          openid: this.getUserId,
+          coupon_id: this.noGetList[key]._id
+        }).then((res) => {
+          if (res.body && res.body.code === '200') {
+            this.getList.unshift(this.noGetList[key])
+            this.noGetList.splice(key, 1)
+            this.applySuccess = true
+          } else {
+            this.applyError = true
+          }
+        }, (err) => {
+          console.log('领取失败:' + err)
+          this.applyError = true
+        })
+      },
+      setCurrent (key) {
+        this.setCurrentCoupon(this.getList[key])
+        window.history.back()
       }
     }
   }
@@ -115,6 +152,7 @@
   .v-cou {
     padding-top: 44px;
   }
+
   // 自定义头部
   .v-hd {
     position: fixed;
@@ -153,7 +191,7 @@
     }
     &.z-past {
       &:after {
-        content: '已过期';
+        content: '已失效';
         position: absolute;
         top: 0;
         right: 0;

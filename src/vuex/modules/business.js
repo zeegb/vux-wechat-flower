@@ -12,7 +12,11 @@ import {
   UPDATE_CART_ERROR,
   UPDATE_CAN_EXPRESS,
   GET_EXPRESS_FEE,
-  SHOW_EXPRESS_ALERT
+  SHOW_EXPRESS_ALERT,
+  ALL_COUPON_LIST,
+  PERSON_COUPON_LIST,
+  GET_COUPON_ERROR,
+  SET_CURRENT_COUPON
 } from '../mutation-types'
 
 let state = {
@@ -26,7 +30,11 @@ let state = {
   cartError: false,
   fee: 0,
   canExpress: true,
-  showExpressAlert: false
+  showExpressAlert: false,
+  allCouponList: [],
+  personCouponList: [],
+  getCouponStatus: true,
+  currentCoupon: {}
 }
 
 const mutations = {
@@ -63,6 +71,18 @@ const mutations = {
   },
   [SHOW_EXPRESS_ALERT] (state, showExpressAlert) {
     state.showExpressAlert = showExpressAlert
+  },
+  [ALL_COUPON_LIST] (state, allCouponList) {
+    state.allCouponList = allCouponList
+  },
+  [PERSON_COUPON_LIST] (state, personCouponList) {
+    state.personCouponList = personCouponList
+  },
+  [GET_COUPON_ERROR] (state, status) {
+    state.getCouponStatus = status
+  },
+  [SET_CURRENT_COUPON] (state, coupon) {
+    state.currentCoupon = coupon
   }
 }
 

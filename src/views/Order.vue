@@ -59,7 +59,10 @@
               优惠券
             </div>
             <div class="ft f-c3" v-if="!isCoupon">未使用</div>
-            <div class="ft f-c2" v-if="isCoupon">- 50.00</div>
+            <div class="ft f-c2" v-if="isCoupon && currentCoupon.type === 'fare'">{{currentCoupon.name}}</div>
+            <div class="ft f-c2" v-if="isCoupon && currentCoupon.type !== 'fare'">
+              - {{currentCoupon.voucher_value}}
+            </div>
             <div class="arrow"></div>
           </div>
           <div class="v-cellbd">
@@ -117,16 +120,16 @@
   import AddressChinaData from '../libs/list.json'
   import productcell from '../components/Prodect-cell.vue'
   import moment from 'moment'
-  import {selectAddress, getUserId, cacheOrder, canExpress, fee} from '../vuex/getters'
-  import {getSelectAddress, getFreight} from '../vuex/actions'
+  import {selectAddress, getUserId, cacheOrder, canExpress, fee, currentCoupon} from '../vuex/getters'
+  import {getSelectAddress, getFreight, setCurrentCoupon, setFreight} from '../vuex/actions'
 
   export default {
     vuex: {
       getters: {
-        selectAddress, getUserId, cacheOrder, canExpress, fee
+        selectAddress, getUserId, cacheOrder, canExpress, fee, currentCoupon
       },
       actions: {
-        getSelectAddress, getFreight
+        getSelectAddress, getFreight, setCurrentCoupon, setFreight
       }
     },
     components: {
@@ -162,7 +165,8 @@
         isCoupon: false,
 
         isHaveselectAddress: false,
-        productCount: 0
+        productCount: 0,
+        reduce: 0
       }
     },
     route: {
@@ -171,6 +175,9 @@
           this.getSelectAddress(this.getUserId)
         } else {
           this.isHaveselectAddress = Object.keys(this.selectAddress).length !== 0
+        }
+        if (transition.from.name !== 'coupon') {
+          this.setCurrentCoupon({})
         }
         this.productCount = this.cacheOrder.length
       }
@@ -185,6 +192,7 @@
         this.$get('cacheOrder').forEach((item) => {
           sum += parseFloat(item.pri * item.num)
         })
+        sum += (this.fee - this.reduce)
         return sum.toFixed(2)
       }
     },
@@ -193,10 +201,18 @@
         this.calendarShow = false
       },
       selectAddress (val) {
-        console.log('地址变咯!')
         this.isHaveselectAddress = Object.keys(this.selectAddress).length !== 0
         if (this.isHaveselectAddress) {
-          this.getFreight(this.selectAddress.editVal)
+          this.getFreight(this.selectAddress.editVal, () => {
+            if (Object.keys(this.currentCoupon).length !== 0) {
+              this.isCoupon = true
+              if (this.currentCoupon.type === 'fare') {
+                this.setFreight()
+              } else if (this.currentCoupon.type === 'voucher') {
+                this.reduce = this.currentCoupon.voucher_value
+              }
+            }
+          })
         }
       }
     },

@@ -162,9 +162,6 @@
         this.getAddress(this.getUserId)
         this.pathFrom = this.$route.query.type
       },
-      canReuse (transition) {
-        return false
-      },
       deactivate (transition) {
         transition.next()
       }

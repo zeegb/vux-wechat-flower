@@ -5,8 +5,8 @@
     </x-header>
 
     <!--<scroller lock-x scrollbar-y use-pullup :pullup-status.sync="pullupStatus" @pullup:loading="load3">-->
-    <search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"
-            top="44px"></search>
+    <!--<search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"-->
+            <!--top="44px"></search>-->
     <!-- 商品 -->
     <div class="v-prolist">
       <tab>
@@ -20,7 +20,7 @@
           <div class="box">
             <img :src="item.pictures[0] || ''" class="img">
             <div class="bd">
-              <div class="discribe">{{item.description}}</div>
+              <div class="discribe">{{item.summary}}</div>
               <div class="pri">￥{{item.price}}</div>
             </div>
           </div>

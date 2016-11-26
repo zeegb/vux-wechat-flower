@@ -75,7 +75,7 @@
           <tab-item :selected="tabSel === 2" @click="tabAssess">评价</tab-item>
         </tab>
         <div class="v-tabcon">
-          <div class="v-content" v-show="tabSel === 0">{{{productDetail.property_detail}}}</div>
+          <div class="v-content" v-show="tabSel === 0">{{{productDetail.description}}}</div>
           <div class="v-content" v-show="tabSel === 1">{{tabArgsCon}}
             <div class="f-tac">
               <spinner :type="ios" slot="value" v-show="disTab1"></spinner>

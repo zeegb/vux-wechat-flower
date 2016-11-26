@@ -98,7 +98,8 @@
       <!-- 底部菜单 -->
       <div class="v-ft">
         <div class="total">合计：￥<span class="pri">{{total}}</span></div>
-        <div class="buy" v-link="{path:'wechat-pay'}">立即购买</div>
+        <div class="buy" @click="pay">立即购买
+        </div>
       </div>
 
       <!-- 日期选择 -->
@@ -107,6 +108,8 @@
                        :weeks-list="weeksList">
       </inline-calendar>
     </div>
+    <toast :show.sync="payError" type="warn">支付失败</toast>
+    <toast :show.sync="createOrderError" type="warn">创建订单失败</toast>
   </div>
 </template>
 
@@ -117,6 +120,7 @@
   import XInput from 'vux/dist/components/x-input'
   import InlineCalendar from 'vux/dist/components/inline-calendar'
   import Address from 'vux/dist/components/address'
+  import Toast from 'vux/dist/components/toast'
   import AddressChinaData from '../libs/list.json'
   import productcell from '../components/Prodect-cell.vue'
   import moment from 'moment'
@@ -140,7 +144,8 @@
       InlineCalendar,
       Address,
       AddressChinaData,
-      productcell
+      productcell,
+      Toast
     },
     data () {
       return {
@@ -167,7 +172,10 @@
         isHaveselectAddress: false,
         productCount: 0,
         reduce: 0,
-        activityInfo: {}
+        activityInfo: {},
+        wxPayConfig: {},
+        payError: false,
+        createOrderError: false
       }
     },
     route: {
@@ -181,12 +189,6 @@
           this.setCurrentCoupon({})
         }
         this.productCount = this.cacheOrder.length
-
-        console.log({
-          openid: this.getUserId,
-          total_fee: this.total,
-          count: this.productCount
-        })
         this.$http.post('/wx/cart/valid-activity', {
           openid: this.getUserId,
           total_fee: this.total,
@@ -210,6 +212,7 @@
         this.$get('cacheOrder').forEach((item) => {
           sum += parseFloat(item.pri * item.num)
         })
+        console.log('111111111111', this.activityInfo.reduce)
         sum += (this.fee - this.reduce - this.activityInfo.reduce)
         return sum.toFixed(2)
       }
@@ -234,7 +237,62 @@
         }
       }
     },
-    methods: {}
+    methods: {
+      pay () {
+        if (typeof WeixinJSBridge === 'undefined') {
+          if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady, false)
+          } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady)
+            document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady)
+          }
+        }
+        let cartIds = this.cacheOrder.map(item => {
+          return item.cartId
+        })
+        this.$http.post('/wx/weixin/create-order', {
+          openid: this.getUserId,
+          cart_ids: cartIds || [],
+          coupons: this.currentCoupon._id,
+          activity: this.activityInfo._id,
+          freight: this.fee,
+          locations: this.selectAddress.editVal,
+          delivery_mode: this.sendVal,
+          address_id: this.selectAddress._id,
+          total_fee: this.total
+        }).then((res) => {
+          console.log(res)
+          if (res.body && res.body.code === '200' && res.body.data) {
+            this.wxPayConfig = res.body.data
+            this.onBridgeReady()
+          } else {
+            this.createOrderError = true
+          }
+        }, (err) => {
+          console.log('获取订单失败:' + err)
+          this.createOrderError = true
+        })
+      },
+      onBridgeReady () {
+        WeixinJSBridge.invoke(
+          'getBrandWCPayRequest', {
+            appId: this.wxPayConfig.appId,
+            timeStamp: this.wxPayConfig.timeStamp,
+            nonceStr: this.wxPayConfig.nonceStr,
+            package: this.wxPayConfig.package,
+            signType: this.wxPayConfig.signType,
+            paySign: this.wxPayConfig.paySign
+          }, function (res) {
+            if (res.err_msg === 'get_brand_wcpay_request：ok') {
+              this.$route.router.go('pay-result')
+            }
+            if (res.err_msg === 'get_brand_wcpay_request：cancel' || res.err_msg === 'get_brand_wcpay_request：fail') {
+              this.payError = true
+//              window.history.back()
+            }
+          })
+      }
+    }
   }
 </script>
 <style lang="scss" scoped>

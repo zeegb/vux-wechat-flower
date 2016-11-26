@@ -2,7 +2,7 @@
   <div id="app">
     <loading :show="isLoading" position="fixed"></loading>
     <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
-    <tabbar v-if="isTabbar" :tab="pathName"></tabbar>
+    <tabbar v-if="isTabbar" :tab="pathName" :cart-list="cartList"></tabbar>
     <toast :show="addressSuccess">操作成功</toast>
     <toast :show="addressError" type="cancel">操作失败</toast>
     <toast :show="cartError" type="cancel">打开购物车失败</toast>
@@ -13,8 +13,17 @@
 <script>
   import Tabbar from './components/tabbar.vue'
   import store from './vuex/store'
-  import {isLoading, direction, addressSuccess, addressError, cartError, showExpressAlert} from './vuex/getters'
-  import {resetAddressError, resetAddressSuccess, resetCartError, resetCanExpress} from './vuex/actions'
+  import {
+    isLoading,
+    direction,
+    addressSuccess,
+    addressError,
+    cartError,
+    showExpressAlert,
+    getUserId,
+    cartList
+  } from './vuex/getters'
+  import {resetAddressError, resetAddressSuccess, resetCartError, resetCanExpress, getCartList} from './vuex/actions'
   import Loading from 'vux/dist/components/loading'
   import Toast from 'vux/dist/components/toast'
   export default {
@@ -41,6 +50,9 @@
         if (this.route.name === 'Cart') return 'Cart'
         if (this.route.name === 'Person') return 'Person'
       }
+    },
+    ready () {
+      this.getCartList(this.getUserId)
     },
     watch: {
       addressSuccess (curVal, oldVal) {
@@ -73,13 +85,16 @@
         addressSuccess,
         addressError,
         cartError,
-        showExpressAlert
+        showExpressAlert,
+        getUserId,
+        cartList
       },
       actions: {
         resetAddressError,
         resetAddressSuccess,
         resetCartError,
-        resetCanExpress
+        resetCanExpress,
+        getCartList
       }
     }
   }

@@ -13,11 +13,12 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "vue": "^1.0.21",
     "babel-runtime": "^6.0.0",
-    "vux": "^0.1.1",
+    "vue": "^1.0.21",
+    "vue-lazyload": "^0.9.3",
+    "vue-resource": "^1.0.3",
     "vue-router": "^0.7.11",
-    "vue-resource": "^1.0.3"
+    "vux": "^0.1.1"
   },
   "devDependencies": {
     "array-find": "^1.0.0",

@@ -1,19 +1,19 @@
 <template>
   <div class="weui_tab_tabbar">
     <tabbar>
-      <tabbar-item show-dot :selected="tab == 'Home'" v-link="{name:'Home'}">
+      <tabbar-item :selected="tab == 'Home'" v-link="{name:'Home'}">
         <img slot="icon" src="../../src/assets/home.png">
         <span slot="label">首页</span>
       </tabbar-item>
-      <tabbar-item show-dot :selected="tab == 'Card'" v-link="{name:'Card'}">
+      <tabbar-item :selected="tab == 'Card'" v-link="{name:'Card'}">
         <img slot="icon" src="../../src/assets/card2.png">
         <span slot="label">贺卡</span>
       </tabbar-item>
-      <tabbar-item show-dot :selected="tab == 'Cart'" v-link="{name:'Cart'}">
+      <tabbar-item :show-dot="cartList.length > 0" :selected="tab == 'Cart'" v-link="{name:'Cart'}">
         <img slot="icon" src="../../src/assets/cart.png">
         <span slot="label">购物车</span>
       </tabbar-item>
-      <tabbar-item show-dot :selected="tab == 'Person'" v-link="{name:'Person'}">
+      <tabbar-item :selected="tab == 'Person'" v-link="{name:'Person'}">
         <img slot="icon" src="../../src/assets/person.png">
         <span slot="label">我</span>
       </tabbar-item>
@@ -32,7 +32,7 @@
       Tabbar,
       TabbarItem
     },
-    props: ['tab']
+    props: ['tab', 'cartList']
   }
 </script>
 

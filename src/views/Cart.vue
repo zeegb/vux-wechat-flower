@@ -3,12 +3,16 @@
     <x-header :left-options="{showBack: false}" :right-options="{showMore: true}"
               @on-click-more="showMenus = true" class="v-hd">购物车
     </x-header>
-    <div style="margin-top: 10px;">
+    <div style="margin-top: 10px;" v-if="cartList.length !== 0">
       <cartpanel :list.sync="list"></cartpanel>
       <group style="padding:0 10px;">
         <x-button :disabled="disable001" @click="cacheOrder" type="primary">提交订单&nbsp;￥{{total}}
         </x-button>
       </group>
+    </div>
+    <div class="no-cart" v-if="cartList.length === 0">
+      <image src="../../src/assets/cart.png"></image>
+      <p style="text-align:center;">购物车还是空的~</p>
     </div>
     <toast :show.sync="orderIsEmpty" type="cancel">再逛逛啦~</toast>
   </div>
@@ -156,5 +160,15 @@
   .buy-btn {
     background-color: #2FCA60;
     color: #3a33d1;
+  }
+
+  .no-cart {
+    color: #69717d;
+    width: 50%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>

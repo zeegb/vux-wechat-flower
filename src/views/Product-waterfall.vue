@@ -18,7 +18,7 @@
       <div id="main">
         <div class="pin" v-for="item in items" track-by="$index" v-link="{name:'productDetail',params:{id:item._id}}">
           <div class="box">
-            <img :src="item.pictures[0] || ''" class="img">
+            <img v-lazy="item.pictures[0] || ''" class="img">
             <div class="bd">
               <div class="discribe">{{item.summary}}</div>
               <div class="pri">￥{{item.price}}</div>

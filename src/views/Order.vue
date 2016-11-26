@@ -110,6 +110,7 @@
     </div>
     <toast :show.sync="payError" type="warn">支付失败</toast>
     <toast :show.sync="createOrderError" type="warn">创建订单失败</toast>
+    <toast :show.sync="noInputAdress" type="warn">请填写收货地址</toast>
   </div>
 </template>
 
@@ -175,7 +176,8 @@
         activityInfo: {},
         wxPayConfig: {},
         payError: false,
-        createOrderError: false
+        createOrderError: false,
+        noInputAdress: false
       }
     },
     route: {
@@ -212,7 +214,6 @@
         this.$get('cacheOrder').forEach((item) => {
           sum += parseFloat(item.pri * item.num)
         })
-        console.log('111111111111', this.activityInfo.reduce)
         sum += (this.fee - this.reduce - this.activityInfo.reduce)
         return sum.toFixed(2)
       }
@@ -250,7 +251,7 @@
         let cartIds = this.cacheOrder.map(item => {
           return item.cartId
         })
-        this.$http.post('/wx/weixin/create-order', {
+        let inputInfo = {
           openid: this.getUserId,
           cart_ids: cartIds || [],
           coupons: this.currentCoupon._id,
@@ -260,7 +261,12 @@
           delivery_mode: this.sendVal,
           address_id: this.selectAddress._id,
           total_fee: this.total
-        }).then((res) => {
+        }
+        if (!inputInfo.locations || !inputInfo.address_id) {
+          this.noInputAdress = true
+          return
+        }
+        this.$http.post('/wx/weixin/create-order', inputInfo).then((res) => {
           console.log(res)
           if (res.body && res.body.code === '200' && res.body.data) {
             this.wxPayConfig = res.body.data

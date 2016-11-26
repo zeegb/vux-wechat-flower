@@ -15,7 +15,6 @@
         </masker>
       </div>
     </div>
-    <tabbar tab="card"></tabbar>
   </div>
 </template>
 

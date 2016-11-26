@@ -106,6 +106,7 @@
     <toast :show.sync="showSuccess">已加入购物车</toast>
     <toast :show.sync="showFail" type="cancel">购物车撑坏啦</toast>
     <toast :show.sync="showSelect" type="cancel">请选择商品类别</toast>
+    <toast :show.sync="createError" type="warn">生成订单失败</toast>
   </div>
 </template>
 
@@ -170,6 +171,7 @@
         showSuccess: false,
         showFail: false,
         showSelect: false,
+        createError: false,
         tabSel: 0,
         tabArgsCon: '',
         tabAssessCon: '',
@@ -291,7 +293,6 @@
             price: this.total,
             price_list: selectStandardList
           }
-          console.log(JSON.stringify(cartDetail))
           this.$http.post('/wx/cart/add-product', cartDetail).then((res) => {
             console.log(res)
             if (res.body && res.body.code === '200' && res.body.data) {
@@ -318,17 +319,43 @@
               }
             })
           })
-          cacheOrder[0] = {
-            img: this.productPictures[0].img,
-            name: this.productDetail.name,
-            sku: skuText,
-            pri: this.productDetail.price,
-            num: 1,
-            pid: this.productDetail._id
+          let selectStandardList = []
+          let jsonStandardList = JSON.parse(JSON.stringify(this.standardList))
+          selectStandardList = jsonStandardList.map((subItem, index) => {
+            subItem.sub_type = subItem.sub_type.filter((item, i) => {
+              return item.standard_collect
+            })
+            return subItem
+          })
+          let cartDetail = {
+            openid: this.getUserId,
+            pid: this.productDetail._id,
+            price: this.total,
+            price_list: selectStandardList,
+            direct: true
           }
-          this.setCacheOrder(cacheOrder)
-          this.$nextTick(function () {
-            go('/order', this.$router)
+          this.$http.post('/wx/cart/add-product', cartDetail).then((res) => {
+            console.log(res)
+            if (res.body && res.body.code === '200' && res.body.data) {
+              cacheOrder[0] = {
+                img: this.productPictures[0].img,
+                name: this.productDetail.name,
+                sku: skuText,
+                pri: this.productDetail.price,
+                num: 1,
+                cartId: res.body.data._id,
+                pid: this.productDetail._id
+              }
+              this.setCacheOrder(cacheOrder)
+              this.$nextTick(function () {
+                go('/order', this.$router)
+              })
+            } else {
+              this.createError = true
+            }
+          }, (err) => {
+            console.log('创建订单失败:' + err)
+            this.createError = true
           })
         }
       }

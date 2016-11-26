@@ -35,8 +35,6 @@
         <cell title="地址管理" is-link v-link="{path:'select-address',query:{type:'person'}}">
           <i slot="icon" class="fa fa-address-card-o" aria-hidden="true">&nbsp;&nbsp;</i>
         </cell>
-        <!--<cell title="实名认证" is-link></cell>-->
-        <!--<cell title="账号安全" is-link></cell>-->
       </group>
     </div>
   </div>
@@ -51,12 +49,12 @@
   import XHeader from 'vux/dist/components/x-header'
   import {userInfo} from '../vuex/getters'
 
-  //  const panelList = [{
-  //    src: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-  //    title: '王泽',
-  //    desc: '用户名:11122233',
-  //    url: '/person-setting'
-  //  }]
+  //    const panelList = [{
+  //      src: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
+  //      title: '王泽',
+  //      desc: '用户名:11122233',
+  //      url: '/person-setting'
+  //    }]
 
   export default {
     vuex: {
@@ -72,7 +70,8 @@
           desc: '用户名:' + this.userInfo.name,
           url: '/person-setting'
         }
-        this.panel_list[0] = user
+        this.panel_list.push(user)
+//        this.panel_list[0] = user
       }
     },
     components: {

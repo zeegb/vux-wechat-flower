@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div class="no-address" v-if="isEmpty">
+      <div class="no-address" v-if="addressList.length === 0">
         <image src="../../src/assets/addr.png"></image>
         <p style="text-align:center;">暂未创建收货地址~</p>
       </div>

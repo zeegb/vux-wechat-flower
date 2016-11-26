@@ -160,10 +160,11 @@ export const setDefaultAddress = ({dispatch}, addressId, userId) => {
 export const getCartList = ({dispatch}, userId) => {
   return Vue.http.post('/wx/data/cart/list', {
     uid: userId,
-    ops: `{"openid": "${userId}","disabled":false}`
+    ops: `{"openid": "${userId}","disabled":false,"direct":false}`
   }).then((res) => {
     console.log(res)
-    if (res.body && res.body.code === '200' && res.body.data && res.body.data.items.length > 0) {
+    if (res.body && res.body.code === '200' && res.body.data) {
+      if (!res.body.data.items) res.body.data.items = []
       dispatch('UPDATE_CART_LIST', res.body.data.items)
     } else {
       dispatch('UPDATE_CART_ERROR', true)

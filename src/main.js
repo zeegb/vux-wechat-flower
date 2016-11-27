@@ -32,12 +32,12 @@ const router = new VueRouter({
 let history = window.sessionStorage
 history.clear()
 // let historyCount = history.getItem('count') * 1 || 0
-history.setItem('/', 0)
-history.setItem('/card', 1)
-history.setItem('/cart', 2)
-history.setItem('/person', 3)
+history.setItem('Home', 0)
+history.setItem('Card', 1)
+history.setItem('Cart', 2)
+history.setItem('Person', 3)
 
-const pathArr = ['/', '/card', '/cart', '/person']
+const pathArr = ['Home', 'Person', 'Cart', 'Card']
 let translateArr = []
 
 sync(store, router)
@@ -53,17 +53,18 @@ router.beforeEach(({to, from, next, redirect}) => {
     if (history.getItem('openid')) {
       toNext()
     } else {
-      Vue.http.post('/wx/user/cookie').then((res) => {
-        if (res.body && res.body.code === '200' && res.body.data) {
-          history.setItem('openid', res.body.data.openid)
-          dispatch('SET_OPENID', res.body.data.openid)
-          dispatch('SET_USERINFO', res.body.data.user_info || {})
-          toNext()
-        } else {
-          redirect('/')
-          dispatch('SHOW_ALERT', true)
-        }
-      })
+      // Vue.http.post('/wx/user/cookie').then((res) => {
+      //   if (res.body && res.body.code === '200' && res.body.data) {
+      //     history.setItem('openid', res.body.data.openid)
+      //     dispatch('SET_OPENID', res.body.data.openid)
+      //     dispatch('SET_USERINFO', res.body.data.user_info || {})
+      //     toNext()
+      //   } else {
+      //     redirect('/')
+      //     dispatch('SHOW_ALERT', true)
+      //     setTimeout(next, 0)
+      //   }
+      // })
       toNext()
     }
   } else {
@@ -84,26 +85,26 @@ router.beforeEach(({to, from, next, redirect}) => {
     //   to.path !== '/' && history.setItem(to.path, historyCount)
     //   dispatch('UPDATE_DIRECTION', 'forward')
     // }
-    if (pathArr.indexOf(to.path) > -1 && pathArr.indexOf(from.path) > -1) {
-      const toIndex = history.getItem(to.path)
-      const fromIndex = history.getItem(from.path)
+    if (pathArr.indexOf(to.name) > -1 && pathArr.indexOf(from.name) > -1) {
+      const toIndex = history.getItem(to.name)
+      const fromIndex = history.getItem(from.name)
       if (toIndex > fromIndex) {
         dispatch('UPDATE_DIRECTION', 'forward')
       } else {
         dispatch('UPDATE_DIRECTION', 'reverse')
       }
       translateArr = []
-      translateArr.push(from.path)
+      translateArr.push(from.name)
     } else {
-      if (translateArr[translateArr.length - 1] === to.path) {
+      if (translateArr[translateArr.length - 1] === to.name) {
         dispatch('UPDATE_DIRECTION', 'reverse')
         translateArr.pop()
       } else {
         dispatch('UPDATE_DIRECTION', 'forward')
-        translateArr.push(from.path)
+        translateArr.push(from.name)
       }
-      if (pathArr.indexOf(to.path) > -1) {
-        translateArr = [to.path]
+      if (pathArr.indexOf(to.name) > -1) {
+        translateArr = [to.name]
       }
     }
     dispatch('UPDATE_LOADING', true)
@@ -113,7 +114,9 @@ router.beforeEach(({to, from, next, redirect}) => {
 
 router.afterEach(function (transition) {
   dispatch('UPDATE_LOADING', false)
-  window.scrollTo(0, 0)
+  setTimeout(() => {
+    window.scrollTo(0, 0)
+  }, 0)
 })
 
 routerMap(router)

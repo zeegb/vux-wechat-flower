@@ -2,7 +2,7 @@
   <div id="app">
     <loading :show="isLoading" position="fixed"></loading>
     <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
-    <tabbar v-if="isTabbar" :tab="pathName" :cart-list="cartList"></tabbar>
+    <tabbar v-if="isTabbar && direction === 'up'" :tab="pathName" :cart-list="cartList"></tabbar>
     <toast :show="addressSuccess">操作成功</toast>
     <toast :show="addressError" type="cancel">操作失败</toast>
     <toast :show="cartError" type="cancel">打开购物车失败</toast>
@@ -34,7 +34,8 @@
     },
     data () {
       return {
-        effect: 'fade'
+        effect: 'fade',
+        direction: 'up'
       }
     },
     computed: {
@@ -52,6 +53,9 @@
       }
     },
     ready () {
+      this.scroll((direction) => {
+        this.direction = direction
+      })
       this.getCartList(this.getUserId)
     },
     watch: {
@@ -95,6 +99,18 @@
         resetCartError,
         resetCanExpress,
         getCartList
+      }
+    },
+    methods: {
+      scroll (fn) {
+        let beforeScrollTop = document.body.scrollTop
+        window.addEventListener('scroll', function () {
+          let afterScrollTop = document.body.scrollTop
+          let delta = afterScrollTop - beforeScrollTop
+          if (delta === 0) return false
+          fn(delta > 0 ? 'down' : 'up')
+          beforeScrollTop = afterScrollTop
+        }, false)
       }
     }
   }
@@ -141,6 +157,9 @@
     backface-visibility: hidden;
   }
 
+  .tabbar-transition {
+  }
+
   .vux-pop-out-enter,
   .vux-pop-out-leave,
   .vux-pop-in-enter,
@@ -166,6 +185,36 @@
 
   .vux-pop-in-leave {
     animation-name: popOutLeft;
+  }
+
+  .tabbar-enter {
+    animation: tabbarIn 1s;
+  }
+
+  .tabbar-leave {
+    animation: tabbarOut 1s;
+  }
+
+  @keyframes tabbarOut {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+  }
+
+  @keyframes tabbarIn {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes popInLeft {

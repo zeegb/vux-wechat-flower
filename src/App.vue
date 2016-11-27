@@ -2,7 +2,7 @@
   <div id="app">
     <loading :show="isLoading" position="fixed"></loading>
     <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
-    <tabbar v-if="isTabbar && direction === 'up'" :tab="pathName" :cart-list="cartList"></tabbar>
+    <tabbar v-if="isTabbar && tabDirection === 'up'" :tab="pathName" :cart-list="cartList" transition="tabbar"></tabbar>
     <toast :show="addressSuccess">操作成功</toast>
     <toast :show="addressError" type="cancel">操作失败</toast>
     <toast :show="cartError" type="cancel">打开购物车失败</toast>
@@ -35,7 +35,7 @@
     data () {
       return {
         effect: 'fade',
-        direction: 'up'
+        tabDirection: 'up'
       }
     },
     computed: {
@@ -54,7 +54,7 @@
     },
     ready () {
       this.scroll((direction) => {
-        this.direction = direction
+        this.tabDirection = direction
       })
       this.getCartList(this.getUserId)
     },
@@ -152,7 +152,7 @@
   .vux-pop-out-transition,
   .vux-pop-in-transition {
     width: 100%;
-    animation-duration: 0.5s;
+    animation-duration: 1s;
     animation-fill-mode: both;
     backface-visibility: hidden;
   }
@@ -219,36 +219,44 @@
 
   @keyframes popInLeft {
     from {
+      opacity: 0;
       transform: translate3d(-100%, 0, 0);
     }
     to {
+      opacity: 1;
       transform: translate3d(0, 0, 0);
     }
   }
 
   @keyframes popOutLeft {
     from {
+      opacity: 1;
       transform: translate3d(0, 0, 0);
     }
     to {
+      opacity: 0;
       transform: translate3d(-100%, 0, 0);
     }
   }
 
   @keyframes popInRight {
     from {
+      opacity: 0;
       transform: translate3d(100%, 0, 0);
     }
     to {
+      opacity: 1;
       transform: translate3d(0, 0, 0);
     }
   }
 
   @keyframes popOutRight {
     from {
+      opacity: 1;
       transform: translate3d(0, 0, 0);
     }
     to {
+      opacity: 0;
       transform: translate3d(100%, 0, 0);
     }
   }

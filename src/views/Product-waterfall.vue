@@ -6,7 +6,7 @@
 
     <!--<scroller lock-x scrollbar-y use-pullup :pullup-status.sync="pullupStatus" @pullup:loading="load3">-->
     <!--<search @result-click="resultClick" @on-change="getResult" :results="results" :value.sync="value"-->
-            <!--top="44px"></search>-->
+    <!--top="44px"></search>-->
     <!-- 商品 -->
     <div class="v-prolist">
       <tab>
@@ -121,17 +121,14 @@
         index: 0,
         pullupStatus: 'default',
         showMenus: false,
-        typeList: {
-          menu1: '多肉',
-          menu2: '种子',
-          menu3: '花'
-        },
+        typeList: {},
         selectedType: ''
       }
     },
     route: {
       data (transition) {
         this.pageData()
+        this.getTypeList()
 //        this.$nextTick(function () {
 //          this.arrange()
 //        })
@@ -211,7 +208,6 @@
         oParent.style.height = maxH + 'px'
         oPullup.style.buttom = 0
       },
-
       scroll (e) {
         if (document.body.scrollHeight - window.screen.height - document.body.scrollTop <= 0 && !this.load) {
           this.load = true
@@ -224,6 +220,7 @@
           uid: 'system',
           ops: this.selectedType ? `{"product_type_id":"${this.selectedType}"}` : ''
         }).then((res) => {
+          console.log(res)
           if (res.body && res.body.code === '200' && res.body.data && res.body.data.items.length) {
             this.page++
             this.items = this.items.concat(res.body.data.items)
@@ -231,42 +228,37 @@
               this.arrange()
             })
             this.load = false
-            if (res.body.data.items.length < 10) {
+            if (res.body.data.items.length < res.body.data.page_info.page_size) {
               this.more = false
               this.load = true
             }
           } else {
+            var oParent = document.getElementById('main')
+            oParent.style.height = '0px'
             this.more = false
             this.load = true
           }
         }, (err) => {
           console.log('获取轮播图失败:' + err)
         })
-//        this.$http.jsonp('http://api.douban.com/v2/movie/' + this.type, {
-//          count: this.count,
-//          start: (this.page - 1) * this.count
-//        }).then((response) => {
-//          if(this.page === 1){
-//            this.$loadingRouteData = false
-//            document.title = this.title = response.data.title.split('-')[0]
-//          }
-//          if(response.data && response.data.subjects.length){
-//            this.page ++
-//            this.list = this.list.concat(response.data.subjects)
-//          }else{
-//            this.more = false
-//          }
-//          this.load = false
-//        })
+      },
+      getTypeList () {
+        this.$http.post('/wx/data/product_type/list', {
+          uid: 'system'
+        }).then((res) => {
+          if (res.body && res.body.code === '200' && res.body.data && res.body.data.items.length) {
+            let typeArr = res.body.data.items
+            let typeFormat = {}
+            typeArr.map(item => {
+              typeFormat[item._id] = item.name
+            })
+            this.$set('typeList', typeFormat)
+          } else {
 
-//        this.page++
-//        if (this.page > 4) {
-//          this.more = false
-//          this.items = this.items
-//        } else {
-//          this.items = this.items.concat(likePro)
-//        }
-//        this.load = false
+          }
+        }, (err) => {
+          console.log('获取商品类别失败:' + err)
+        })
       },
       // tab切换显示-商品
       tabProsFn (n) {
@@ -291,8 +283,21 @@
       scrollTop () {
         window.scrollTo(0, 0)
       },
+      initState () {
+        this.items = []
+        this.page = 1
+        this.more = true
+        this.load = false
+        this.colsHeight = [0, 0]
+        this.pinS = []
+        this.$items = []
+        this.itemWidth = ''
+        this.index = 0
+      },
       selectType (key) {
-        console.log(key)
+        this.$set('selectedType', key)
+        this.initState()
+        this.pageData()
       }
     }
   }

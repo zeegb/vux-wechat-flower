@@ -29,6 +29,7 @@
   }
 </script>
 <style lang="scss" scoped>
+  @import "~open-color/open-color";
   @mixin borderBottom {
     content: '';
     position: absolute;
@@ -80,7 +81,7 @@
         .nums {
           position: relative;
           .pri {
-            color: #f00;
+            color: $oc-pink-6;
           }
           .num {
             position: absolute;

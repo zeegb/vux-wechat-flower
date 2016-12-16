@@ -363,6 +363,7 @@
   }
 </script>
 <style lang="scss" scoped>
+  @import "~open-color/open-color";
   .v-product {
     padding-top: 44px;
     background: #efefef;
@@ -442,7 +443,7 @@
       .pri1 {
         display: inline-block;
         font-size: 20px;
-        color: #f00;
+        color: $oc-pink-6;
       }
       .pri2 {
         font-size: 14px;
@@ -480,7 +481,7 @@
     .hd {
       margin-top: 5px;
       margin-bottom: 5px;
-      color: #2e77e3;
+      color: $oc-pink-5;
     }
     .bd {
       position: relative;
@@ -498,7 +499,7 @@
           text-align: center;
           background: #f1f1f1;
           &.o-act {
-            background: #FF5809;
+            background: $oc-red-5;
             color: #ffffff;
           }
         }
@@ -543,7 +544,7 @@
         background: #f1f1f1;
         &.z-act {
           i {
-            color: #f00;
+            color: $oc-pink-6;
           }
         }
       }
@@ -618,17 +619,17 @@
         line-height: 44px;
         font-size: 22px;
         &.z-act {
-          color: #f00;
+          color: $oc-yellow-7;
         }
       }
     }
     .cart {
       flex: 1;
-      background: #ff9703;
+      background: $oc-yellow-7;
     }
     .buy {
       flex: 1;
-      background: #3cc51f;
+      background: $oc-lime-7;
     }
   }
 </style>

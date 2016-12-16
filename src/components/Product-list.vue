@@ -24,6 +24,7 @@
   }
 </script>
 <style lang="scss" scoped>
+  @import "~open-color/open-color";
   // 产品列表
   .v-pro {
     box-sizing: border-box;
@@ -52,7 +53,7 @@
       .price {
         line-height: 32px;
         font-size: 18px;
-        color: #f00;
+        color: $oc-pink-6;
       }
       .num {
         line-height: 20px;

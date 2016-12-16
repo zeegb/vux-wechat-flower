@@ -220,7 +220,6 @@
           uid: 'system',
           ops: this.selectedType ? `{"product_type_id":"${this.selectedType}"}` : ''
         }).then((res) => {
-          console.log(res)
           if (res.body && res.body.code === '200' && res.body.data && res.body.data.items.length) {
             this.page++
             this.items = this.items.concat(res.body.data.items)
@@ -303,6 +302,7 @@
   }
 </script>
 <style lang="scss" scoped>
+  @import '~open-color/open-color';
   // 瀑布流
   #main {
     position: relative;
@@ -339,7 +339,7 @@
     }
     .pri {
       margin: 0.3em 0 0 0;
-      color: #ff2c00;
+      color: $oc-pink-6;
       font-size: 18px;
     }
   }

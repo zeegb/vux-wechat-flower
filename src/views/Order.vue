@@ -302,6 +302,7 @@
   }
 </script>
 <style lang="scss" scoped>
+  @import "~open-color/open-color";
   // 箭头
   @mixin arrow {
     content: " ";
@@ -406,13 +407,13 @@
       padding-right: 10px;
       .pri {
         font-size: 16px;
-        color: #f00;
+        color: $oc-pink-6;
       }
     }
     .buy {
       flex: 1;
       padding: 0 15px;
-      background: #3cc51f;
+      background: $oc-lime-7;
       color: #fff;
     }
   }
@@ -567,7 +568,7 @@
     .stat {
       padding: 15px 10px 0 0;
       font-size: 20px;
-      color: #f00;
+      color: $oc-pink-6;
     }
     .cont {
       // flex: 1;
@@ -621,7 +622,7 @@
   }
 
   .f-c2 {
-    color: #f00;
+    color: $oc-pink-6;
   }
 
   .f-c5 {

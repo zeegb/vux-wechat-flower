@@ -53,6 +53,7 @@
   }
 </script>
 <style lang="scss" scoped>
+  @import "~open-color/open-color";
   @mixin borderBottom {
     content: '';
     position: absolute;
@@ -109,7 +110,7 @@
           position: relative;
           .pri {
             float: left;
-            color: #f00;
+            color: $oc-pink-6;
           }
           .num {
             float: right;

@@ -232,6 +232,7 @@
   }
 </script>
 <style lang="scss" scoped>
+  @import "~open-color/open-color";
   // 箭头
   @mixin arrow {
     content: " ";
@@ -323,7 +324,7 @@
   }
 
   .f-c1 {
-    color: #f00;
+    color: $oc-pink-6;
   }
 
   .f-c2 {

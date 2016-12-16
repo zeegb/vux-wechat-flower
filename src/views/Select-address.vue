@@ -30,7 +30,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-
+  @import "~open-color/open-color";
   @mixin borderBottom {
     content: '';
     position: absolute;
@@ -80,7 +80,7 @@
     .stat {
       padding: 15px 10px 0 0;
       font-size: 20px;
-      color: #f00;
+      color: $oc-pink-6;
     }
     .cont {
       flex: 1;

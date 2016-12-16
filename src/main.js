@@ -53,19 +53,19 @@ router.beforeEach(({to, from, next, redirect}) => {
     if (history.getItem('openid')) {
       toNext()
     } else {
-      Vue.http.post('/wx/user/cookie').then((res) => {
-        if (res.body && res.body.code === '200' && res.body.data) {
-          history.setItem('openid', res.body.data.openid)
-          dispatch('SET_OPENID', res.body.data.openid)
-          dispatch('SET_USERINFO', res.body.data.user_info || {})
-          toNext()
-        } else {
-          redirect('/')
-          dispatch('SHOW_ALERT', true)
-          setTimeout(next, 0)
-        }
-      })
-      // toNext()
+      // Vue.http.post('/wx/user/cookie').then((res) => {
+      //   if (res.body && res.body.code === '200' && res.body.data) {
+      //     history.setItem('openid', res.body.data.openid)
+      //     dispatch('SET_OPENID', res.body.data.openid)
+      //     dispatch('SET_USERINFO', res.body.data.user_info || {})
+      //     toNext()
+      //   } else {
+      //     redirect('/')
+      //     dispatch('SHOW_ALERT', true)
+      //     setTimeout(next, 0)
+      //   }
+      // })
+      toNext()
     }
   } else {
     toNext()
